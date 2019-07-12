@@ -13,9 +13,7 @@ private:
 	bool takeable; 
 	
 public: 
-	void lookAt(){
-		std::cout << description << "\n"; 
-	}
+	void lookAt(); 
 }; 
 
 #endif

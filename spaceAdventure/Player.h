@@ -3,19 +3,22 @@
 #include <string>
 #include <vector> 
 #include "Action.h"
+#include "Area.h"
 #include "Item.h"
+
+using std::vector; 
 
 class Player 
 {
 private: 
-	vector<Item> inventory;  
+	vector<Item*> inventory;  
 	Area* location; 
 
 public: 
-	void drop(Item); 
-	bool teak(Item); 
+	void drop(Item* thing); 
+	bool take(Item* thing); 
 	Area* getLocation(); 
-	void setLocation(Area*); 
+	void setLocation(Area* anArea); 
 	
 }; 
 

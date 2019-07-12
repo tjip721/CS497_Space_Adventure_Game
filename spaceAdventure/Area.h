@@ -13,9 +13,14 @@ class Area
 private: 
 	string longDescription;
 	string shortDescription; 
-	vector<Exit> exits; 
-	vector<Item> items;  
+	vector<Exit*> exits; 
+	vector<Item*> items;  
 	vector<Action> availableActions;  
+	bool firstEntry; 
+public: 
+	void printDescription(); 
+	void takeItem(Item* thing); 
+	void dropItem(Item* thing); 
 	
 }; 
 

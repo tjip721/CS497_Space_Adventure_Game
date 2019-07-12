@@ -5,10 +5,13 @@
 #include <iostream> 
 #include "spaceAdventure.h"
 
+enum Verb{look, move, help, inventory, lookAt, take, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid}; 
 
 int main(){
 
 bool gameOver = false; 
+Player player; 
+
 while (!gameOver){
 
 //loadgame & savegame logic
@@ -21,29 +24,34 @@ int verb = 1; //	verb = verbNLP
 
 switch (verb){
 
+//enum Verb{look move help inventory lookAt take fire open close push mine launch land eat bow say use invalid}; 
+
 	//Do non item actions
 	//look
-	case 1: 
+	case look: 
+
 
 	//go somewhere
-	case 2: 
-	case 3: 
-	case 4: 
+	case move: 
+	case help: 
+	case inventory: 
 	// If an item action is requested check if the item is available
 	//Check every inventory item for the item name
-	case 5: 
-	case 6: 
-	case 7: 
-	case 8: 
-	case 9: 
-	case 10: 
-	case 11: 
-	case 12: 
-	case 13: 
-	case 14: 
-	case 15: 
-	case 16: 
-	case 17: 
+	case lookAt: 
+	case take: 
+	case fire: 
+	case open: 
+	case close: 
+	case push: 
+	case mine: 
+	case launch: 
+	case land: 
+	case eat: 
+	case bow: 
+	case say: 
+	case use: 
+	case invalid: 
+		std::cout << "Uh that doesn't make sense try something else.\n"; 		break; 
 
 	std::cout << "Hello world.\n"; 
 }
