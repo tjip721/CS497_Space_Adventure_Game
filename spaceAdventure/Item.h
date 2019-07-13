@@ -14,6 +14,7 @@ private:
 	
 public: 
 	void lookAt(); 
+	std::string getName(); 
 }; 
 
 #endif

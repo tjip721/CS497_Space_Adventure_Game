@@ -19,16 +19,56 @@ void Area::printDescription(){
 	}
 }
 
-void Area::takeItem(Item* thing){
+void Area::look(){
+	std::cout << longDescription << "\n"; 
+} 
+
+Item* Area::takeItem(std::string target){
+	Item* itemPtr; 
 	for(int ii=0; ii < items.size(); ii++){
-		if(items[ii] == thing){
+		if(items[ii]->getName().compare(target)){
+			itemPtr = items[ii]; 
 			items.erase(items.begin()+ii); 
+			return itemPtr; 
 		}
 	}
+	return NULL; 
 }
 
 void Area::dropItem(Item* thing){
 	items.push_back(thing); 
 } 
 	
+
+bool Area::hasExit(std::string target){
+	int exitValid = false;  
+	for(int ii=0; ii < exits.size(); ii++){
+		if(exits[ii]->getName().compare(target)==0){
+			exitValid = true; 
+			break;
+		} 
+	}
+	return exitValid; 
+}
+
+
+Area* Area::getExit(std::string targetName){
+	for(int ii=0; ii < exits.size(); ii++){
+		if(exits[ii]->getName().compare(targetName)==0){
+			return exits[ii]->getArea(); 
+		} 
+	}
+	return NULL; 
+}
+
+
+
+
+
+
+
+
+
+
+
 

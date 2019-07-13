@@ -11,3 +11,7 @@ void Item::lookAt(){
 	std::cout << description << "\n"; 
 } 
 
+std::string Item::getName(){
+	return name; 
+}
+

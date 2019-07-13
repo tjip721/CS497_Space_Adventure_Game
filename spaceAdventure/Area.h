@@ -19,9 +19,11 @@ private:
 	bool firstEntry; 
 public: 
 	void printDescription(); 
-	void takeItem(Item* thing); 
+	void look(); 
+	Item* takeItem(std::string targetName); 
 	void dropItem(Item* thing); 
-	
+	bool hasExit(std::string target); 	
+	Area* getExit(std::string targetName); 	
 }; 
 
 #endif

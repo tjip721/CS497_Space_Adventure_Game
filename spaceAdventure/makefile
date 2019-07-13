@@ -1,21 +1,25 @@
+CC = g++
+CFLAGS = -Wall
+OBJS = Item.o Area.o Player.o Exit.o
 
-spaceAdventure: spaceAdventure.cpp classes.o
-	g++ -g -o goAdventure spaceAdventure.cpp
+
+spaceAdventure: spaceAdventure.cpp $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -g -o goAdventure spaceAdventure.cpp
 
 classes.o: Item.o Area.o Player.o
 	
 Item.o: Item.cpp Item.h
-	g++ -g -c Item.cpp
+	$(CC) $(CFLAGS) -g -c Item.cpp
 
 Area.o: Area.cpp Area.h
-	g++ -g -c Area.cpp
+	$(CC) $(CFLAGS) -g -c Area.cpp
 
-#Exit.o: Exit.cpp Exit.h
-#	g++ -g -c Exit.cpp
+Exit.o: Exit.cpp Exit.h
+	g++ -g -c Exit.cpp
 
 
 Player.o: Player.cpp Player.h
-	g++ -g -c Player.cpp
+	$(CC) $(CFLAGS) -g -c Player.cpp
 
 
 .PHONY: clean

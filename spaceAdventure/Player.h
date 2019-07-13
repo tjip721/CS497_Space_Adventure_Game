@@ -15,10 +15,11 @@ private:
 	Area* location; 
 
 public: 
-	void drop(Item* thing); 
-	bool take(Item* thing); 
+	bool drop(std::string targetName); 
+	bool take(std::string targetName); 
 	Area* getLocation(); 
 	void setLocation(Area* anArea); 
+	void listInventory(); 
 	
 }; 
 
