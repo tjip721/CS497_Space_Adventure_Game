@@ -51,7 +51,7 @@ switch (verb){
 		break; 
 
 	case help: 
-		cout << "Try one of the following commands: \n Look \n Look at \n move \n take \n fire \n open \n close \n push \n launch \n land\n" ; 
+		cout << "Try one of the following commands: \n Look \n Look at \n Move \n Take \n Fire \n Open \n Close \n Push \n Launch \n Land\n" ; 
 		break; 
 
 	case inventory: 

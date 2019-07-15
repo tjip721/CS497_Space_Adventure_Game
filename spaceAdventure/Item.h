@@ -15,6 +15,7 @@ private:
 public: 
 	void lookAt(); 
 	std::string getName(); 
+	bool isTakeable(); 
 }; 
 
 #endif

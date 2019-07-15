@@ -13,6 +13,8 @@ class Player
 private: 
 	vector<Item*> inventory;  
 	Area* location; 
+	double lifeRemaining; 
+	double gasRemaining; 
 
 public: 
 	bool drop(std::string targetName); 

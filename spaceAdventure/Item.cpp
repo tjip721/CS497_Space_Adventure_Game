@@ -15,3 +15,6 @@ std::string Item::getName(){
 	return name; 
 }
 
+bool Item::isTakeable(){
+	return takeable; 
+} 

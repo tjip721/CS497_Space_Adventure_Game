@@ -26,7 +26,7 @@ void Area::look(){
 Item* Area::takeItem(std::string target){
 	Item* itemPtr; 
 	for(int ii=0; ii < items.size(); ii++){
-		if(items[ii]->getName().compare(target)){
+		if(items[ii]->getName().compare(target)&&items[ii]->isTakeable() ){
 			itemPtr = items[ii]; 
 			items.erase(items.begin()+ii); 
 			return itemPtr; 
