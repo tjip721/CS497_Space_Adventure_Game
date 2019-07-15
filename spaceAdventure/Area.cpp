@@ -61,7 +61,15 @@ Area* Area::getExit(std::string targetName){
 	return NULL; 
 }
 
-
+bool Area::lookAt(std::string targetName){
+	for(int ii=0; ii < items.size(); ii++){
+		if(items[ii]->getName().compare(targetName)){
+			items[ii]->lookAt(); 
+			return true; 
+		}
+	}
+	return false; 
+}  
 
 
 

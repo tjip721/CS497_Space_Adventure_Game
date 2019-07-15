@@ -20,6 +20,7 @@ public:
 	Area* getLocation(); 
 	void setLocation(Area* anArea); 
 	void listInventory(); 
+	bool lookAt(std::string targetName); 
 	
 }; 
 

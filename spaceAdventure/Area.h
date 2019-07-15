@@ -24,6 +24,7 @@ public:
 	void dropItem(Item* thing); 
 	bool hasExit(std::string target); 	
 	Area* getExit(std::string targetName); 	
+	bool lookAt(std::string targetName); 
 }; 
 
 #endif

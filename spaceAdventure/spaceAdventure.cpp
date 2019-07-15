@@ -6,6 +6,7 @@
 #include "spaceAdventure.h"
 
 using std::string; 
+using std::cout; 
 
 enum Verb{look, move, help, inventory, lookAt, take, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid}; 
 
@@ -50,25 +51,53 @@ switch (verb){
 		break; 
 
 	case help: 
+		cout << "Try one of the following commands: \n Look \n Look at \n move \n take \n fire \n open \n close \n push \n launch \n land\n" ; 
+		break; 
+
 	case inventory: 
+		player.listInventory(); 
+		break; 
 	// If an item action is requested check if the item is available
 	//Check every inventory item for the item name
-	
 	case lookAt: 
-
+		if(player.lookAt(noun)){
+			break; 
+		}else if(player.getLocation()->lookAt(noun)){ 
+			break; 
+		}else{
+			cout << "Sorry you can't look at that right now\n" ; 
+			break; 
+		}
 	case take: 
+		if(player.take(noun)){
+			break; 
+		}else{
+			cout << "Sorry you don't seem to be able to take that right now.\n"; 
+			break; 
+		}
 
 	case fire: 
+
 	case open: 
+
 	case close: 
+
 	case push: 
+
 	case mine: 
+
 	case launch: 
+
 	case land: 
+
 	case eat: 
+
 	case bow: 
+
 	case say: 
+
 	case use: 
+
 	case invalid: 
 		std::cout << "Uh that doesn't make sense try something else.\n"; 		break; 
 

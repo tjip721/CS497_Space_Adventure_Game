@@ -34,5 +34,23 @@ void Player::listInventory(){
 	for(int ii=0; ii < inventory.size(); ii++){
 		std::cout << inventory[ii]->getName() << "\n"; 
 	}
+	if(inventory.empty()){
+		std::cout << "... is empty\n"; 
+	}
 }
+
+bool Player::lookAt(std::string targetName){
+	for(int ii=0; ii < inventory.size(); ii++){
+		if(inventory[ii]->getName().compare(targetName)==0){
+			inventory[ii]->lookAt(); 
+			return true; 	
+		}
+	}
+	return false; 
+}
+
+
+
+
+
 
