@@ -11,6 +11,12 @@
 //open description file to save to an object variable
 std:string get_file_data(std::string text){}
 
+//UI functions --to be pretty
+void display_planet(){}
+void display_descriptions(){}
+//i.e. game over, start menue
+void display_gameInstances(){}
+
 //save log file conditions
 void save_log(){}
 void open_log(){}
