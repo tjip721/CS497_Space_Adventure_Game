@@ -7,5 +7,6 @@
 #include "Action.h"
 #include "Item.h"
 #include "Player.h"
+#include "data.h"
 
 #endif
