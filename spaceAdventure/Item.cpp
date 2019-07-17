@@ -7,6 +7,12 @@ private:
 	bool takeable; 
 */	
 	
+Item::Item(std::string nameIn, std::string descriptionIn, bool takeableIn){
+	name = nameIn; 
+	description = descriptionIn; 
+	takeable = takeableIn; 
+}
+
 void Item::lookAt(){
 	std::cout << description << "\n"; 
 } 

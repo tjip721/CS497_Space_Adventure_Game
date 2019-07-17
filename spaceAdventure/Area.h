@@ -16,7 +16,7 @@ private:
 	vector<Exit*> exits; 
 	vector<Item*> items;  
 	vector<Action> availableActions;  
-	bool firstEntry; 
+	bool firstEntry = true;
 public: 
 	void printDescription(); 
 	void look(); 
@@ -25,6 +25,12 @@ public:
 	bool hasExit(std::string target); 	
 	Area* getExit(std::string targetName); 	
 	bool lookAt(std::string targetName); 
+	
+	void addExit(Exit* exit); 
+	void addItem(Item* item); 
+	void setLongDescription(std::string text); 
+	void setShortDescription(std::string text); 
+	
 }; 
 
 #endif

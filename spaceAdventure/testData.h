@@ -15,5 +15,11 @@ player.setLocation(&earth);
 earth.addItem(&jacket); 
 earth.addItem(&pickaxe); 
 
-Exit marsExit("Launch to Mars", "The way to mars is to launch on a space ship", &mars); 
+Exit marsExit("Mars", "The way to mars is to launch on a space ship", &mars); 
 earth.addExit(&marsExit); 
+
+Exit northAmericaExit("NorthAmerica", "Head down to land on Mexico, USA, and Cananada", &northAmerica); 
+earth.addExit(&northAmericaExit); 
+
+Exit antarcticaExit("Antarctica", "Head south up to the penguins", &antarctica); 
+northAmerica.addExit(&antarcticaExit); 

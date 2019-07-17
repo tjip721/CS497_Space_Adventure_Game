@@ -13,6 +13,7 @@ private:
 	std::string shortDescription; 
 	Area* toArea; 
 public:
+	Exit(std::string name, std::string longDescription, Area* toArea); 
 	Area* getArea(); 
 	std::string getName(); 
 }; 

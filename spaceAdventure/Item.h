@@ -16,6 +16,7 @@ public:
 	void lookAt(); 
 	std::string getName(); 
 	bool isTakeable(); 
+	Item(std::string name, std::string description, bool takeable); 
 }; 
 
 #endif

@@ -14,19 +14,27 @@ void Area::printDescription(){
 	if(firstEntry){
 		std::cout << longDescription << "\n"; 
 		firstEntry = false; 
+		if(items.size() > 0){
+			std::cout << "There are some items here: "; 
+			for(int ii=0; ii < items.size(); ii++){
+				std::cout << items[ii]->getName() << "\n"; 
+			}
+		}
+		//Add logic to print description of items here
 	} else {
 		std::cout << shortDescription << "\n"; 
 	}
 }
 
 void Area::look(){
-	std::cout << longDescription << "\n"; 
+	firstEntry = true; 
+	printDescription();
 } 
 
 Item* Area::takeItem(std::string target){
 	Item* itemPtr; 
 	for(int ii=0; ii < items.size(); ii++){
-		if(items[ii]->getName().compare(target)&&items[ii]->isTakeable() ){
+		if(items[ii]->getName().compare(target)==0 && items[ii]->isTakeable() ){
 			itemPtr = items[ii]; 
 			items.erase(items.begin()+ii); 
 			return itemPtr; 
@@ -71,6 +79,19 @@ bool Area::lookAt(std::string targetName){
 	return false; 
 }  
 
+void Area::addExit(Exit* exit){
+	exits.push_back(exit); 
+}
+void Area::addItem(Item* item){ 
+	items.push_back(item); 
+}
+void Area::setLongDescription(std::string text){
+	longDescription = text; 
+}
+void Area::setShortDescription(std::string text){
+	shortDescription= text; 
+}
+	
 
 
 

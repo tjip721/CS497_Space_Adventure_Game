@@ -17,12 +17,15 @@ private:
 	double gasRemaining; 
 
 public: 
+	Player(double life, double gas); 
 	bool drop(std::string targetName); 
 	bool take(std::string targetName); 
 	Area* getLocation(); 
 	void setLocation(Area* anArea); 
 	void listInventory(); 
 	bool lookAt(std::string targetName); 
+	double getLife(){ return lifeRemaining;} 
+	double getGas(){ return gasRemaining;}
 	
 }; 
 
