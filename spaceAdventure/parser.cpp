@@ -132,14 +132,3 @@ std::string Parser::getVerb() {
 const std::vector<std::string>& Parser::getNouns() const {
     return nouns;
 }
-
-/************ TEST FUNCTIONS ***************/
-void Parser::printInput() {
-    std::cout << input << std::endl;
-}
-
-void Parser::printTokens() {
-    for (std::string word : inputTokens) {
-        std::cout << word << std::endl;
-    }
-}

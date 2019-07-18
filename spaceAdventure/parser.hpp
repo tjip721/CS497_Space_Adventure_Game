@@ -33,10 +33,6 @@ class Parser
         void processInput(std::string i);
         std::string getVerb();
         const std::vector<std::string>& getNouns() const;
-
-        // Test Functions
-        void printInput();
-        void printTokens();
 };
 
 #endif // PARSER_H
