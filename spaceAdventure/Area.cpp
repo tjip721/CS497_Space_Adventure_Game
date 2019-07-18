@@ -85,11 +85,13 @@ void Area::addExit(Exit* exit){
 void Area::addItem(Item* item){ 
 	items.push_back(item); 
 }
-void Area::setLongDescription(std::string text){
-	longDescription = text; 
+void Area::setLongDescription(std::string fileName){
+	//from data.h
+	longDescription = get_file_data(fileName); 
 }
-void Area::setShortDescription(std::string text){
-	shortDescription= text; 
+void Area::setShortDescription(std::string fileName){
+	//from data.h
+	shortDescription= get_file_data(fileName); 
 }
 	
 
