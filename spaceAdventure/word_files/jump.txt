@@ -1,0 +1,9 @@
+jump
+bound
+hop
+hurdle
+jump
+leap
+skip
+spring
+vault
