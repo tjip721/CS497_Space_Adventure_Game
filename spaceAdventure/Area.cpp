@@ -71,13 +71,23 @@ Area* Area::getExit(std::string targetName){
 
 bool Area::lookAt(std::string targetName){
 	for(int ii=0; ii < items.size(); ii++){
-		if(items[ii]->getName().compare(targetName)){
+		if(items[ii]->getName().compare(targetName)==0){
 			items[ii]->lookAt(); 
 			return true; 
 		}
 	}
 	return false; 
 }  
+
+bool Area::hasItem(std::string targetName){
+for(int ii=0; ii < items.size(); ii++){
+		if(items[ii]->getName().compare(targetName)==0){
+			return true; 
+		}
+	}
+	return false; 
+
+}
 
 void Area::addExit(Exit* exit){
 	exits.push_back(exit); 

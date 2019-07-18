@@ -30,6 +30,7 @@ public:
 	void addItem(Item* item); 
 	void setLongDescription(std::string text); 
 	void setShortDescription(std::string text); 
+	bool hasItem(std::string targetName);
 	
 }; 
 

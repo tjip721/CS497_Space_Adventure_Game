@@ -1,5 +1,15 @@
 #include "Player.h"
 
+int Player::findItem(std::string targetName){
+	for(int ii=0; ii < inventory.size(); ii++){
+		if(inventory[ii]->getName().compare(targetName)==0){
+			return ii; 	
+		}
+	}
+	return NULL; 
+}
+	
+
 Player::Player(double life, double gas){
 	lifeRemaining = life; 
 	gasRemaining = gas; 
@@ -56,7 +66,22 @@ bool Player::lookAt(std::string targetName){
 }
 
 
+bool Player::eat(std::string targetName){
+	int itemIndex = findItem(targetName); 
+	if(itemIndex != NULL){
+		//Eat the item, add to asphyxiation timer?
+		return true; 
+	}else{
+		return false; 
+	}
+}
 
+/*bool Player::launch(){
+	if(location->hasItem("Spaceship"){
+		
+	}
+}
+*/
 
 
 

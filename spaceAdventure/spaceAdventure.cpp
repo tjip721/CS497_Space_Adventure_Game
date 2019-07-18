@@ -108,10 +108,19 @@ switch (verb){
 	case mine: 
 
 	case launch: 
+		// IF spaceship is present launch to space
 
 	case land: 
+		//If in space land on specified planet
 
 	case eat: 
+		if(player.eat(noun)){
+			cout << "You at the " << noun << ".\n";
+			break; 
+		}else {
+			cout << "You can't eat that.\n"; 
+			break; 
+		}
 
 	case bow: 
 

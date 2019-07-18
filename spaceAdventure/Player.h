@@ -26,6 +26,9 @@ public:
 	bool lookAt(std::string targetName); 
 	double getLife(){ return lifeRemaining;} 
 	double getGas(){ return gasRemaining;}
+	bool launch(); 
+	bool eat(std::string targetName); 
+	int findItem(std::string targetName); 
 	
 }; 
 

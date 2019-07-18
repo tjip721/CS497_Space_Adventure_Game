@@ -21,6 +21,11 @@ std::string Item::getName(){
 	return name; 
 }
 
+
+void Item::setEdible(bool yummy){
+	edible = yummy;
+} 
+
 bool Item::isTakeable(){
 	return takeable; 
 } 
