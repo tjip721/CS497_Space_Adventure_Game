@@ -55,6 +55,12 @@ bool Player::lookAt(std::string targetName){
 	return false; 
 }
 
+void Area::getPlayer(){
+	for(int i=0; i < inventory.size(); i++) {
+		std::cout << inventory[i]->getName() << " ";
+	}
+	std::cout << gasRemaining << " " << lifeRemaining << " " << location;
+}
 
 
 
