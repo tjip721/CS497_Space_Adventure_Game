@@ -6,6 +6,7 @@
 #include "Action.h"
 #include "Item.h"
 #include "Exit.h"
+#include "data.h"
 using std::vector; 
 
 class Area
@@ -30,6 +31,8 @@ public:
 	void addItem(Item* item); 
 	void setLongDescription(std::string text); 
 	void setShortDescription(std::string text); 
+	//Prints all of the items in the Area + the Area name -- done for save log.
+	void getItems();
 	
 }; 
 
