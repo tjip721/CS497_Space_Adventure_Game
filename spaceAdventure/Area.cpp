@@ -94,7 +94,11 @@ void Area::setShortDescription(std::string fileName){
 	shortDescription= get_file_data(fileName); 
 }
 	
-
+void Area::getItem(){
+	for(int i=0; i < items.size(); i++) {
+		std::cout << items[i] << " ";
+	}
+}
 
 
 
