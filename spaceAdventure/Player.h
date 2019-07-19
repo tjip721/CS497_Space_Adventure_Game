@@ -26,6 +26,7 @@ public:
 	bool lookAt(std::string targetName); 
 	double getLife(){ return lifeRemaining;} 
 	double getGas(){ return gasRemaining;}
+	void getPlayer();
 	
 }; 
 
