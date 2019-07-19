@@ -17,9 +17,10 @@ void display_descriptions();
 //i.e. game over, start menue
 void display_gameInstances();
 
-//save log file conditions
+//save log file conditions, will be called in the "main" game
 void save_log();
+//Parse the save_log.txt and place in constructor for the areas + user
 void open_log();
-void remove_log();
+
 
 #endif // DATA_H
