@@ -1,6 +1,6 @@
 #include "data.h"
 
-std:string get_file_data(std::string fileName){
+std::string get_file_data(std::string fileName){
 	std::fstream r_file;
 	std::string file_read;
 	r_file.open(fileName);
