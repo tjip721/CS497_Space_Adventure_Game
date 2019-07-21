@@ -32,8 +32,10 @@ public:
 	void setLongDescription(std::string text); 
 	void setShortDescription(std::string text); 
 	//Prints all of the items in the Area + the Area name -- done for save log.
-	void getItems();
-	
+        std::vector<Item*> getItems();
+        bool getAreaEntry();
+
+
 }; 
 
 #endif
