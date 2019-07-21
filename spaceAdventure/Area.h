@@ -12,6 +12,7 @@ using std::vector;
 class Area
 {
 private: 
+	string areaName;
 	string longDescription;
 	string shortDescription; 
 	vector<Exit*> exits; 
@@ -19,6 +20,7 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry = true;
 public: 
+	string getName();
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
