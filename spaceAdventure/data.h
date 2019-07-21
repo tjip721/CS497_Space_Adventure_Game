@@ -9,7 +9,7 @@
 #define save_data="save_log.txt"
 
 //open description file to save to an object variable
-std:string get_file_data(std::string text);
+std::string get_file_data(std::string text);
 
 //UI functions --to be pretty
 void display_planet();
