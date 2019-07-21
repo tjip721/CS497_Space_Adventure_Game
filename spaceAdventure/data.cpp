@@ -1,4 +1,4 @@
-#include data.h
+#include "data.h"
 
 std:string get_file_data(std::string fileName){
 	std::fstream r_file;
