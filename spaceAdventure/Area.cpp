@@ -2,6 +2,7 @@
 #include <iostream>
 /*
 private: 
+	string areaName;
 	string longDescription;
 	string shortDescription; 
 	vector<Exit*> exits; 
@@ -9,7 +10,9 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry; 
 */	
-
+Area::Area(std::string name){
+	areaName=name;
+}
 void Area::printDescription(){
 	if(firstEntry){
 		std::cout << longDescription << "\n"; 
@@ -101,7 +104,9 @@ bool Area::getAreaEntry() {
         return firstEntry;
 }
 
-
+std::string Area::getName(){
+	return areaName;
+}
 
 
 
