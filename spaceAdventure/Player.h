@@ -27,6 +27,9 @@ public:
 	double getLife(){ return lifeRemaining;} 
 	double getGas(){ return gasRemaining;}
 	void getPlayer();
+	std::vector<Item*> getPlayerInventory();
+	//When user chooses to "load game" adds an item object
+	void initializeInventory(std::vector<Item*> toAdd);	
 	
 }; 
 
