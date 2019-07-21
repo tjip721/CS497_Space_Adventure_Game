@@ -20,7 +20,7 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry = true;
 public: 
-	string getName();
+	Area(std::string name);
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
@@ -36,6 +36,7 @@ public:
 	//Prints all of the items in the Area + the Area name -- done for save log.
         std::vector<Item*> getItems();
         bool getAreaEntry();
+	string getName();
 
 
 }; 
