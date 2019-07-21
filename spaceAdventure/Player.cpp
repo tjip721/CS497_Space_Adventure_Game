@@ -5,6 +5,13 @@ Player::Player(double life, double gas){
 	gasRemaining = gas; 
 }
 
+void Player::initializeInventory(std::vector<Item*> addItem) {
+	for(int i=0; i < addItem.size(); i++) {
+		inventory.push_back(addItem[i]);
+		std::cout << addItem[i]->getName() << std::endl;
+	}
+}
+
 bool Player::drop(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
@@ -55,13 +62,9 @@ bool Player::lookAt(std::string targetName){
 	return false; 
 }
 
-void Area::getPlayer(){
-	for(int i=0; i < inventory.size(); i++) {
-		std::cout << inventory[i]->getName() << " ";
-	}
-	std::cout << gasRemaining << " " << lifeRemaining << " " << location;
+std::vector<Item*> Player::getPlayerInventory(){
+	return inventory;
 }
-
 
 
 
