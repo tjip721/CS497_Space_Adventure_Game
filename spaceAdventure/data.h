@@ -6,7 +6,7 @@
 
 
 
-#define save_data="save_log.txt"
+std::string filename= " saveLog.txt"
 
 //open description file to save to an object variable
 std::string get_file_data(std::string text);
@@ -18,7 +18,7 @@ void display_descriptions();
 void display_gameInstances();
 
 //save log file conditions, will be called in the "main" game
-void save_log();
+void saveGame(Player::Player player1, std::vector<Area*> planets); 
 //Parse the save_log.txt and place in constructor for the areas + user
 void open_log();
 
