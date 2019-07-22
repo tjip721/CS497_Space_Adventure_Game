@@ -10,8 +10,10 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry; 
 */	
-Area::Area(std::string name){
+Area::Area(std::string name, std::string shortFileName, std::string longFileName){
 	areaName=name;
+	shortDescription=get_file_data(shortFileName);
+	longDescription=get_file_data(longFileName);
 }
 void Area::printDescription(){
 	if(firstEntry){
