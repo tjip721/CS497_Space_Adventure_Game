@@ -20,7 +20,7 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry = true;
 public: 
-	Area(std::string name);
+	Area(std::string name, std::string shortFileName, std::string longFileName);
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
