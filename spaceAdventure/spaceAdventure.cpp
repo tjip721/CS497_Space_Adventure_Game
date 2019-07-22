@@ -3,6 +3,7 @@
 //
 
 #include <iostream> 
+#include <vector>
 #include "spaceAdventure.h"
 
 using std::string; 
@@ -12,16 +13,43 @@ using std::cout;
 
 int main(){
 
-#include "testData.h"
-bool gameOver = false; 
+	#include "testData.h"
+	bool gameOver = false; 
+	//Declaring the Area objects
+	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"), 
+   	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt"), Sun("Sun", "sun_short.txt", "sun_long.txt"), 
+   	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt"), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"), 
+   	Uranus("Uranus", "uranus_short.txt", "uranus_long.txt"), Pluto("Pluto", "pluto_short.txt", "pluto_long.txt"), PlutoM("Pluto_Moon", "pluto_moon_short.txt", "pluto_moon_long.txt"), 
+   	Neptune1("Neptune_1", "neptune_1_short.txt", "neptune_1_long.txt"), Neptune2("Neptune_2", "neptune_2_short.txt", "neptune_2_long.txt"), Venus2("Venus_2", "venus2_short.txt", "venus2_long.txt");
+	std::vector<Area*> planets;
+	planets.push_back(&Mercury);
+	planets.push_back(&Venus1);
+	planets.push_back(&Earth);
+	planets.push_back(&EarthM);
+	planets.push_back(&LostM);
+	planets.push_back(&Sun);
+	planets.push_back(&Mars);
+	planets.push_back(&Jupiter);
+	planets.push_back(&Saturn);
+	planets.push_back(&Uranus);
+	planets.push_back(&Pluto);
+	planets.push_back(&PlutoM);
+	planets.push_back(&Neptune1);
+	planets.push_back(&Neptune2);
+	planets.push_back(&Venus2);
 
-//Print out intro text
-cout << "Welcome to the space adventure\n";
-player.getLocation()->printDescription(); 
+	//Print out intro text
+	cout << "Welcome to the space adventure\n";
+	player.getLocation()->printDescription(); 
 
 while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 
 //loadgame & savegame logic
+	if(userChooses == "loadgame") {
+	}
+	else {
+	
+	}
 
 //check for players requested action using NLP interface
 
