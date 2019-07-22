@@ -13,6 +13,7 @@ class Parser
         std::string input;
         std::vector<std::string> inputTokens;
         int currentTokenIndex;
+		std::string directory;
         std::string verb;
         std::vector<std::string> nouns;
 
@@ -21,10 +22,12 @@ class Parser
         int loadFile(std::string fileName, std::vector<std::string> &wordList);
         void inputToLowerCase();
         void tokenizeInput();
+		void removeInvalidChars();
         void matchVerb();
         void matchNouns();
         bool searchList(std::string token, std::vector<std::string> &list);
 		void duplicateNounCheck();
+		std::string getDirectory(std::string filePath);
 
     public:
         //Public Member Functions
@@ -35,4 +38,4 @@ class Parser
         const std::vector<std::string>& getNouns() const;
 };
 
-#endif // PARSER_H
+#endif // PARSER_HPP

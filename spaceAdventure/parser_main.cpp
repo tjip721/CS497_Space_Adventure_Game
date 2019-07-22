@@ -1,9 +1,9 @@
-#include "Parser.hpp"
 #include <iostream>
+#include "parser.hpp"
 
 int main()
 {
-	// Get file list file names
+	// Get file list names
 	std::string verbFileList;
 	std::string nounFileList;
 	std::cout << "Enter name of the verb file list: ";
