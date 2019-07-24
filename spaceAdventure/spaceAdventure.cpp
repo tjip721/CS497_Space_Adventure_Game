@@ -2,26 +2,30 @@
 //Written by Tim Ip ONID # 933912896
 //
 
-#include <iostream> 
+#include <iostream>
 #include <vector>
+#include <map>
 #include "spaceAdventure.h"
+#include "parser.hpp"
 
-using std::string; 
-using std::cout; 
+using std::string;
+using std::cout;
 
-
+// Make sure that the word_files folder is in the same directory as the executable
+const string VERB_FILE_LIST = "./word_files/verb_files.txt";
+const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 
 int main(){
 
 	#include "testData.h"
-	bool gameOver = false; 
+	bool gameOver = false;
 	//Declaring the Area objects
-	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"), 
-   	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt"), Sun("Sun", "sun_short.txt", "sun_long.txt"), 
-   	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt"), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"), 
-   	Uranus("Uranus", "uranus_short.txt", "uranus_long.txt"), Pluto("Pluto", "pluto_short.txt", "pluto_long.txt"), PlutoM("Pluto_Moon", "pluto_moon_short.txt", "pluto_moon_long.txt"), 
+	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"),
+   	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt"), Sun("Sun", "sun_short.txt", "sun_long.txt"),
+   	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt"), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"),
+   	Uranus("Uranus", "uranus_short.txt", "uranus_long.txt"), Pluto("Pluto", "pluto_short.txt", "pluto_long.txt"), PlutoM("Pluto_Moon", "pluto_moon_short.txt", "pluto_moon_long.txt"),
    	Neptune1("Neptune_1", "neptune_1_short.txt", "neptune_1_long.txt"), Neptune2("Neptune_2", "neptune_2_short.txt", "neptune_2_long.txt"), Venus2("Venus_2", "venus2_short.txt", "venus2_long.txt");
-	
+
 	std::vector<Area*> planets;
 	planets.push_back(&Mercury);
 	planets.push_back(&Venus1);
@@ -43,7 +47,15 @@ int main(){
 	Item Shoe('Shoe','shoe.txt',1), Gas('Gas','gas.txt',1), PowerC('Power Crystal','powercrystal.txt',1), Crysallith('Crysallith','crysallith.txt',1), OpportunityR('Opportunity Rover','opportunity_rover.txt',0), Transmitter('Transmitter','transmitter.txt',1), ScrewD('Screw Driver','screwdriver.txt',1), Doohickey('Doohickey','doohickey.txt',1), PickA('Pick Axe','pickaxe.txt',1), Rock('Rock','rock.txt',0), Jacket('Jacket','jacket.txt',1), Flashlight('Flashlight','flashlight.txt' ,1), Mushroom('Mushroom', 'mushroom.txt', 1);
 	//Print out intro text
 	cout << "Welcome to the space adventure\n";
-	player.getLocation()->printDescription(); 
+	player.getLocation()->printDescription();
+
+	// Initialize parser
+	Parser parser;
+	// Load word files for parser
+	if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
+		return EXIT_FAILURE;
+	}
+
 
 while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 
@@ -59,110 +71,123 @@ while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 //Temporary read in commands for TESTing
 int verb; //	verb = verbNLP
 //	noun = nounNLP
-string noun = "test"; 
-cout << "Give enumerated verb choice as int:0 look, 1 move, 2 help, 3 inventory,4 lookAt, 5 take, 6 drop 7 fire, 8 open, 9 close, 10 push, 11 mine, 12 launch, 13 land, 14 eat, 15 bow, 16 say, 17 use, 18 invalid, 19 savegame\n";
+//string noun  = "test";
+string noun;
+string command;
+//cout << "Give enumerated verb choice as int:0 look, 1 move, 2 help, 3 inventory,4 lookAt, 5 take, 6 drop 7 fire, 8 open, 9 close, 10 push, 11 mine, 12 launch, 13 land, 14 eat, 15 bow, 16 say, 17 use, 18 invalid, 19 savegame\n";
 
-std::cin >> verb; 
-cout << "Give target item name:"; 
-std::cin >> noun;
+//std::cin >> verb;
+//cout << "Give target item name:";
+//std::cin >> noun;
+cout << "Enter a command: ";
+std::cin >> command;
+parser.processInput(command);
+
 
 //-----------------------------------------------
 
-enum Verb{look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame}; 
+enum Verb{look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame};
+// Map for converting string to enum
+std::map<std::string, Verb> verbMap = {
+	{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"lookAt",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"open",open},{"close",close},
+	{"push",push},{"mine",mine},{"launch",launch},{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame}
+};
 
+verb = verbMap[parser.getVerb()];
+noun = parser.getNouns()[0];
 
 switch (verb){
 	//Do non item actions
 	//look around current location
-	case look: 
-		player.getLocation()->look(); 
-		break; 
+	case look:
+		player.getLocation()->look();
+		break;
 
 	//go somewhere, check exit is accessible and go there
 	case move:
-		moveFxn(string noun); 
-		
+		moveFxn(string noun);
 
-	case help: 
-		cout << "Try one of the following commands: \n Look \n Look at \n Move \n Take \n Fire \n Open \n Close \n Push \n Launch \n Land\n" ; 
-		break; 
 
-	case inventory: 
-		player.listInventory(); 
-		break; 
+	case help:
+		cout << "Try one of the following commands: \n Look \n Look at \n Move \n Take \n Fire \n Open \n Close \n Push \n Launch \n Land\n" ;
+		break;
+
+	case inventory:
+		player.listInventory();
+		break;
 	// If an item action is requested check if the item is available
 	//Check every inventory item for the item name
-	case lookAt: 
+	case lookAt:
 		if(player.lookAt(noun)){
-			break; 
-		}else if(player.getLocation()->lookAt(noun)){ 
-			break; 
+			break;
+		}else if(player.getLocation()->lookAt(noun)){
+			break;
 		}else{
-			cout << "Sorry you can't look at that right now\n" ; 
-			break; 
+			cout << "Sorry you can't look at that right now\n" ;
+			break;
 		}
-	case take: 
+	case take:
 		if(player.take(noun)){
-			break; 
+			break;
 		}else{
-			cout << "Sorry you don't seem to be able to take that right now.\n"; 
-			break; 
+			cout << "Sorry you don't seem to be able to take that right now.\n";
+			break;
 		}
-	case drop: 
+	case drop:
 		if(player.drop(noun)){
 			cout << "You dropped the " << noun << ".\n";
-			break; 
+			break;
 		} else {
-			cout << "Sorry you don't seem to have that in your inventory... soooo you can't drop it.\n"; 
-			break; 
-		} 
+			cout << "Sorry you don't seem to have that in your inventory... soooo you can't drop it.\n";
+			break;
+		}
 
-	case fire: 
+	case fire:
 
-	case open: 
+	case open:
 
-	case close: 
+	case close:
 
-	case push: 
+	case push:
 
-	case mine: 
+	case mine:
 
-	case launch: 
+	case launch:
 		// IF spaceship is present launch to space
-		Area* location = player.getLocation(); 
+		Area* location = player.getLocation();
 		if(location->hasItem("Spaceship") && location->launchExit!= NULL{
-			moveFxn(string noun); 
-		}else{ 
-			cout << "Sorry you don't appear to be able to launch from here.\n"; 
-		}
-
-	case land: 
-		//If in space land on specified planet
-		Area* location = player.getLocation(); 
-		if(location->hasItem("Spaceship") && location->landExit != NULL{
-			moveFxn(string noun); 
+			moveFxn(string noun);
 		}else{
-			cout << "Sorry you don't appear to be able to land there from here.\n"; 
+			cout << "Sorry you don't appear to be able to launch from here.\n";
 		}
 
-	case eat: 
+	case land:
+		//If in space land on specified planet
+		Area* location = player.getLocation();
+		if(location->hasItem("Spaceship") && location->landExit != NULL{
+			moveFxn(string noun);
+		}else{
+			cout << "Sorry you don't appear to be able to land there from here.\n";
+		}
+
+	case eat:
 		if(player.eat(noun)){
 			cout << "You at the " << noun << ".\n";
-			break; 
+			break;
 		}else {
-			cout << "You can't eat that.\n"; 
-			break; 
+			cout << "You can't eat that.\n";
+			break;
 		}
 
-	case bow: 
+	case bow:
 
-	case say: 
+	case say:
 
-	case use: 
+	case use:
 
-	case invalid: 
-		std::cout << "Uh that doesn't make sense try something else.\n"; 		
-		break; 
+	case invalid:
+		std::cout << "Uh that doesn't make sense try something else.\n";
+		break;
 	case savegame:
 		savegame(player, planets);
 
@@ -172,29 +197,27 @@ cout << "\n";
 
 }
 
-return 0; 
+return 0;
 }
 
 
 moveFxn(string noun){
-			Area* location = player.getLocation(); 
-			bool exitValid = location->hasExit(noun); 
+			Area* location = player.getLocation();
+			bool exitValid = location->hasExit(noun);
 			if(exitValid){
-				Exit targetExit = location->getExit(noun); 
-				player.removeLife(targetExit->lifeDistance); 
-				player.removeGas(targetExit->gasDistance); 
+				Exit targetExit = location->getExit(noun);
+				player.removeLife(targetExit->lifeDistance);
+				player.removeGas(targetExit->gasDistance);
 				if(player.getLife < 0){
-					cout << "Oh no! It appears you died of old age in transit. \n GAME OVER. \n"; 
+					cout << "Oh no! It appears you died of old age in transit. \n GAME OVER. \n";
 				else if (player.getGas < 0){
-					cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n"; 
+					cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n";
 				}
-				player.setLocation(location->getExit(noun));  
-				player.getLocation()->printDescription(); 
+				player.setLocation(location->getExit(noun));
+				player.getLocation()->printDescription();
 			} else {
-				std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
+				std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n";
 			}
 		}
-		break; 
+		break;
 }
-
-
