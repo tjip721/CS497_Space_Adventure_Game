@@ -27,6 +27,7 @@ class Parser
         void matchNouns();
         bool searchList(std::string token, std::vector<std::string> &list);
 		void duplicateNounCheck();
+		//void recapitalizeNouns();
 		std::string getDirectory(std::string filePath);
 
     public:

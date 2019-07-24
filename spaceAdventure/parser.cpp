@@ -99,6 +99,7 @@ void Parser::processInput(std::string i) {
 		matchNouns();
 	}
 	duplicateNounCheck(); // If the same noun was recorded twice, remove the second instance from the noun vector.
+	//recapitalizeNouns();
 }
 
 // Set all input characters to lowercase.
@@ -123,6 +124,7 @@ void Parser::removeInvalidChars() {
 	for (int i = 0; i < input.size(); i++) {
 		// Check if it is non-alphanumeric or non-space
 		if (input[i] != ' ' &&
+			input[i] != '_' &&
 			(input[i] < 'a' || input[i] > 'z') &&
 			(input[i] < '0' || input[i] > '9'))
 		{
@@ -170,7 +172,7 @@ void Parser::matchNouns() {
 bool Parser::searchList(std::string token, std::vector<std::string> &list) {
 	/*Start search at second word in file as first word represents the action that will be selected if any match is found in file.
 	  lower_bound() performs binary search for first value that is not less than token. This requires that word files be sorted alphabetically.
-	  If no values less than token are found, it returns pointer to memory one past the end of the vector. 
+	  If no values less than token are found, it returns pointer to memory one past the end of the vector.
 	  list.begin() is subtracted to get index of search result. as lower_bound returns iterator that points to resulting value.*/
     int index = lower_bound(std::next(list.begin(), 1), list.end(), token) - list.begin();
 
@@ -187,6 +189,17 @@ void Parser::duplicateNounCheck() {
 		nouns.pop_back();
 	}
 }
+
+//void Parser::recapitalizeNouns() {
+//	for (std::string noun : nouns) {
+//		noun[0] = std::toupper(noun[0]);
+//		for (int i = 0; i < noun.size(); i++) {
+//			if (i != 0 && noun[i - 1] == '_') {
+//				noun[i] = std::toupper(noun[i]);
+//			}
+//		}
+//	}
+//}
 
 // Getter for the verb member.
 std::string Parser::getVerb() {
