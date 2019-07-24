@@ -4,7 +4,7 @@ OBJS = Item.o Area.o Player.o Exit.o
 
 
 spaceAdventure: spaceAdventure.cpp $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -g -o goAdventure spaceAdventure.cpp
+	$(CC) $(CFLAGS) $(OBJS) -g -o goAdventure spaceAdventure.cpp 
 
 classes.o: Item.o Area.o Player.o
 	

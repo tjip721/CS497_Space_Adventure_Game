@@ -21,7 +21,7 @@ void display_descriptions();
 void display_gameInstances();
 
 //save log file conditions, will be called in the "main" game
-void saveGame(Player::Player player1, std::vector<Area*> planets); 
+void saveGame(Player player1, std::vector<Area*> planets); 
 //Parse the save_log.txt and place in constructor for the areas + user
 void open_log();
 

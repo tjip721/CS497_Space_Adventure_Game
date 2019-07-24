@@ -18,6 +18,8 @@ public:
 	Exit(std::string name, std::string longDescription, Area* toArea); 
 	Area* getArea(); 
 	std::string getName(); 
+	double getGasDistance(){return gasDistance;}
+	double getLifeDistance(){return lifeDistance;}
 }; 
 
 #endif

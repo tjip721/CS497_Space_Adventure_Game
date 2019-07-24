@@ -10,7 +10,7 @@
 #include "data.h"
 
 
-void moveFxn(string noun); 
+void moveFxn(string noun, Player player); 
 
 
 

@@ -93,11 +93,14 @@ bool Player::eat(std::string targetName){
 	}else{
 		return false; 
 	}
+}
+
+/*
 std::vector<Item*> Player::getPlayerInventory(){
 	return inventory;
 }
 
-/*bool Player::launch(){
+bool Player::launch(){
 	if(location->hasItem("Spaceship"){
 		
 	}

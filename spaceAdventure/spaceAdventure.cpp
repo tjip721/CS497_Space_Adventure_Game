@@ -15,6 +15,8 @@ int main(){
 
 	#include "testData.h"
 	bool gameOver = false; 
+
+/*
 	//Declaring the Area objects
 	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"), 
    	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt"), Sun("Sun", "sun_short.txt", "sun_long.txt"), 
@@ -45,17 +47,25 @@ int main(){
 	cout << "Welcome to the space adventure\n";
 	player.getLocation()->printDescription(); 
 
+*/
+
+
 while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 
 //loadgame & savegame logic
-	if(userChooses == "loadgame") {
-	}
-	else{}
+/*	if(userChooses == "loadgame") {
 
+	}else{
+
+	}
+*/
 //check for players requested action using NLP interface
 
 
 //------------------------------------------------
+
+
+
 //Temporary read in commands for TESTing
 int verb; //	verb = verbNLP
 //	noun = nounNLP
@@ -71,6 +81,7 @@ std::cin >> noun;
 enum Verb{look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame}; 
 
 
+Area* location = player.getLocation(); 
 switch (verb){
 	//Do non item actions
 	//look around current location
@@ -80,8 +91,8 @@ switch (verb){
 
 	//go somewhere, check exit is accessible and go there
 	case move:
-		moveFxn(string noun); 
-		
+		moveFxn(noun, player); 
+		break; 
 
 	case help: 
 		cout << "Try one of the following commands: \n Look \n Look at \n Move \n Take \n Fire \n Open \n Close \n Push \n Launch \n Land\n" ; 
@@ -129,21 +140,21 @@ switch (verb){
 
 	case launch: 
 		// IF spaceship is present launch to space
-		Area* location = player.getLocation(); 
-		if(location->hasItem("Spaceship") && location->launchExit!= NULL{
-			moveFxn(string noun); 
+		if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
+			moveFxn(noun, player); 
 		}else{ 
 			cout << "Sorry you don't appear to be able to launch from here.\n"; 
 		}
+		break; 
 
 	case land: 
 		//If in space land on specified planet
-		Area* location = player.getLocation(); 
-		if(location->hasItem("Spaceship") && location->landExit != NULL{
-			moveFxn(string noun); 
+		if(location->hasItem("Spaceship") && location->getLandExit() != NULL){
+			moveFxn(noun, player); 
 		}else{
 			cout << "Sorry you don't appear to be able to land there from here.\n"; 
 		}
+		break; 
 
 	case eat: 
 		if(player.eat(noun)){
@@ -163,8 +174,10 @@ switch (verb){
 	case invalid: 
 		std::cout << "Uh that doesn't make sense try something else.\n"; 		
 		break; 
+
 	case savegame:
-		savegame(player, planets);
+		//savegame(player, planets);
+		break; 
 
 }
 cout << "\n";
@@ -176,25 +189,23 @@ return 0;
 }
 
 
-moveFxn(string noun){
-			Area* location = player.getLocation(); 
-			bool exitValid = location->hasExit(noun); 
-			if(exitValid){
-				Exit targetExit = location->getExit(noun); 
-				player.removeLife(targetExit->lifeDistance); 
-				player.removeGas(targetExit->gasDistance); 
-				if(player.getLife < 0){
-					cout << "Oh no! It appears you died of old age in transit. \n GAME OVER. \n"; 
-				else if (player.getGas < 0){
-					cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n"; 
-				}
-				player.setLocation(location->getExit(noun));  
-				player.getLocation()->printDescription(); 
-			} else {
-				std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
-			}
+void moveFxn(string noun, Player player){
+	Area* location = player.getLocation(); 
+	bool exitValid = location->hasExit(noun); 
+	if(exitValid){
+		Exit* targetExit = location->getExit(noun); 
+		player.removeLife(targetExit->getLifeDistance()); 
+		player.removeGas(targetExit->getGasDistance()); 
+		if(player.getLife() < 0){
+			cout << "Oh no! It appears you died of old age in transit. \n GAME OVER. \n"; 
+		}else if (player.getGas() < 0){
+			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n"; 
 		}
-		break; 
+		player.setLocation(location->getExit(noun)->getArea());  
+		player.getLocation()->printDescription(); 
+	} else {
+		std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
+	}
 }
 
 

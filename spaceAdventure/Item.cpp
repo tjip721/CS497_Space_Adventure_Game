@@ -6,12 +6,14 @@ private:
 	bool breakable; 
 	bool takeable; 
 */	
+
 	
 Item::Item(std::string nameIn, std::string descriptionIn, bool takeableIn){
 	name = nameIn; 
 	description = get_file_data(descriptionIn); 
 	takeable = takeableIn; 
 }
+
 
 void Item::lookAt(){
 	std::cout << description << "\n"; 

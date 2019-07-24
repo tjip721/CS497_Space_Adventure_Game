@@ -14,6 +14,8 @@ Area::Area(std::string name, std::string shortFileName, std::string longFileName
 	areaName=name;
 	shortDescription=get_file_data(shortFileName);
 	longDescription=get_file_data(longFileName);
+	launchExit = NULL;
+	landExit = NULL; 
 }
 void Area::printDescription(){
 	if(firstEntry){
@@ -65,10 +67,10 @@ bool Area::hasExit(std::string target){
 }
 
 
-Area* Area::getExit(std::string targetName){
+Exit* Area::getExit(std::string targetName){
 	for(int ii=0; ii < exits.size(); ii++){
 		if(exits[ii]->getName().compare(targetName)==0){
-			return exits[ii]->getArea(); 
+			return exits[ii]; 
 		} 
 	}
 	return NULL; 
