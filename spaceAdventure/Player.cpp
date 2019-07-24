@@ -72,6 +72,18 @@ bool Player::lookAt(std::string targetName){
 	return false; 
 }
 
+bool Player::use(std::string targetName){
+	for(int ii=0; ii < inventory.size(); ii++){
+		if(inventory[ii]->getName().compare(targetName)==0){
+			inventory[ii]->lookAt(); 
+			clothesWorn.push_back(inventory[ii]);
+			inventory.erase(inventory.begin()+ii); 
+			return true; 	
+		}
+	}
+	return false; 
+
+}
 
 bool Player::eat(std::string targetName){
 	int itemIndex = findItem(targetName); 

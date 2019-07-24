@@ -12,6 +12,7 @@ class Player
 {
 private: 
 	vector<Item*> inventory;  
+	vector<Item*> clothesWorn;  
 	Area* location; 
 	double lifeRemaining; 
 	double gasRemaining; 
@@ -26,6 +27,8 @@ public:
 	bool lookAt(std::string targetName); 
 	double getLife(){ return lifeRemaining;} 
 	double getGas(){ return gasRemaining;}
+	void removeLife(int years){lifeRemaining -= years;}
+	void removeGas(int gas){gasRemaining -= gas;}
 	bool launch(); 
 	bool eat(std::string targetName); 
 	int findItem(std::string targetName); 
@@ -33,6 +36,7 @@ public:
 	std::vector<Item*> getPlayerInventory();
 	//When user chooses to "load game" adds an item object
 	void initializeInventory(std::vector<Item*> toAdd);	
+	bool use(std::string itemName); 
 	
 }; 
 
