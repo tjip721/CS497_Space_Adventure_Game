@@ -1,0 +1,2 @@
+door.txt
+gem.txt

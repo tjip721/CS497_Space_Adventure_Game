@@ -1,8 +1,8 @@
 
 Player player(50,100); 
 
-Item jacket("Jacket", "Leather Jacket", true); 
-Item pickaxe("Pickaxe", "An old dull pickaxe", true); 
+Item jacket("Jacket", "descriptorFiles\\jacket.txt", true); 
+Item pickaxe("Pickaxe", "descriptorFiles\\pickaxe.txt", true); 
 
 Area earth, mars, northAmerica, antarctica; 
 

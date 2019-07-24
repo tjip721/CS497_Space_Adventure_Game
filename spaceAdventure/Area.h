@@ -6,11 +6,13 @@
 #include "Action.h"
 #include "Item.h"
 #include "Exit.h"
+#include "data.h"
 using std::vector; 
 
 class Area
 {
 private: 
+	string areaName;
 	string longDescription;
 	string shortDescription; 
 	vector<Exit*> exits; 
@@ -18,6 +20,7 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry = true;
 public: 
+	Area(std::string name, std::string shortFileName, std::string longFileName);
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
@@ -32,6 +35,12 @@ public:
 	void setShortDescription(std::string text); 
 	bool hasItem(std::string targetName);
 	
+	//Prints all of the items in the Area + the Area name -- done for save log.
+        std::vector<Item*> getItems();
+        bool getAreaEntry();
+	string getName();
+
+
 }; 
 
 #endif

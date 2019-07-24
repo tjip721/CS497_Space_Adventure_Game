@@ -9,7 +9,7 @@ private:
 	
 Item::Item(std::string nameIn, std::string descriptionIn, bool takeableIn){
 	name = nameIn; 
-	description = descriptionIn; 
+	description = get_file_data(descriptionIn); 
 	takeable = takeableIn; 
 }
 

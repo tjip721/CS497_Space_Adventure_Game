@@ -1,0 +1,9 @@
+door
+door
+doorway
+egress
+entrance
+entry
+exit
+opening
+portal

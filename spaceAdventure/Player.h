@@ -29,6 +29,10 @@ public:
 	bool launch(); 
 	bool eat(std::string targetName); 
 	int findItem(std::string targetName); 
+	void getPlayer();
+	std::vector<Item*> getPlayerInventory();
+	//When user chooses to "load game" adds an item object
+	void initializeInventory(std::vector<Item*> toAdd);	
 	
 }; 
 

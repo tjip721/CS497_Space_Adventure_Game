@@ -2,6 +2,7 @@
 #include <iostream>
 /*
 private: 
+	string areaName;
 	string longDescription;
 	string shortDescription; 
 	vector<Exit*> exits; 
@@ -9,7 +10,11 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry; 
 */	
-
+Area::Area(std::string name, std::string shortFileName, std::string longFileName){
+	areaName=name;
+	shortDescription=get_file_data(shortFileName);
+	longDescription=get_file_data(longFileName);
+}
 void Area::printDescription(){
 	if(firstEntry){
 		std::cout << longDescription << "\n"; 
@@ -95,16 +100,25 @@ void Area::addExit(Exit* exit){
 void Area::addItem(Item* item){ 
 	items.push_back(item); 
 }
-void Area::setLongDescription(std::string text){
-	longDescription = text; 
+void Area::setLongDescription(std::string fileName){
+	//from data.h
+	longDescription = get_file_data(fileName); 
 }
-void Area::setShortDescription(std::string text){
-	shortDescription= text; 
+void Area::setShortDescription(std::string fileName){
+	//from data.h
+	shortDescription= get_file_data(fileName); 
 }
 	
+std::vector<Item*> Area::getItems(){
+        return items;
+}
+bool Area::getAreaEntry() {
+        return firstEntry;
+}
 
-
-
+std::string Area::getName(){
+	return areaName;
+}
 
 
 
