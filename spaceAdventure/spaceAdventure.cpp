@@ -80,17 +80,8 @@ switch (verb){
 
 	//go somewhere, check exit is accessible and go there
 	case move:
-		{
-			Area* location = player.getLocation(); 
-			bool exitValid = location->hasExit(noun); 
-			if(exitValid){
-				player.setLocation(location->getExit(noun));  
-				player.getLocation()->printDescription(); 
-			} else {
-				std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
-			}
-		}
-		break; 
+		moveFxn(string noun); 
+		
 
 	case help: 
 		cout << "Try one of the following commands: \n Look \n Look at \n Move \n Take \n Fire \n Open \n Close \n Push \n Launch \n Land\n" ; 
@@ -138,9 +129,21 @@ switch (verb){
 
 	case launch: 
 		// IF spaceship is present launch to space
+		Area* location = player.getLocation(); 
+		if(location->hasItem("Spaceship") && location->launchExit!= NULL{
+			moveFxn(string noun); 
+		}else{ 
+			cout << "Sorry you don't appear to be able to launch from here.\n"; 
+		}
 
 	case land: 
 		//If in space land on specified planet
+		Area* location = player.getLocation(); 
+		if(location->hasItem("Spaceship") && location->landExit != NULL{
+			moveFxn(string noun); 
+		}else{
+			cout << "Sorry you don't appear to be able to land there from here.\n"; 
+		}
 
 	case eat: 
 		if(player.eat(noun)){
@@ -171,3 +174,27 @@ cout << "\n";
 
 return 0; 
 }
+
+
+moveFxn(string noun){
+			Area* location = player.getLocation(); 
+			bool exitValid = location->hasExit(noun); 
+			if(exitValid){
+				Exit targetExit = location->getExit(noun); 
+				player.removeLife(targetExit->lifeDistance); 
+				player.removeGas(targetExit->gasDistance); 
+				if(player.getLife < 0){
+					cout << "Oh no! It appears you died of old age in transit. \n GAME OVER. \n"; 
+				else if (player.getGas < 0){
+					cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n"; 
+				}
+				player.setLocation(location->getExit(noun));  
+				player.getLocation()->printDescription(); 
+			} else {
+				std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
+			}
+		}
+		break; 
+}
+
+

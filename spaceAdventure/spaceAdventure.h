@@ -9,4 +9,9 @@
 #include "Player.h"
 #include "data.h"
 
+
+void moveFxn(string noun); 
+
+
+
 #endif

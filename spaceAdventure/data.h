@@ -3,10 +3,13 @@
 
 #include <string>
 #include <fstream>
+//#include "Player.h"
+//#include "Area.h"
+class Player;
+class Area; 
 
 
-
-std::string filename= " saveLog.txt"
+std::string filename= " saveLog.txt"; 
 
 //open description file to save to an object variable
 std::string get_file_data(std::string text);
