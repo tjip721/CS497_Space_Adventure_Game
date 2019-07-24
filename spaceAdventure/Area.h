@@ -16,6 +16,8 @@ private:
 	string longDescription;
 	string shortDescription; 
 	vector<Exit*> exits; 
+	Exit launchExit = NULL; 
+	Exit landExit = NULL;
 	vector<Item*> items;  
 	vector<Action> availableActions;  
 	bool firstEntry = true;
@@ -34,6 +36,8 @@ public:
 	void setLongDescription(std::string text); 
 	void setShortDescription(std::string text); 
 	bool hasItem(std::string targetName);
+	void setLaunchExit(Exit* exit){launchExit= exit;}
+	void setLandExit(Exit* exit){landExit= exit;}
 	
 	//Prints all of the items in the Area + the Area name -- done for save log.
         std::vector<Item*> getItems();
