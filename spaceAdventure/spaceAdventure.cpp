@@ -91,7 +91,8 @@ switch (verb){
 
 	//go somewhere, check exit is accessible and go there
 	case move:
-		if(!player.isWearing("Jacket") && player.getLocation()->getName().compare("Pluto")==0 )	{
+		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 || 
+			player.getLocation()->getName().compare("Uranus")==0 || player.getLocation()->getName().compare("Neptune")==0) ){
 			cout << "Pluto is cold! You froze to DEATH. GAME OVER. \n"; 
 			gameOver = true; 
 		}else if(player.isWearing("Shoes") || player.getLocation()->getName().compare("Shoes")==0 ){
