@@ -21,6 +21,7 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry = true;
 	bool dark = false; 
+	bool oxygen = true; 
 public: 
 	void printDescription(); 
 	void look(); 
@@ -32,6 +33,8 @@ public:
 	bool lookAt(std::string targetName); 
 	bool isDark(){return dark;}
 	void setDark(bool tf){dark = tf;} 
+	bool hasOxygen(){return oxygen; }
+	void setOxygen(bool tf){oxygen = tf; }
 	
 	void addExit(Exit* exit); 
 	void addItem(Item* item); 

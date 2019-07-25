@@ -61,6 +61,21 @@ while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 */
 //check for players requested action using NLP interface
 
+if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 || 
+			player.getLocation()->getName().compare("Uranus")==0 || player.getLocation()->getName().compare("Neptune")==0) ){
+			cout << "Pluto is cold! You froze to DEATH. GAME OVER. \n"; 
+			gameOver = true; 
+}
+int suffocationCounter = 1; 
+if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
+	if(suffocationCounter < 0){
+		gameOver = true; 
+		cout << "Oh no looks like you suffocated.\n"; 
+		break; 
+	}
+	cout << "You don't seem to be able to breath here.\n"; 
+	suffocationCounter--; 	
+}
 
 //------------------------------------------------
 
@@ -91,11 +106,7 @@ switch (verb){
 
 	//go somewhere, check exit is accessible and go there
 	case move:
-		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 || 
-			player.getLocation()->getName().compare("Uranus")==0 || player.getLocation()->getName().compare("Neptune")==0) ){
-			cout << "Pluto is cold! You froze to DEATH. GAME OVER. \n"; 
-			gameOver = true; 
-		}else if(player.isWearing("Shoes") || player.getLocation()->getName().compare("Shoes")==0 ){
+		if(player.isWearing("Shoes") || player.getLocation()->getName().compare("Shoes")==0 ){
 			moveFxn(noun, player); 
 		}
 		break; 
