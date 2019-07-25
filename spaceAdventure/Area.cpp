@@ -13,6 +13,7 @@ private:
 
 
 void Area::printDescription(){
+
 	if(firstEntry){
 		std::cout << longDescription << "\n"; 
 		firstEntry = false; 
@@ -29,6 +30,10 @@ void Area::printDescription(){
 }
 
 void Area::look(){
+	if(dark){
+		std::cout<< "It is very dark in here you don't seem to be able to see much.\n"; 
+		return; 
+	}
 	firstEntry = true; 
 	printDescription();
 } 

@@ -208,7 +208,7 @@ void moveFxn(string noun, Player player){
 			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n"; 
 		}
 		player.setLocation(location->getExit(noun)->getArea());  
-		player.getLocation()->printDescription(); 
+		player.getLocation()->look(); 
 	} else {
 		std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
 	}

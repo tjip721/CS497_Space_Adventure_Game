@@ -20,6 +20,7 @@ private:
 	vector<Item*> items;  
 	vector<Action> availableActions;  
 	bool firstEntry = true;
+	bool dark = false; 
 public: 
 	void printDescription(); 
 	void look(); 
@@ -29,6 +30,8 @@ public:
 	bool hasExit(std::string target); 	
 	Exit* getExit(std::string targetName); 	
 	bool lookAt(std::string targetName); 
+	bool isDark(){return dark;}
+	void setDark(bool tf){dark = tf;} 
 	
 	void addExit(Exit* exit); 
 	void addItem(Item* item); 
