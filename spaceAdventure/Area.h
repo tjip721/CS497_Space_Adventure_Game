@@ -6,7 +6,6 @@
 #include "Action.h"
 #include "Item.h"
 #include "Exit.h"
-#include "data.h"
 using std::vector; 
 
 class Area
@@ -22,8 +21,6 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry = true;
 public: 
-	Area(std::string name, std::string shortFileName, std::string longFileName);
-	Area(); 
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 

@@ -3,7 +3,6 @@
 #include <string>
 #include <vector> 
 #include <iostream>
-#include "data.h"
 
 class Item 
 {
