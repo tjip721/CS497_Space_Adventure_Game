@@ -24,6 +24,7 @@ public:
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
+	Item* getItem(std::string targetName); 
 	void dropItem(Item* thing); 
 	bool hasExit(std::string target); 	
 	Exit* getExit(std::string targetName); 	

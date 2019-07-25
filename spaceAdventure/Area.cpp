@@ -33,6 +33,17 @@ void Area::look(){
 	printDescription();
 } 
 
+Item* Area::getItem(std::string targetName){
+	Item* itemPtr; 
+	for(int ii=0; ii < items.size(); ii++){
+		if(items[ii]->getName().compare(targetName)==0){
+			itemPtr = items[ii];
+			return itemPtr; 
+		}
+	}
+	return NULL; 
+}
+
 Item* Area::takeItem(std::string target){
 	Item* itemPtr; 
 	for(int ii=0; ii < items.size(); ii++){
