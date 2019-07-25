@@ -14,8 +14,11 @@ private:
 	bool takeable; 
 	bool edible; 
 	bool wearable; 
+	bool hidden = false; 
 	
 public: 
+	void setHidden(bool hide){ hidden = hide; }
+	bool isHidden(){return hidden;}
 	void lookAt(); 
 	std::string getName(); 
 	bool isTakeable(); 
