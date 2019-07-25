@@ -12,6 +12,7 @@ private:
 	bool breakable; 
 	bool takeable; 
 	bool edible; 
+	bool wearable; 
 	
 public: 
 	void lookAt(); 
@@ -19,6 +20,8 @@ public:
 	bool isTakeable(); 
 	bool isEdible(){ return edible; }
 	void setEdible(bool edible); 
+	bool isWearable(){return wearable;}
+	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 }; 
 

@@ -91,6 +91,7 @@ switch (verb){
 
 	//go somewhere, check exit is accessible and go there
 	case move:
+		if(player.isWearing("Shoes") || player.getLocation()->getName().compare("Shoes")==0 )
 		moveFxn(noun, player); 
 		break; 
 

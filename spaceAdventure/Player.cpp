@@ -95,6 +95,15 @@ bool Player::eat(std::string targetName){
 	}
 }
 
+bool Player::isWearing(std::string targetName){
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		if(clothesWorn[ii]->getName().compare(targetName)==0){
+			return true; 	
+		}
+	}
+	return false; 
+}
+
 /*
 std::vector<Item*> Player::getPlayerInventory(){
 	return inventory;
