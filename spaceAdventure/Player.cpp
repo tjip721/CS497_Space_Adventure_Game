@@ -87,6 +87,7 @@ bool Player::eat(std::string targetName){
 	int itemIndex = findItem(targetName); 
 	if(itemIndex != NULL){
 		//Eat the item, add to asphyxiation timer?
+		inventory[itemIndex]->use(location); 
 		return true; 
 	}else{
 		return false; 
