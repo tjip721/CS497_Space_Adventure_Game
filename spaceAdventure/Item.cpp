@@ -10,10 +10,13 @@ private:
 	
 Item::Item(std::string nameIn, std::string descriptionIn, bool takeableIn){
 	name = nameIn; 
-	description = get_file_data(descriptionIn); 
+	description = descriptionIn; 
 	takeable = takeableIn; 
 }
 
+void Item::use(Area* location){
+	std::cout << "That didn't seem to do anything. \n"; 
+}
 
 void Item::lookAt(){
 	std::cout << description << "\n"; 

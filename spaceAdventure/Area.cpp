@@ -11,14 +11,10 @@ private:
 	vector<Action> availableActions;  
 	bool firstEntry; 
 */	
-Area::Area(std::string name, std::string shortFileName, std::string longFileName){
-	areaName=name;
-	shortDescription=get_file_data(shortFileName);
-	longDescription=get_file_data(longFileName);
-	launchExit = NULL;
-	landExit = NULL; 
-}
+
+
 void Area::printDescription(){
+
 	if(firstEntry){
 		std::cout << longDescription << "\n"; 
 		firstEntry = false; 
@@ -35,9 +31,24 @@ void Area::printDescription(){
 }
 
 void Area::look(){
+	if(dark){
+		std::cout<< "It is very dark in here you don't seem to be able to see much.\n"; 
+		return; 
+	}
 	firstEntry = true; 
 	printDescription();
 } 
+
+Item* Area::getItem(std::string targetName){
+	Item* itemPtr; 
+	for(int ii=0; ii < items.size(); ii++){
+		if(items[ii]->getName().compare(targetName)==0){
+			itemPtr = items[ii];
+			return itemPtr; 
+		}
+	}
+	return NULL; 
+}
 
 Item* Area::takeItem(std::string target){
 	Item* itemPtr; 
@@ -103,14 +114,17 @@ void Area::addExit(Exit* exit){
 void Area::addItem(Item* item){ 
 	items.push_back(item); 
 }
+
+
 void Area::setLongDescription(std::string fileName){
 	//from data.h
-	longDescription = get_file_data(fileName); 
+	longDescription = fileName; 
 }
 void Area::setShortDescription(std::string fileName){
 	//from data.h
-	shortDescription= get_file_data(fileName); 
+	shortDescription= fileName; 
 }
+
 	
 std::vector<Item*> Area::getItems(){
         return items;

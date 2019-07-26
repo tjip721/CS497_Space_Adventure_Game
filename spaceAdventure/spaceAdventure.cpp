@@ -5,15 +5,15 @@
 #include <iostream> 
 #include <vector>
 #include "spaceAdventure.h"
+#include "testData.h"
 
 using std::string; 
 using std::cout; 
-
+using std::vector;
 
 
 int main(){
 
-	#include "testData.h"
 	bool gameOver = false; 
 
 /*
@@ -61,6 +61,21 @@ while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 */
 //check for players requested action using NLP interface
 
+if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 || 
+			player.getLocation()->getName().compare("Uranus")==0 || player.getLocation()->getName().compare("Neptune")==0) ){
+			cout << "Pluto is cold! You froze to DEATH. GAME OVER. \n"; 
+			gameOver = true; 
+}
+int suffocationCounter = 1; 
+if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
+	if(suffocationCounter < 0){
+		gameOver = true; 
+		cout << "Oh no looks like you suffocated.\n"; 
+		break; 
+	}
+	cout << "You don't seem to be able to breath here.\n"; 
+	suffocationCounter--; 	
+}
 
 //------------------------------------------------
 
@@ -91,7 +106,9 @@ switch (verb){
 
 	//go somewhere, check exit is accessible and go there
 	case move:
-		moveFxn(noun, player); 
+		if(player.isWearing("Shoes") || player.getLocation()->getName().compare("Shoes")==0 ){
+			moveFxn(noun, player); 
+		}
 		break; 
 
 	case help: 
@@ -202,7 +219,7 @@ void moveFxn(string noun, Player player){
 			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n"; 
 		}
 		player.setLocation(location->getExit(noun)->getArea());  
-		player.getLocation()->printDescription(); 
+		player.getLocation()->look(); 
 	} else {
 		std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n"; 
 	}

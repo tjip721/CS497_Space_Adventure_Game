@@ -77,9 +77,7 @@ bool Player::lookAt(std::string targetName){
 bool Player::use(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
-			inventory[ii]->lookAt(); 
-			clothesWorn.push_back(inventory[ii]);
-			inventory.erase(inventory.begin()+ii); 
+			inventory[ii]->use(location); 
 			return true; 	
 		}
 	}
@@ -91,10 +89,20 @@ bool Player::eat(std::string targetName){
 	int itemIndex = findItem(targetName); 
 	if(itemIndex != NULL){
 		//Eat the item, add to asphyxiation timer?
+		inventory[itemIndex]->use(location); 
 		return true; 
 	}else{
 		return false; 
 	}
+}
+
+bool Player::isWearing(std::string targetName){
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		if(clothesWorn[ii]->getName().compare(targetName)==0){
+			return true; 	
+		}
+	}
+	return false; 
 }
 
 /*

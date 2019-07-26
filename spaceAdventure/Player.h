@@ -40,6 +40,7 @@ public:
 	//When user chooses to "load game" adds an item object
 	void initializeInventory(std::vector<Item*> toAdd);	
 	bool use(std::string itemName); 
+	bool isWearing(std::string name); 
 	
 }; 
 

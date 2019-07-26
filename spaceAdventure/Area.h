@@ -6,7 +6,6 @@
 #include "Action.h"
 #include "Item.h"
 #include "Exit.h"
-#include "data.h"
 using std::vector; 
 
 class Area
@@ -21,16 +20,21 @@ private:
 	vector<Item*> items;  
 	vector<Action> availableActions;  
 	bool firstEntry = true;
+	bool dark = false; 
+	bool oxygen = true; 
 public: 
-	Area(std::string name, std::string shortFileName, std::string longFileName);
-	Area(); 
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
+	Item* getItem(std::string targetName); 
 	void dropItem(Item* thing); 
 	bool hasExit(std::string target); 	
 	Exit* getExit(std::string targetName); 	
 	bool lookAt(std::string targetName); 
+	bool isDark(){return dark;}
+	void setDark(bool tf){dark = tf;} 
+	bool hasOxygen(){return oxygen; }
+	void setOxygen(bool tf){oxygen = tf; }
 	
 	void addExit(Exit* exit); 
 	void addItem(Item* item); 
