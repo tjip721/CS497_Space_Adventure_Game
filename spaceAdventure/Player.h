@@ -7,6 +7,9 @@
 #include "Item.h"
 
 using std::vector; 
+//Forward declaration
+class Area;
+class Item;
 
 class Player 
 {

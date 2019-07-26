@@ -1,5 +1,6 @@
-#include "Area.h"
 #include <iostream>
+#include "Area.h"
+#include "Item.h"
 /*
 private: 
 	string areaName;
