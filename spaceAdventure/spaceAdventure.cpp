@@ -5,15 +5,15 @@
 #include <iostream> 
 #include <vector>
 #include "spaceAdventure.h"
+#include "testData.h"
 
 using std::string; 
 using std::cout; 
-
+using std::vector;
 
 
 int main(){
 
-	#include "testData.h"
 	bool gameOver = false; 
 
 /*
