@@ -5,6 +5,8 @@
 #include <iostream>
 #include "data.h"
 
+class Area;
+
 class Item 
 {
 private: 
