@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Area.h"
+#include "Item.h"
 
 int Player::findItem(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
