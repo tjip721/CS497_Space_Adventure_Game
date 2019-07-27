@@ -1,5 +1,7 @@
 #ifndef FLASHLIGHT_H 
-#define FLASHLIGHT_H #include "Item.h" 
+#define FLASHLIGHT_H 
+#include "Item.h" 
+
 class Flashlight : public Item
 {
 private: 
@@ -24,7 +26,7 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 */
-	void use(Player* player); 
+	void use(Area* location); 
 	
 }; 
 

@@ -1,8 +1,8 @@
-#ifndef PICKAXE_H 
-#define PICKAXE_H
+#ifndef POWERCRYSTAL_H 
+#define POWERCRYSTAL_H
 #include "Item.h"
 
-class Pickaxe : public Item
+class PowerCrystal : public Item
 {
 private: 
 

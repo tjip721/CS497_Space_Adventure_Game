@@ -3,9 +3,9 @@
 #include <string>
 #include <vector> 
 #include <iostream>
+#include "Area.h"
 
-
-class Area;
+using std::cout; 
 
 class Item 
 {
@@ -31,6 +31,7 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 	void use(Area* location); 
+	void fix(){cout<<"That didn't do anything.\n";}
 }; 
 
 #endif

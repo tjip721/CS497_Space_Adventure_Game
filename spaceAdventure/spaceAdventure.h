@@ -7,6 +7,11 @@
 #include "Action.h"
 #include "Item.h"
 #include "Player.h"
+#include "Pickaxe.h"
+#include "Flashlight.h"
+#include "Mushroom.h"
+#include "PowerCrystal.h"
+#include "Spaceship.h"
 #include "data.h"
 
 using std::string;
