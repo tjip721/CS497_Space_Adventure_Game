@@ -1,12 +1,11 @@
-#ifndef SPACESHIP_H 
-#define SPACESHIP_H
+#ifndef SCREWDRIVER_H 
+#define SCREWDRIVER_H
 #include "Item.h"
 
-class Spaceship : public Item
+class ScrewDriver : public Item
 {
 private: 
 
-	int fixesNeeded = 3; 
 /* Inherited attributes for reference
 	std::string name; 
 	std::string description; 
@@ -28,8 +27,6 @@ public:
 	Item(std::string name, std::string description, bool takeable); 
 */
 	void use(Area* location); 
-	void fix(){ fixesNeeded--;}
-	bool isFixed();
 	
 }; 
 
