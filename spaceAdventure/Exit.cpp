@@ -1,5 +1,5 @@
 #include "Exit.h"
-
+#include "Area.h"
 /*class Area; 
 class Exit 
 {

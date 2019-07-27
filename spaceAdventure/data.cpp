@@ -1,4 +1,6 @@
 #include "data.h"
+#include "Player.h"
+#include "Area.h"
 
 std::string get_file_data(std::string fileName){
 	std::fstream r_file;
@@ -12,7 +14,6 @@ std::string get_file_data(std::string fileName){
 	r_file.close();
 	return file_read;
 }
-
 void saveGame(Player::Player player1, std::vector<Area*> planets) {
    std::fstream savegame;
    savegame.open("saveLog.txt", std::fstream::out | std::fstream::trunc);

@@ -4,16 +4,18 @@
 
 #include <iostream> 
 #include <vector>
+#include <time.h>
 #include "spaceAdventure.h"
-#include "testData.h"
+//#include "testData.h"
 
 using std::string; 
 using std::cout; 
+using std::endl; 
 using std::vector;
 
 
 int main(){
-
+	srand(time(NULL));
 	bool gameOver = false; 
 
 /*
@@ -48,10 +50,13 @@ int main(){
 	player.getLocation()->printDescription(); 
 
 */
-
+double playerLife, playerGas;
+playerGas=rand()%3+1;
+playerLife= rand()%40+30;
+Player player(playerLife, playerGas);
 
 while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
-
+	cout << "You did it!" << endl;
 //loadgame & savegame logic
 /*	if(userChooses == "loadgame") {
 

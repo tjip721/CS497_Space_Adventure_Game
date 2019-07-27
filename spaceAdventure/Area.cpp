@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Area.h"
 #include "Item.h"
+#include "Exit.h"
 /*
 private: 
 	string areaName;
@@ -12,6 +13,12 @@ private:
 	bool firstEntry; 
 */	
 
+Area::Area(std::string name, std::string shortFileName, std::string longFileName){
+	areaName=name;
+	//to do: update open file for reading in main
+	shortDescription=shortFileName;
+	longDescription=longFileName;
+}
 
 void Area::printDescription(){
 

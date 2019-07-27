@@ -4,10 +4,11 @@
 #include <string>
 #include <vector> 
 #include "Action.h"
-#include "Item.h"
-#include "Exit.h"
+
 using std::vector; 
 
+class Item;
+class Exit;
 class Area
 {
 private: 
@@ -23,6 +24,8 @@ private:
 	bool dark = false; 
 	bool oxygen = true; 
 public: 
+	//Adding constructor back
+	Area(std::string name, std::string shortFileName, std::string longFileName);
 	void printDescription(); 
 	void look(); 
 	Item* takeItem(std::string targetName); 
@@ -47,8 +50,8 @@ public:
 	Exit* getLaunchExit(){return launchExit;}
 	
 	//Prints all of the items in the Area + the Area name -- done for save log.
-        std::vector<Item*> getItems();
-        bool getAreaEntry();
+    std::vector<Item*> getItems();
+    bool getAreaEntry();
 	string getName();
 
 
