@@ -2,18 +2,6 @@
 #include "Player.h"
 #include "Area.h"
 
-std::string get_file_data(std::string fileName){
-	std::fstream r_file;
-	std::string file_read;
-	const std::string readFile= "descriptorFiles/"+fileName;
-        std::cout << readFile << std::endl;
-	r_file.open(readFile);
-
-	getline(r_file, file_read);
-	std::cout << file_read << std::endl;
-	r_file.close();
-	return file_read;
-}
 void saveGame(Player::Player player1, std::vector<Area*> planets) {
    std::fstream savegame;
    savegame.open("saveLog.txt", std::fstream::out | std::fstream::trunc);

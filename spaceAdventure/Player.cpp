@@ -10,12 +10,6 @@ int Player::findItem(std::string targetName){
 	}
 	return NULL; 
 }
-	
-
-Player::Player(double life, double gas){
-	lifeRemaining = life; 
-	gasRemaining = gas; 
-}
 
 void Player::initializeInventory(std::vector<Item*> addItem) {
 	for(int i=0; i < addItem.size(); i++) {
@@ -50,6 +44,11 @@ Area* Player::getLocation(){
 	return location; 
 }
 
+void Player::setVars(Area* anArea, double gas, double life){
+	location = anArea; 
+	lifeRemaining = life; 
+	gasRemaining = gas; 
+}
 void Player::setLocation(Area* anArea){
 	location = anArea; 
 }

@@ -9,6 +9,11 @@
 #include "Player.h"
 #include "data.h"
 
+using std::string;
+
+//open description file to save to an object variable
+string get_file_data(string text);
+
 
 void moveFxn(string noun, Player player); 
 

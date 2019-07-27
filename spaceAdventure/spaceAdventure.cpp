@@ -12,13 +12,16 @@ using std::string;
 using std::cout; 
 using std::endl; 
 using std::vector;
+using std::fstream;
+using std::cin;
+using std::fstream;
 
 
 int main(){
 	srand(time(NULL));
 	bool gameOver = false; 
 
-/*
+	Player player;
 	//Declaring the Area objects
 	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"), 
    	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt"), Sun("Sun", "sun_short.txt", "sun_long.txt"), 
@@ -44,26 +47,37 @@ int main(){
 	planets.push_back(&Venus2);
 
 	//Declaring Item objects
-	Item Shoe('Shoe','shoe.txt',1), Gas('Gas','gas.txt',1), PowerC('Power Crystal','powercrystal.txt',1), Crysallith('Crysallith','crysallith.txt',1), OpportunityR('Opportunity Rover','opportunity_rover.txt',0), Transmitter('Transmitter','transmitter.txt',1), ScrewD('Screw Driver','screwdriver.txt',1), Doohickey('Doohickey','doohickey.txt',1), PickA('Pick Axe','pickaxe.txt',1), Rock('Rock','rock.txt',0), Jacket('Jacket','jacket.txt',1), Flashlight('Flashlight','flashlight.txt' ,1), Mushroom('Mushroom', 'mushroom.txt', 1);
+	Item Shoe("Shoe","shoe.txt",1), Gas("Gas","gas.txt",1), PowerC("Power Crystal","powercrystal.txt",1), Crysallith("Crysallith","crysallith.txt",1), OpportunityR("Opportunity Rover","opportunity_rover.txt",0), Transmitter("Transmitter","transmitter.txt",1), ScrewD("Screw Driver","screwdriver.txt",1), Doohickey("Doohickey","doohickey.txt",1), PickA("Pick Axe","pickaxe.txt",1), Rock("Rock","rock.txt",0), Jacket("Jacket","jacket.txt",1), Flashlight("Flashlight","flashlight.txt" ,1), Mushroom("Mushroom", "mushroom.txt", 1);
 	//Print out intro text
-	cout << "Welcome to the space adventure\n";
-	player.getLocation()->printDescription(); 
-
-*/
-double playerLife, playerGas;
-playerGas=rand()%3+1;
-playerLife= rand()%40+30;
-Player player(playerLife, playerGas);
-
-while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
-	cout << "You did it!" << endl;
-//loadgame & savegame logic
-/*	if(userChooses == "loadgame") {
-
+	string userChooses;
+	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
+	cin >> userChooses;
+	planets[1]->getName();
+	//player.getLocation()->printDescription(); 
+	//loadgame & savegame logic
+	double playerLife, playerGas;
+	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "Load") {
+		cout << "Loading game..." << endl;
+		//dummy values for now
+		playerGas=1;
+		playerLife=0;
+		player.setVars(&Uranus, playerGas, playerLife);
 	}else{
-
+		cout << "Okay!" << std:: endl;
+		playerGas=rand() % 3 + 1;
+		playerLife= rand()% 40 + 30;
+		int location=rand()% 2 + 1;
+		if (location == 1){
+			player.setVars(&Uranus, playerGas, playerLife);
+		}
+		else {
+			player.setVars(&Mercury, playerGas, playerLife);
+		}
 	}
-*/
+
+	cout << player.getLife() << endl;
+while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
+
 //check for players requested action using NLP interface
 
 if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 || 
@@ -230,4 +244,16 @@ void moveFxn(string noun, Player player){
 	}
 }
 
+std::string get_file_data(std::string fileName){
+	fstream r_file;
+	string file_read;
+	const string readFile= "descriptorFiles/"+fileName;
+        cout << readFile << endl;
+	r_file.open(readFile);
+
+	getline(r_file, file_read);
+	cout << file_read << endl;
+	r_file.close();
+	return file_read;
+}
 

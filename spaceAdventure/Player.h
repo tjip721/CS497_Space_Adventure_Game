@@ -20,12 +20,13 @@ private:
 	double gasRemaining; 
 
 public: 
-	Player(double life, double gas); 
 	bool drop(std::string targetName); 
 	bool take(std::string targetName); 
-	Area* getLocation(); 
-	void setLocation(Area* anArea); 
+	Area* getLocation();
+	//Needed because of dynamic loadgame 
+	void setVars(Area* anArea, double gas, double life); 
 	void listInventory(); 
+	void setLocation(Area* anArea);
 	bool lookAt(std::string targetName); 
 	double getLife(){ return lifeRemaining;} 
 	double getGas(){ return gasRemaining;}
