@@ -1,138 +1,148 @@
 #include <iostream>
+#include <fstream>
 #include "Area.h"
 #include "Item.h"
 #include "Exit.h"
 /*
-private: 
+private:
 	string areaName;
 	string longDescription;
-	string shortDescription; 
-	vector<Exit*> exits; 
-	vector<Item*> items;  
-	vector<Action> availableActions;  
-	bool firstEntry; 
-*/	
+	string shortDescription;
+	vector<Exit*> exits;
+	vector<Item*> items;
+	vector<Action> availableActions;
+	bool firstEntry;
+*/
 
 Area::Area(std::string name, std::string shortFileName, std::string longFileName){
 	areaName=name;
 	//to do: update open file for reading in main
-	shortDescription=shortFileName;
-	longDescription=longFileName;
+	shortDescription=loadFile(shortFileName);
+	longDescription=loadFile(longFileName);
+}
+
+std::string Area::loadFile(std::string fileName) {
+	fileName = "./descriptorFiles/" + fileName;
+	std::ifstream file(fileName.c_str());
+	std::string str;
+	getline(file, str);
+	file.close();
+	return str;
 }
 
 void Area::printDescription(){
 
 	if(firstEntry){
-		std::cout << longDescription << "\n"; 
-		firstEntry = false; 
+		std::cout << longDescription << "\n";
+		firstEntry = false;
 		if(items.size() > 0){
-			std::cout << "There are some items here: "; 
+			std::cout << "There are some items here: ";
 			for(int ii=0; ii < items.size(); ii++){
-				std::cout << items[ii]->getName() << "\n"; 
+				std::cout << items[ii]->getName() << "\n";
 			}
 		}
 		//Add logic to print description of items here
 	} else {
-		std::cout << shortDescription << "\n"; 
+		std::cout << shortDescription << "\n";
 	}
 }
 
 void Area::look(){
 	if(dark){
-		std::cout<< "It is very dark in here you don't seem to be able to see much.\n"; 
-		return; 
+		std::cout<< "It is very dark in here you don't seem to be able to see much.\n";
+		return;
 	}
-	firstEntry = true; 
+	firstEntry = true;
 	printDescription();
-} 
+}
 
 Item* Area::getItem(std::string targetName){
-	Item* itemPtr; 
+	Item* itemPtr;
 	for(int ii=0; ii < items.size(); ii++){
 		if(items[ii]->getName().compare(targetName)==0){
 			itemPtr = items[ii];
-			return itemPtr; 
+			return itemPtr;
 		}
 	}
-	return NULL; 
+	return NULL;
 }
 
 Item* Area::takeItem(std::string target){
-	Item* itemPtr; 
+	Item* itemPtr;
 	for(int ii=0; ii < items.size(); ii++){
 		if(items[ii]->getName().compare(target)==0 && items[ii]->isTakeable() ){
-			itemPtr = items[ii]; 
-			items.erase(items.begin()+ii); 
-			return itemPtr; 
+			itemPtr = items[ii];
+			items.erase(items.begin()+ii);
+			return itemPtr;
 		}
 	}
-	return NULL; 
+	return NULL;
 }
 
 void Area::dropItem(Item* thing){
-	items.push_back(thing); 
-} 
-	
+	items.push_back(thing);
+}
+
 
 bool Area::hasExit(std::string target){
-	int exitValid = false;  
+	int exitValid = false;
 	for(int ii=0; ii < exits.size(); ii++){
 		if(exits[ii]->getName().compare(target)==0){
-			exitValid = true; 
+			exitValid = true;
 			break;
-		} 
+		}
 	}
-	return exitValid; 
+	return exitValid;
 }
 
 
 Exit* Area::getExit(std::string targetName){
 	for(int ii=0; ii < exits.size(); ii++){
 		if(exits[ii]->getName().compare(targetName)==0){
-			return exits[ii]; 
-		} 
+			return exits[ii];
+		}
 	}
-	return NULL; 
+	return NULL;
 }
 
 bool Area::lookAt(std::string targetName){
 	for(int ii=0; ii < items.size(); ii++){
 		if(items[ii]->getName().compare(targetName)==0){
-			items[ii]->lookAt(); 
-			return true; 
+			items[ii]->lookAt();
+			return true;
 		}
 	}
-	return false; 
-}  
+	return false;
+}
 
 bool Area::hasItem(std::string targetName){
 for(int ii=0; ii < items.size(); ii++){
 		if(items[ii]->getName().compare(targetName)==0){
-			return true; 
+			return true;
 		}
 	}
-	return false; 
+	return false;
 
 }
 
 void Area::addExit(Exit* exit){
-	exits.push_back(exit); 
+	exits.push_back(exit);
 }
-void Area::addItem(Item* item){ 
-	items.push_back(item); 
+void Area::addItem(Item* item){
+	items.push_back(item);
 }
 
 
 void Area::setLongDescription(std::string fileName){
 	//from data.h
-	longDescription = fileName; 
+	longDescription = fileName;
 }
 void Area::setShortDescription(std::string fileName){
 	//from data.h
-	shortDescription= fileName; 
+	shortDescription= fileName;
 }
 
-	
+
 std::vector<Item*> Area::getItems(){
         return items;
 }
@@ -143,9 +153,3 @@ bool Area::getAreaEntry() {
 std::string Area::getName(){
 	return areaName;
 }
-
-
-
-
-
-
