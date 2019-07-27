@@ -119,7 +119,7 @@ int main(){
 		}
 
 	
-		int verb;
+		int verb = 18;
 		string noun = "";
 		string command;
 		cout << "Please enter a command: ";
