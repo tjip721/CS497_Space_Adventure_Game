@@ -123,6 +123,7 @@ void Parser::removeInvalidChars() {
 	for (int i = 0; i < input.size(); i++) {
 		// Check if it is non-alphanumeric or non-space
 		if (input[i] != ' ' &&
+			input[i] != '_' &&
 			(input[i] < 'a' || input[i] > 'z') &&
 			(input[i] < '0' || input[i] > '9'))
 		{
