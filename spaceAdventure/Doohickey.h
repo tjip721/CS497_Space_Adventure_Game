@@ -1,8 +1,8 @@
-#ifndef PICKAXE_H 
-#define PICKAXE_H
+#ifndef DOOHICKEY_H 
+#define DOOHICKEY_H
 #include "Item.h"
 
-class Pickaxe : public Item
+class Doohickey : public Item
 {
 private: 
 

@@ -2,7 +2,7 @@
 
 
 void Mushroom::use(Area* location){
-	if(!location->hasOxygen(){
+	if(!location->hasOxygen()){
 		location->setOxygen(true); 
 		cout << "Wow you can suddenly breath.\n"; 
 	}else{

@@ -26,7 +26,7 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 */
-	void use(Player* player); 
+	void use(Area* location); 
 	
 }; 
 
