@@ -6,8 +6,10 @@
 #include <vector>
 #include <time.h>
 #include <map>
+#include <algorithm>
 #include "spaceAdventure.h"
 #include "parser.h"
+#include "Player.h"
 //#include "testData.h"
 
 using std::string;
@@ -24,7 +26,7 @@ const string VERB_FILE_LIST = "./word_files/verb_files.txt";
 const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 vector<string> loadingGame;
 
-int main(){
+int main() {
 
 	srand(time(NULL));
 	bool gameOver = false;
@@ -84,15 +86,14 @@ int main(){
 	// Initialize parser
 	Parser parser;
 	// Load word files for parser
-	if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
-		return EXIT_FAILURE;
-	}
+	//if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
+	//	return EXIT_FAILURE;
+	//}
 
 	//Print out intro text
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
-	double playerLife, playerGas;
 	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "Load") {
 		cout << "Loading game..." << endl;
 		int fileReturn;
@@ -105,16 +106,20 @@ int main(){
 			player=loadOldPlayer(savedLines, planets, items);
 			loadOldPlanets(savedLines, planets, items);
 		}	
-	}else{
+	}
+	else{
 		player= createNewPlayer(&Uranus, &Mercury);
 	}
+
+	getWelcome(&player);
 
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 
 		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
 					player.getLocation()->getName().compare("Uranus")==0 || player.getLocation()->getName().compare("Neptune")==0) ){
-					cout << "Pluto is cold! You froze to DEATH. GAME OVER. \n";
+					cout << "It is cold! You froze to DEATH. GAME OVER. \n";
 					gameOver = true;
+					break;
 		}
 
 		int suffocationCounter = 1;
@@ -134,15 +139,30 @@ int main(){
 		string command;
 		cout << "Please enter a command: ";
 		getline(cin, command);
+		std::transform(command.begin(), command.end(), command.begin(), toupper);
+		cout << command << endl;
+		if(command =="SAVEGAME" || "SAVE GAME") {
+			saveGame(&player, planets);
+		}
+		if (command == "EXIT"){
+			exit(0);
+		}
+		if (command == "LOOK"){
+			player.getLocation()->printLongDescription();
+		}
+		/*
 		parser.processInput(command);
 		verb = verbMap[parser.getVerb()];
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
+		*/
 		//cout << "Give enumerated verb choice as int:0 look, 1 move, 2 help, 3 inventory,4 lookAt, 5 take, 6 drop 7 fire, 8 open, 9 close, 10 push, 11 mine, 12 launch, 13 land, 14 eat, 15 bow, 16 say, 17 use, 18 invalid, 19 savegame\n";
 		//cout << "Give target item name:";
-
+		/*
 		Area* location = player.getLocation();
+		//Changing for now for showing functionality - mid point review
+		
 		switch (verb){
 			//Do non item actions
 			//look around current location
@@ -239,16 +259,14 @@ int main(){
 				break;
 
 			case savegame:
-				//savegame(player, planets);
+				saveGame(player, planets);
 				break;
 
 		}
 		cout << "\n";
-
-
-	}
-
-return 0;
+*/
+		}
+	return 0;
 }
 
 
@@ -275,11 +293,26 @@ std::string get_file_data(std::string fileName){
 	fstream r_file;
 	string file_read;
 	const string readFile= "descriptorFiles/"+fileName;
-        cout << readFile << endl;
 	r_file.open(readFile);
-
-	getline(r_file, file_read);
+	while(!r_file.eof()) {
+		getline(r_file, file_read);
+		//cout << file_read << endl;
+	}
+	//done to clear screen
+	cout << string(20, '\n');
 	cout << file_read << endl;
 	r_file.close();
 	return file_read;
+}
+void getWelcome(Player* player){
+	
+	if(player->getLocation()->getName() == "Uranus"){
+		get_file_data("welcome_1.txt");
+		cout << "As of now you have: " << player->getLife() << " years left" << endl; 
+	}
+	else {
+		get_file_data("welcome_0.txt");
+		cout << "As of now you have: " << player->getLife() << " years left and " << player->getGas() << " million miles left in the tank\n\n" << endl; 
+	}
+	player->getLocation()->printDescription();
 }

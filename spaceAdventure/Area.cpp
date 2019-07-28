@@ -46,7 +46,17 @@ void Area::printDescription(){
 		std::cout << shortDescription << "\n";
 	}
 }
-
+void Area::printLongDescription(){
+		std::cout << longDescription << "\n";
+		firstEntry = false;
+		if(items.size() > 0){
+			std::cout << "There are some items here: ";
+			for(int ii=0; ii < items.size(); ii++){
+				std::cout << items[ii]->getName() << "\n";
+			}
+		}
+		//Add logic to print description of items here
+}
 void Area::look(){
 	if(dark){
 		std::cout<< "It is very dark in here you don't seem to be able to see much.\n";
