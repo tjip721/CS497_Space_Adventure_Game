@@ -20,8 +20,8 @@ using std::fstream;
 
 
 // Make sure that the word_files folder is in the same directory as the executable
-const string VERB_FILE_LIST = "word_files/verb_files.txt";
-const string NOUN_FILE_LIST = "word_files/noun_files.txt";
+const string VERB_FILE_LIST = "./word_files/verb_files.txt";
+const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 vector<string> loadingGame;
 
 int main(){
