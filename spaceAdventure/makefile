@@ -13,7 +13,7 @@ spaceAdventure: spaceAdventure.cpp $(OBJS)
 
 classes.o: Item.o Area.o Player.o Exit.o parser.o
 
-%.o: %.c %.h
+%.o: %.cpp %.h
 	$(CC) $(CFLAGS) -g -c $< -o $@
 
 .PHONY: clean

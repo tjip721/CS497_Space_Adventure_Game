@@ -2,7 +2,7 @@
 #include <fstream>
 #include <algorithm>
 #include <sstream>
-#include "parser.hpp"
+#include "parser.h"
 
 // Constructor just initializes token index.
 Parser::Parser() {
@@ -171,7 +171,7 @@ void Parser::matchNouns() {
 bool Parser::searchList(std::string token, std::vector<std::string> &list) {
 	/*Start search at second word in file as first word represents the action that will be selected if any match is found in file.
 	  lower_bound() performs binary search for first value that is not less than token. This requires that word files be sorted alphabetically.
-	  If no values less than token are found, it returns pointer to memory one past the end of the vector. 
+	  If no values less than token are found, it returns pointer to memory one past the end of the vector.
 	  list.begin() is subtracted to get index of search result. as lower_bound returns iterator that points to resulting value.*/
     int index = lower_bound(std::next(list.begin(), 1), list.end(), token) - list.begin();
 
