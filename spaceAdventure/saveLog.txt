@@ -1,0 +1,16 @@
+User 0 1 Uranus 
+Mercury 1 Shoe 
+Venus_1 1 
+Earth 1 
+Earth_Moon 1 
+Lost_Moon 1 
+Sun 1 
+Mars 1 
+Jupiter 1 
+Saturn 1 
+Uranus 1 
+Pluto 1 
+Pluto_Moon 1 
+Neptune_1 1 
+Neptune_2 1 
+Venus_2 1 

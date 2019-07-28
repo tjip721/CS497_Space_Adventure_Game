@@ -21,10 +21,12 @@ private:
 
 public: 
 	bool drop(std::string targetName); 
+	void addInventory(Item *item);
 	bool take(std::string targetName); 
 	Area* getLocation();
+	std::string getLocationName();
 	//Needed because of dynamic loadgame 
-	void setVars(Area* anArea, double gas, double life); 
+	void setVars(double gas, double life); 
 	void listInventory(); 
 	void setLocation(Area* anArea);
 	bool lookAt(std::string targetName); 
@@ -38,7 +40,7 @@ public:
 	void getPlayer();
 	std::vector<Item*> getPlayerInventory();
 	//When user chooses to "load game" adds an item object
-	void initializeInventory(std::vector<Item*> toAdd);	
+	//void initializeInventory(std::vector<Item*> toAdd);	
 	bool use(std::string itemName); 
 	bool isWearing(std::string name); 
 	

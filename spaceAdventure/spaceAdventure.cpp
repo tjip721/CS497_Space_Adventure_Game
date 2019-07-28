@@ -8,6 +8,7 @@
 #include <map>
 #include "spaceAdventure.h"
 #include "parser.hpp"
+
 //#include "testData.h"
 
 using std::string; 
@@ -18,12 +19,14 @@ using std::fstream;
 using std::cin;
 using std::fstream;
 
-// Make sure that the word_files folder is in the same directory as the executable
-const string VERB_FILE_LIST = "./word_files/verb_files.txt";
-const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 
+// Make sure that the word_files folder is in the same directory as the executable
+const string VERB_FILE_LIST = "word_files/verb_files.txt";
+const string NOUN_FILE_LIST = "word_files/noun_files.txt";
+vector<string> loadingGame;
 
 int main(){
+
 	srand(time(NULL));
 	bool gameOver = false; 
 
@@ -51,10 +54,26 @@ int main(){
 	planets.push_back(&Neptune1);
 	planets.push_back(&Neptune2);
 	planets.push_back(&Venus2);
-
 	//Declaring Item objects
 	Item Shoe("Shoe","shoe.txt",1), Gas("Gas","gas.txt",1), PowerC("Power Crystal","powercrystal.txt",1), Crysallith("Crysallith","crysallith.txt",1), OpportunityR("Opportunity Rover","opportunity_rover.txt",0), Transmitter("Transmitter","transmitter.txt",1), ScrewD("Screw Driver","screwdriver.txt",1), Doohickey("Doohickey","doohickey.txt",1), PickA("Pick Axe","pickaxe.txt",1), Rock("Rock","rock.txt",0), Jacket("Jacket","jacket.txt",1), Flashlight("Flashlight","flashlight.txt" ,1), Mushroom("Mushroom", "mushroom.txt", 1);
 	
+	planets[0]->addItem(&Shoe);
+	
+	std::vector<Item*> items;
+	items.push_back(&Shoe);
+	items.push_back(&Gas);
+	items.push_back(&PowerC);
+	items.push_back(&Crysallith);
+	items.push_back(&OpportunityR);
+	items.push_back(&Transmitter);
+	items.push_back(&ScrewD);
+	items.push_back(&Doohickey);
+	items.push_back(&PickA);
+	items.push_back(&Rock);
+	items.push_back(&Jacket);
+	items.push_back(&Flashlight);
+	items.push_back(&Mushroom);
+
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame };
 	
 	// Map for converting string to enum
@@ -74,30 +93,23 @@ int main(){
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
-	planets[1]->getName();
-	//player.getLocation()->printDescription(); 
-	//loadgame & savegame logic
+
+	int fileReturn;
 	double playerLife, playerGas;
 	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "Load") {
 		cout << "Loading game..." << endl;
-		//dummy values for now
-		playerGas=1;
-		playerLife=0;
-		player.setVars(&Uranus, playerGas, playerLife);
-	}else{
-		cout << "Okay!" << std:: endl;
-		playerGas=rand() % 3 + 1;
-		playerLife= rand()% 40 + 30;
-		int location=rand()% 2 + 1;
-		if (location == 1){
-			player.setVars(&Uranus, playerGas, playerLife);
+		fileReturn = open_log();
+		if(fileReturn == 1 ) {
+			player=createNewPlayer(&Uranus, &Mercury);
 		}
 		else {
-			player.setVars(&Mercury, playerGas, playerLife);
-		}
+			vector<string> savedLines=parseLoadFile();
+			player=loadOldPlayer(savedLines, planets, items);
+			loadOldPlanets(savedLines, planets, items);
+		}	
+	}else{
+		player= createNewPlayer(&Uranus, &Mercury);
 	}
-
-	cout << player.getLife() << endl;
 
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 
@@ -273,4 +285,5 @@ std::string get_file_data(std::string fileName){
 	r_file.close();
 	return file_read;
 }
+
 

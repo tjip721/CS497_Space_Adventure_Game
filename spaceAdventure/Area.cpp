@@ -153,3 +153,14 @@ bool Area::getAreaEntry() {
 std::string Area::getName(){
 	return areaName;
 }
+
+void Area::setEntry(int entry){
+	bool fEntry;
+	if(entry == 1) {
+		fEntry = true;
+	}
+	else{
+		fEntry = false;
+	}
+	firstEntry = fEntry;
+}

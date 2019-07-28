@@ -10,14 +10,17 @@ int Player::findItem(std::string targetName){
 	}
 	return NULL; 
 }
-
+/*
 void Player::initializeInventory(std::vector<Item*> addItem) {
 	for(int i=0; i < addItem.size(); i++) {
 		inventory.push_back(addItem[i]);
 		std::cout << addItem[i]->getName() << std::endl;
 	}
 }
-
+*/
+void Player::addInventory(Item *item){
+	inventory.push_back(item);
+}
 bool Player::drop(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
@@ -43,9 +46,11 @@ bool Player::take(std::string targetName){
 Area* Player::getLocation(){
 	return location; 
 }
+std::string Player::getLocationName(){
+	return location->getName(); 
+}
 
-void Player::setVars(Area* anArea, double gas, double life){
-	location = anArea; 
+void Player::setVars(double gas, double life){
 	lifeRemaining = life; 
 	gasRemaining = gas; 
 }
@@ -104,11 +109,11 @@ bool Player::isWearing(std::string targetName){
 	return false; 
 }
 
-/*
+
 std::vector<Item*> Player::getPlayerInventory(){
 	return inventory;
 }
-
+/***
 bool Player::launch(){
 	if(location->hasItem("Spaceship"){
 		

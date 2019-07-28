@@ -49,11 +49,11 @@ public:
 	void setLandExit(Exit* exit){landExit= exit;}
 	Exit* getLandExit(){return landExit;}
 	Exit* getLaunchExit(){return launchExit;}
-
+	void setEntry(int entry);
 	//Prints all of the items in the Area + the Area name -- done for save log.
     std::vector<Item*> getItems();
     bool getAreaEntry();
-	string getName();
+	std::string getName();
 
 
 };

@@ -1,12 +1,12 @@
 CC = g++ -std=c++11
 CFLAGS = -Wall
-OBJS = Item.o Area.o Player.o Exit.o parser.o
+OBJS = Item.o Area.o Player.o Exit.o parser.o data.o
 
 
 spaceAdventure: spaceAdventure.cpp $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -g -o goAdventure spaceAdventure.cpp
 
-classes.o: Item.o Area.o Player.o Exit.o parser.o
+classes.o: Item.o Area.o Player.o Exit.o parser.o data.o
 
 Item.o: Item.cpp Item.h
 	$(CC) $(CFLAGS) -g -c Item.cpp
@@ -22,6 +22,8 @@ Player.o: Player.cpp Player.h
 
 parser.o: parser.cpp parser.hpp
 	$(CC) $(CFLAGS) -g -c parser.cpp
+data.o: data.cpp data.h
+	$(CC) $(CFLAGS) -g -c data.cpp
 
 .PHONY: clean
 clean:
