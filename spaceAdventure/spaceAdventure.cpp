@@ -57,9 +57,9 @@ int main() {
 	planets.push_back(&Venus2);
 	//Declaring Item objects
 	Item Shoe("Shoe","shoe.txt",1), Gas("Gas","gas.txt",1), PowerC("Power Crystal","powercrystal.txt",1), Crysallith("Crysallith","crysallith.txt",1), OpportunityR("Opportunity Rover","opportunity_rover.txt",0), Transmitter("Transmitter","transmitter.txt",1), ScrewD("Screw Driver","screwdriver.txt",1), Doohickey("Doohickey","doohickey.txt",1), PickA("Pick Axe","pickaxe.txt",1), Rock("Rock","rock.txt",0), Jacket("Jacket","jacket.txt",1), Flashlight("Flashlight","flashlight.txt" ,1), Mushroom("Mushroom", "mushroom.txt", 1);
-	
+
 	planets[0]->addItem(&Shoe);
-	
+
 	std::vector<Item*> items;
 	items.push_back(&Shoe);
 	items.push_back(&Gas);
@@ -86,9 +86,9 @@ int main() {
 	// Initialize parser
 	Parser parser;
 	// Load word files for parser
-	//if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
-	//	return EXIT_FAILURE;
-	//}
+	if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
+		return EXIT_FAILURE;
+	}
 
 	//Print out intro text
 	string userChooses;
@@ -105,7 +105,7 @@ int main() {
 			vector<string> savedLines=parseLoadFile();
 			player=loadOldPlayer(savedLines, planets, items);
 			loadOldPlanets(savedLines, planets, items);
-		}	
+		}
 	}
 	else{
 		player= createNewPlayer(&Uranus, &Mercury);
@@ -162,7 +162,7 @@ int main() {
 		/*
 		Area* location = player.getLocation();
 		//Changing for now for showing functionality - mid point review
-		
+
 		switch (verb){
 			//Do non item actions
 			//look around current location
@@ -305,14 +305,14 @@ std::string get_file_data(std::string fileName){
 	return file_read;
 }
 void getWelcome(Player* player){
-	
+
 	if(player->getLocation()->getName() == "Uranus"){
 		get_file_data("welcome_1.txt");
-		cout << "As of now you have: " << player->getLife() << " years left" << endl; 
+		cout << "As of now you have: " << player->getLife() << " years left" << endl;
 	}
 	else {
 		get_file_data("welcome_0.txt");
-		cout << "As of now you have: " << player->getLife() << " years left and " << player->getGas() << " million miles left in the tank\n\n" << endl; 
+		cout << "As of now you have: " << player->getLife() << " years left and " << player->getGas() << " million miles left in the tank\n\n" << endl;
 	}
 	player->getLocation()->printDescription();
 }
