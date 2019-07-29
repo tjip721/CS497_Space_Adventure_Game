@@ -39,7 +39,7 @@ public:
 	void setDark(bool tf){dark = tf;}
 	bool hasOxygen(){return oxygen; }
 	void setOxygen(bool tf){oxygen = tf; }
-
+	void printLongDescription();
 	void addExit(Exit* exit);
 	void addItem(Item* item);
 	void setLongDescription(std::string text);
