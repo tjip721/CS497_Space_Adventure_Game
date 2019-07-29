@@ -19,6 +19,7 @@ class Parser
 
         // Private Member Functions
         int loadFileList(std::string fileListName, std::vector< std::vector<std::string> > &wordLists);
+        void eraseSubString(std::string& str, std::string strToErase);
         int loadFile(std::string fileName, std::vector<std::string> &wordList);
         void inputToLowerCase();
         void tokenizeInput();

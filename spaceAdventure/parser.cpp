@@ -27,8 +27,17 @@ int Parser::loadFiles(std::string verbFileList, std::string nounFileList) {
 	return EXIT_SUCCESS;
 }
 
+void Parser::eraseSubString(std::string& str, std::string strToErase) {
+	int position = std::string::npos;
+	while ((position = str.find(strToErase)) != std::string::npos) {
+		str.erase(position, strToErase.length());
+	}
+}
+
 // Iterate through file lists, loading the word lists from each into a vector.
 int Parser::loadFileList(std::string fileListName, std::vector< std::vector<std::string> > &wordLists) {
+	// Remove any carriage return characters
+	eraseSubString(fileListName, "\r");
 	// Open file list
 	std::ifstream file(fileListName.c_str());
 	if (!file) {
@@ -65,6 +74,7 @@ std::string Parser::getDirectory(std::string filePath) {
 // Loop through word lists, loading words to word vectors
 int Parser::loadFile(std::string fileName, std::vector<std::string> &wordList) {
 	// Open word file.
+	eraseSubString(fileName, "\r");
 	std::ifstream file(fileName.c_str());
 	if (!file) {
 		std::cerr << "Failed to open file: " << fileName;
@@ -73,6 +83,7 @@ int Parser::loadFile(std::string fileName, std::vector<std::string> &wordList) {
 
 	// Push words in file to word vectors
 	std::string word;
+	eraseSubString(word, "\r");
     while (getline(file, word)) {
         wordList.push_back(word);
     }
