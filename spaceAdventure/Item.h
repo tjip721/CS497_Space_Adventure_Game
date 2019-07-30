@@ -16,6 +16,7 @@ private:
 	bool takeable; 
 	bool edible; 
 	bool wearable; 
+	bool hostile = false; 
 	bool hidden = false; 
 	
 public: 
@@ -32,6 +33,8 @@ public:
 	Item(std::string name, std::string description, bool takeable); 
 	void use(Area* location); 
 	void fix(){cout<<"That didn't do anything.\n";}
+	bool isHostile(){return hostile;}
+	void attack(){return;}
 }; 
 
 #endif

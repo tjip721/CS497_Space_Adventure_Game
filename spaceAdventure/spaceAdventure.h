@@ -12,6 +12,7 @@
 #include "PowerCrystal.h"
 #include "Spaceship.h"
 #include "data.h"
+#include "Alien.h"
 
 using std::string;
 class Player;

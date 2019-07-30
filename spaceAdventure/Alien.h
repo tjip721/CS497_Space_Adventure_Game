@@ -1,6 +1,7 @@
 #ifndef ALIEN_H 
 #define ALIEN_H
 #include "Item.h"
+#include "Player.h"
 
 class Alien : public Item
 {

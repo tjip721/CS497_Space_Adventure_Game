@@ -265,7 +265,8 @@ int main() {
 
 		}
 		if(location->hasItem("Alien")){
-			if(location->getItem("Alien")->isHostile()){
+			Item* pAlien =  (location->getItem("Alien") ); 
+			if(pAlien->isHostile()){
 				location->getItem("Alien")->attack(); 
 			}
 		}
