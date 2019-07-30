@@ -1,5 +1,5 @@
-User 64 2 Mercury 
-Mercury 0 Shoe 
+User 59 2 Mercury 
+Mercury 0 Shoe Shoe 
 Venus_1 1 
 Earth 1 
 Earth_Moon 1 

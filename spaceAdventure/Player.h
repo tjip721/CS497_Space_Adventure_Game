@@ -44,6 +44,7 @@ public:
 	bool use(std::string itemName); 
 	bool isWearing(std::string name); 
 	
+	void kill(){lifeRemaining = 0;}
 }; 
 
 #endif

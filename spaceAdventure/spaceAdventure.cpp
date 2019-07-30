@@ -160,9 +160,9 @@ int main() {
 		//cout << "Give enumerated verb choice as int:0 look, 1 move, 2 help, 3 inventory,4 lookAt, 5 take, 6 drop 7 fire, 8 open, 9 close, 10 push, 11 mine, 12 launch, 13 land, 14 eat, 15 bow, 16 say, 17 use, 18 invalid, 19 savegame\n";
 		//cout << "Give target item name:";
 		/*
-		Area* location = player.getLocation();
 		//Changing for now for showing functionality - mid point review
-
+*/
+		Area* location = player.getLocation();
 		switch (verb){
 			//Do non item actions
 			//look around current location
@@ -253,18 +253,24 @@ int main() {
 			case say:
 
 			case use:
+				player.use(noun); 
 
 			case invalid:
 				std::cout << "Uh that doesn't make sense try something else.\n";
 				break;
 
 			case savegame:
-				saveGame(player, planets);
+				saveGame(&player, planets);
 				break;
 
 		}
+		if(location->hasItem("Alien")){
+			if(location->getItem("Alien")->isHostile()){
+				location->getItem("Alien")->attack(); 
+			}
+		}
 		cout << "\n";
-*/
+
 		}
 	return 0;
 }
