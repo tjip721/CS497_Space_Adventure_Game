@@ -82,6 +82,9 @@ bool Player::use(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
 			inventory[ii]->use(location); 
+			if(targetName == "Doohickey" || targetName == "Power Crystal"){
+				inventory.erase(inventory.begin()+ii); 
+			}
 			return true; 	
 		}
 	}

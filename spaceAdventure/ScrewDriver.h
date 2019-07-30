@@ -14,6 +14,7 @@ private:
 	bool edible; 
 	bool wearable; 
 */
+	int fixes = 1; 
 	
 public: 
 /* Inherited methods for reference

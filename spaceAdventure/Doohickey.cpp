@@ -8,6 +8,7 @@ void Doohickey::use(Area* location){
 		if(item !=NULL){
 			ship ->fix(); 
 			cout << "Not sure what this doohickey does but you found a spot it fits right into on the spaceship.\n";
+			delete this; 
 		}
 	}else{
 		cout << "Looks like that didn't do anything.\n"; 
