@@ -31,9 +31,10 @@ public:
 	bool isWearable(){return wearable;}
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
-	void use(Area* location); 
+	virtual void use(Area* location); 
 	void fix(){cout<<"That didn't do anything.\n";}
 	bool isHostile(){return hostile;}
+	//void aggravate(){hostile = true;}
 	void attack(){return;}
 }; 
 

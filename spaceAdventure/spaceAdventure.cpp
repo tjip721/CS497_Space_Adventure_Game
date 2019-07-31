@@ -212,6 +212,20 @@ int main() {
 				}
 
 			case fire:
+				//Throw your shoe...
+				if(player.drop("Shoe")){
+					 cout<<"You threw your shoe"; 
+					if(location->hasItem("Alien")){
+						Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+						if(pAlien != nullptr){
+							//((Alien *)(location->getItem("Alien")))->aggravate(); 
+							pAlien->aggravate(); 
+							cout << "Looks like that aggravated the alien, it is now hostile towards you.\n"; 
+						}
+					}
+				}else{
+					cout << "Nothing happened.\n"; 
+				}
 
 			case open:
 
@@ -268,9 +282,9 @@ int main() {
 
 		}
 		if(location->hasItem("Alien")){
-			Item* pAlien =  (location->getItem("Alien") ); 
-			if(pAlien->isHostile()){
-				location->getItem("Alien")->attack(); 
+			Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+			if(pAlien != nullptr && pAlien->isHostile()){
+				pAlien->attack(&player); 
 			}
 		}
 		cout << "\n";
