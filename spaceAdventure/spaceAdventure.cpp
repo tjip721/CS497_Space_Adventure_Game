@@ -212,8 +212,11 @@ int main() {
 				}
 
 			case fire:
+				//Throw something
+				if(noun.compare("Shoe")!=0){
+					player.drop(noun);
 				//Throw your shoe...
-				if(player.drop("Shoe")){
+				}else if(player.drop("Shoe")){
 					 cout<<"You threw your shoe"; 
 					if(location->hasItem("Alien")){
 						Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
