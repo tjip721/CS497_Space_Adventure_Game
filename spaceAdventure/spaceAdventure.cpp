@@ -269,6 +269,15 @@ int main() {
 				}
 
 			case bow:
+				if(location->hasItem("Alien") && player.hasItem("Crysallith")){
+					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+					if(pAlien != nullptr ){
+						pAlien->makePeace(); 
+					}
+					cout <<"You bow to the Alien with Crysallith in your hands. It seems to accept your peace offering.\n"; 
+				}else{
+					cout << "You bowed, but no one seemed to notice.\n"; 	
+				}
 
 			case say:
 

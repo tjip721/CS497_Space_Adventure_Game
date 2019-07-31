@@ -43,6 +43,7 @@ public:
 	//void initializeInventory(std::vector<Item*> toAdd);	
 	bool use(std::string itemName); 
 	bool isWearing(std::string name); 
+	bool hasItem(std::string name); 
 	
 	void kill(){lifeRemaining = 0;}
 }; 

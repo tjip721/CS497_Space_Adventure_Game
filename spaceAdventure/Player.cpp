@@ -112,6 +112,14 @@ bool Player::isWearing(std::string targetName){
 	return false; 
 }
 
+bool Player::hasItem(std::string targetName){
+	for(int ii=0; ii < inventory.size(); ii++){
+		if(inventory[ii]->getName().compare(targetName)==0){
+			return true; 	
+		}
+	}
+	return false; 
+}
 
 std::vector<Item*> Player::getPlayerInventory(){
 	return inventory;
