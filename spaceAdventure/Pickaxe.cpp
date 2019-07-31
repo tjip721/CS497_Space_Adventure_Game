@@ -7,7 +7,7 @@ void Pickaxe::use(Area* location){
 		Item* item = location->getItem("Crysallith"); 
 		if(item !=NULL){
 			item->setTakeable(true); 
-			cout << "It appears you knocked the Crysallith loose.\n";
+			cout << "It appears you successfully mined the Crysallith.\n";
 		}
 	}else if(location->hasItem("Power Crystal")){
 		Item* item = location->getItem("Power Crystal"); 

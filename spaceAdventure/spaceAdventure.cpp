@@ -220,6 +220,9 @@ int main() {
 			case push:
 
 			case mine:
+				if(!player.use("Pickaxe")){
+					cout << "Looks like you can't mine right now.\n"; 
+				}
 
 			case launch:
 				// IF spaceship is present launch to space
