@@ -13,6 +13,7 @@
 #include "Spaceship.h"
 #include "data.h"
 #include "Alien.h"
+#include "Human.h"
 
 using std::string;
 class Player;

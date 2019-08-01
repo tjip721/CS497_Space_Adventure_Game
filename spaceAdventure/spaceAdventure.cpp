@@ -113,10 +113,12 @@ int main() {
 
 	getWelcome(&player);
 
+	int turnCounter = 0; 
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
-
+		turnCounter++; 
 		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
-					player.getLocation()->getName().compare("Uranus")==0 || player.getLocation()->getName().compare("Neptune")==0) ){
+			player.getLocation()->getName().compare("Uranus")==0 || 
+			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>2 ){
 					cout << "It is cold! You froze to DEATH. GAME OVER. \n";
 					gameOver = true;
 					break;
@@ -150,13 +152,13 @@ int main() {
 		if (command == "LOOK"){
 			player.getLocation()->printLongDescription();
 		}
-		/*
+		
 		parser.processInput(command);
 		verb = verbMap[parser.getVerb()];
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
-		*/
+		
 		//cout << "Give enumerated verb choice as int:0 look, 1 move, 2 help, 3 inventory,4 lookAt, 5 take, 6 drop 7 fire, 8 open, 9 close, 10 push, 11 mine, 12 launch, 13 land, 14 eat, 15 bow, 16 say, 17 use, 18 invalid, 19 savegame\n";
 		//cout << "Give target item name:";
 		/*
@@ -280,6 +282,21 @@ int main() {
 				}
 
 			case say:
+				if(noun=="Alien" && location->hasItem("Alien") ){
+					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+					if(pAlien != nullptr ){
+						cout << "The alien replies: "; 
+						pAlien->talk(); 
+					}
+				} else if (noun == "Human"){
+					Human* pHuman= dynamic_cast<Human*>(location->getItem("Human")); 
+					if(pHuman!= nullptr ){
+						cout << "The human replies: "; 
+						pHuman->talk(); 
+					}
+				} else {
+					cout << "You speak but no one seems to be around to hear you.\n"; 
+				}
 
 			case use:
 				player.use(noun); 

@@ -1,9 +1,9 @@
-#ifndef ALIEN_H 
-#define ALIEN_H
+#ifndef HUMAN_H 
+#define HUMAN_H
 #include "Item.h"
 #include "Player.h"
 
-class Alien : public Item
+class Human : public Item
 {
 private: 
 
@@ -29,11 +29,11 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 */
+	void talk(); 
 	void aggravate(){hostile = true;}
 	void makePeace(){hostile = false;}
 	bool isHostile(){return hostile;}
 	void attack(Player* player); 
-	void talk(); 
 	
 }; 
 

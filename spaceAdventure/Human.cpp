@@ -1,7 +1,7 @@
-#include "Alien.h"
+#include "Human.h"
 
 
-void Alien::attack(Player* player){
+void Human::attack(Player* player){
 	srand(time(NULL)); 
 	int flip = rand()%2; 
 	if(flip){
@@ -9,10 +9,8 @@ void Alien::attack(Player* player){
 	}
 }
 
-void Alien::talk(){
+void Human::talk(){
 	std::cout<< speech << "\n"; 
 }
-
-
 
 
