@@ -1,4 +1,5 @@
 #include "Human.h"
+#include <time.h>
 
 
 void Human::attack(Player* player){

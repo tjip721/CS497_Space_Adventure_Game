@@ -1,4 +1,5 @@
 #include "Alien.h"
+#include <time.h>
 
 
 void Alien::attack(Player* player){
