@@ -136,34 +136,33 @@ int main() {
 		}
 
 
-		int verb = 18;
+		int verb = invalid;
 		string noun = "";
 		string command;
 		cout << "Please enter a command: ";
 		getline(cin, command);
-		std::transform(command.begin(), command.end(), command.begin(), toupper);
-		cout << command << endl;
-		if(command =="SAVEGAME" || "SAVE GAME") {
-			saveGame(&player, planets);
-		}
-		if (command == "EXIT"){
-			exit(0);
-		}
-		if (command == "LOOK"){
-			player.getLocation()->printLongDescription();
-		}
-		
 		parser.processInput(command);
 		verb = verbMap[parser.getVerb()];
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
-		
-		//cout << "Give enumerated verb choice as int:0 look, 1 move, 2 help, 3 inventory,4 lookAt, 5 take, 6 drop 7 fire, 8 open, 9 close, 10 push, 11 mine, 12 launch, 13 land, 14 eat, 15 bow, 16 say, 17 use, 18 invalid, 19 savegame\n";
-		//cout << "Give target item name:";
+		// Left this in for exiting game while testing
+		std::transform(command.begin(), command.end(), command.begin(), toupper);
+		if (command == "EXIT") {
+			exit(0);
+		}
 		/*
-		//Changing for now for showing functionality - mid point review
-*/
+		cout << command << endl;
+		if(verb == savegame) {
+			saveGame(&player, planets);
+		}
+
+		if (verb == look){
+			player.getLocation()->printLongDescription();
+		}
+		*/
+		
+
 		Area* location = player.getLocation();
 		switch (verb){
 			//Do non item actions
