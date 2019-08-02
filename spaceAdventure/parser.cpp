@@ -80,11 +80,10 @@ int Parser::loadFile(std::string fileName, std::vector<std::string> &wordList) {
 		std::cerr << "Failed to open file: " << fileName;
 		return EXIT_FAILURE;
 	}
-
 	// Push words in file to word vectors
 	std::string word;
-	eraseSubString(word, "\r");
     while (getline(file, word)) {
+		eraseSubString(word, "\r");
         wordList.push_back(word);
     }
     file.close();
