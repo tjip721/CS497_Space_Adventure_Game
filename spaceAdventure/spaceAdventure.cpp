@@ -191,6 +191,10 @@ int main() {
 				if(player.lookAt(noun)){
 					break;
 				}else if(player.getLocation()->lookAt(noun)){
+					// If player looks at rover for the first time, add transmitter to area's items
+					if (noun.compare("Opportunity Rover") == 0 && !itemExists(planets, player, "Transmitter")) {
+						player.getLocation()->addItem(&Transmitter);
+					}
 					break;
 				}else{
 					cout << "Sorry you can't look at that right now\n" ;
@@ -368,4 +372,16 @@ void getWelcome(Player* player){
 		cout << "As of now you have: " << player->getLife() << " years left and " << player->getGas() << " million miles left in the tank\n\n" << endl;
 	}
 	player->getLocation()->printDescription();
+}
+
+bool itemExists(std::vector<Area*> planets, Player player, std::string item) {
+	if (player.hasItem(item)) {
+		return true;
+	}
+	for (Area* planet : planets) {
+		if (planet->hasItem(item)) {
+			return true;
+		}
+	}
+	return false;
 }
