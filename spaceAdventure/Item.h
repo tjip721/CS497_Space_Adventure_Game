@@ -4,6 +4,7 @@
 #include <vector> 
 #include <iostream>
 #include "Area.h"
+#include "Player.h"
 
 using std::cout; 
 
@@ -30,7 +31,7 @@ public:
 	bool isWearable(){return wearable;}
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
-	virtual void use(Area* location); 
+	virtual void use(Area* location, Player* player); 
 	void fix(){cout<<"That didn't do anything.\n";}
 }; 
 

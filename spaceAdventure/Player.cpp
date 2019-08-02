@@ -81,7 +81,7 @@ bool Player::lookAt(std::string targetName){
 bool Player::use(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
-			inventory[ii]->use(location); 
+			inventory[ii]->use(location, this); 
 			if(targetName == "Doohickey" || targetName == "Power Crystal"){
 				inventory.erase(inventory.begin()+ii); 
 			}
@@ -96,7 +96,7 @@ bool Player::eat(std::string targetName){
 	int itemIndex = findItem(targetName); 
 	if(itemIndex != NULL){
 		//Eat the item, add to asphyxiation timer?
-		inventory[itemIndex]->use(location); 
+		inventory[itemIndex]->use(location, this); 
 		return true; 
 	}else{
 		return false; 

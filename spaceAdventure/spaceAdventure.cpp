@@ -299,6 +299,7 @@ int main() {
 
 			case use:
 				player.use(noun); 
+				break; 
 
 			case invalid:
 				std::cout << "Uh that doesn't make sense try something else.\n";

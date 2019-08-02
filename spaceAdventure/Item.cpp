@@ -14,7 +14,7 @@ Item::Item(std::string nameIn, std::string descriptionIn, bool takeableIn){
 	takeable = takeableIn; 
 }
 
-void Item::use(Area* location){
+void Item::use(Area* location, Player* player){
 	std::cout << "That didn't seem to do anything. \n"; 
 }
 
