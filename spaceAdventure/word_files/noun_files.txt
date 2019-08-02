@@ -13,7 +13,7 @@ pluto_moon.txt
 neptune_1.txt
 neptune_2.txt
 venus_2.txt
-shoe.txt
+shoes.txt
 gas.txt
 power_crystal.txt
 crysallith.txt
