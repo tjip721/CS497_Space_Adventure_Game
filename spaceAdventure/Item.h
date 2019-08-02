@@ -18,6 +18,7 @@ private:
 	bool edible; 
 	bool wearable; 
 	bool hidden = false; 
+	std::string loadFile(std::string fileName);
 	
 public: 
 	void setHidden(bool hide){ hidden = hide; }
