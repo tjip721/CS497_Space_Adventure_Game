@@ -56,7 +56,7 @@ int main() {
 	planets.push_back(&Neptune2);
 	planets.push_back(&Venus2);
 	//Declaring Item objects
-	Item Shoe("Shoe","shoe.txt",1), Gas("Gas","gas.txt",1), PowerC("Power Crystal","powercrystal.txt",1), Crysallith("Crysallith","crysallith.txt",1), OpportunityR("Opportunity Rover","opportunity_rover.txt",0), Transmitter("Transmitter","transmitter.txt",1), ScrewD("Screw Driver","screwdriver.txt",1), Doohickey("Doohickey","doohickey.txt",1), PickA("Pick Axe","pickaxe.txt",1), Rock("Rock","rock.txt",0), Jacket("Jacket","jacket.txt",1), Flashlight("Flashlight","flashlight.txt" ,1), Mushroom("Mushroom", "mushroom.txt", 1);
+	Item Shoe("Shoes","shoes.txt",1), Gas("Gas","gas.txt",1), PowerC("Power Crystal","powercrystal.txt",1), Crysallith("Crysallith","crysallith.txt",1), OpportunityR("Opportunity Rover","opportunity_rover.txt",0), Transmitter("Transmitter","transmitter.txt",1), ScrewD("Screw Driver","screwdriver.txt",1), Doohickey("Doohickey","doohickey.txt",1), PickA("Pick Axe","pickaxe.txt",1), Rock("Rock","rock.txt",0), Jacket("Jacket","jacket.txt",1), Flashlight("Flashlight","flashlight.txt" ,1), Mushroom("Mushroom", "mushroom.txt", 1);
 
 	planets[0]->addItem(&Shoe);
 
@@ -262,7 +262,7 @@ int main() {
 
 			case eat:
 				if(player.eat(noun)){
-					cout << "You at the " << noun << ".\n";
+					cout << "You ate the " << noun << ".\n";
 					break;
 				}else {
 					cout << "You can't eat that.\n";
