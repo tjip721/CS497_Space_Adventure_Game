@@ -33,7 +33,7 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 	virtual void use(Area* location, Player* player); 
-	void fix(){cout<<"That didn't do anything.\n";}
+	void fix(){cout<<"You have made repairs to your ship.\n";}
 }; 
 
 #endif

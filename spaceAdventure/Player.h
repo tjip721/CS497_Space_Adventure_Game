@@ -44,7 +44,7 @@ public:
 	bool use(std::string itemName); 
 	bool isWearing(std::string name); 
 	bool hasItem(std::string name); 
-	
+	bool eraseItem(std::string targetName);
 	void kill(){lifeRemaining = 0;}
 }; 
 

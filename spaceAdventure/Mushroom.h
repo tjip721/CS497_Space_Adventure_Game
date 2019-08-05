@@ -26,8 +26,8 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 */
-	void use(Area* location); 
-	
+	Mushroom(std::string nameIn, std::string descriptionIn, bool takeableIn);
+	void use(Area* location, Player* player);
 }; 
 
 #endif

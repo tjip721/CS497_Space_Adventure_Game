@@ -12,6 +12,7 @@
 #include "Player.h"
 //#include "testData.h"
 
+using std::map;
 using std::string;
 using std::cout;
 using std::endl;
@@ -19,6 +20,7 @@ using std::vector;
 using std::fstream;
 using std::cin;
 using std::fstream;
+using std::transform;
 
 
 // Make sure that the word_files folder is in the same directory as the executable
@@ -55,37 +57,54 @@ int main() {
 	planets.push_back(&Neptune1);
 	planets.push_back(&Neptune2);
 	planets.push_back(&Venus2);
-	//Declaring Item objects
-	Item Shoe("Shoes","shoes.txt",1), Gas("Gas","gas.txt",1), PowerC("Power Crystal","powercrystal.txt",1), Crysallith("Crysallith","crysallith.txt",1), OpportunityR("Opportunity Rover","opportunity_rover.txt",0), Transmitter("Transmitter","transmitter.txt",1), ScrewD("Screw Driver","screwdriver.txt",1), Doohickey("Doohickey","doohickey.txt",1), PickA("Pick Axe","pickaxe.txt",1), Rock("Rock","rock.txt",0), Jacket("Jacket","jacket.txt",1), Flashlight("Flashlight","flashlight.txt" ,1), Mushroom("Mushroom", "mushroom.txt", 1);
 
-	planets[0]->addItem(&Shoe);
+	// Declare Item Objects
+	Item Shoes("Shoes", "shoes.txt", 1),
+		Gas("Gas", "gas.txt", 1),
+		Crysallith("Crysallith", "crysallith.txt", 0),
+		OpportunityR("Opportunity Rover", "opportunity_rover.txt", 0),
+		Rock("Rock", "rock.txt", 0),
+		Jacket("Jacket", "jacket.txt", 1);
+
+	Doohickey doohickey("Doohickey", "doohickey.txt", 1);
+	Flashlight flashlight("Flashlight", "flashlight.txt", 1);
+	Mushroom mushroom("Mushroom", "mushroom.txt", 1);
+	Pickaxe PickA("Pick Axe", "pickaxe.txt", 1);
+	PowerCrystal PowerC("Power Crystal", "powercrystal.txt", 0);
+	ScrewDriver ScrewD("Screw Driver", "screwdriver.txt", 1);
+	Spaceship spaceship("Spaceship", "spaceship.txt", 0);
+	Transmitter transmitter("Transmitter", "transmitter.txt", 1);
 
 	std::vector<Item*> items;
-	items.push_back(&Shoe);
+	items.push_back(&Shoes);
 	items.push_back(&Gas);
 	items.push_back(&PowerC);
 	items.push_back(&Crysallith);
 	items.push_back(&OpportunityR);
-	items.push_back(&Transmitter);
+	items.push_back(&transmitter);
 	items.push_back(&ScrewD);
-	items.push_back(&Doohickey);
+	items.push_back(&doohickey);
 	items.push_back(&PickA);
 	items.push_back(&Rock);
 	items.push_back(&Jacket);
-	items.push_back(&Flashlight);
-	items.push_back(&Mushroom);
+	items.push_back(&flashlight);
+	items.push_back(&mushroom);
+	items.push_back(&spaceship);
+
+	planets[0]->addItem(&Shoes);
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame };
 
 	// Map for converting string to enum
-	std::map<std::string, Verb> verbMap = {
+	map<string, Verb> verbMap = {
 		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"lookAt",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"open",open},{"close",close},
 		{"push",push},{"mine",mine},{"launch",launch},{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame}
 	};
 
-	// Initialize parser
+	//Initialize parser
 	Parser parser;
-	// Load word files for parser
+	int verb;
+	string noun, command;
 	if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
@@ -94,7 +113,8 @@ int main() {
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
-	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "Load") {
+	transform(userChooses.begin(), userChooses.end(), userChooses.begin(), tolower);
+	if(userChooses == "loadgame" || userChooses =="load") {
 		cout << "Loading game..." << endl;
 		int fileReturn;
 		fileReturn = open_log();
@@ -135,10 +155,9 @@ int main() {
 			suffocationCounter--;
 		}
 
-
-		int verb = invalid;
-		string noun = "";
-		string command;
+		verb = invalid;
+		noun.clear();
+		command.clear();
 		cout << "Please enter a command: ";
 		getline(cin, command);
 		parser.processInput(command);
@@ -147,22 +166,11 @@ int main() {
 			noun = parser.getNouns()[0];
 		}
 		// Left this in for exiting game while testing
-		std::transform(command.begin(), command.end(), command.begin(), toupper);
+		transform(command.begin(), command.end(), command.begin(), toupper);
 		if (command == "EXIT") {
 			exit(0);
 		}
-		/*
-		cout << command << endl;
-		if(verb == savegame) {
-			saveGame(&player, planets);
-		}
-
-		if (verb == look){
-			player.getLocation()->printLongDescription();
-		}
-		*/
 		
-
 		Area* location = player.getLocation();
 		switch (verb){
 			//Do non item actions
@@ -193,7 +201,8 @@ int main() {
 				}else if(player.getLocation()->lookAt(noun)){
 					// If player looks at rover for the first time, add transmitter to area's items
 					if (noun.compare("Opportunity Rover") == 0 && !itemExists(planets, player, "Transmitter")) {
-						player.getLocation()->addItem(&Transmitter);
+						player.getLocation()->addItem(&transmitter);
+						cout << "A transmitter is attached to Opportunity Rover.\n";
 					}
 					break;
 				}else{
@@ -218,10 +227,10 @@ int main() {
 
 			case fire:
 				//Throw something
-				if(noun.compare("Shoe")!=0){
+				if(noun.compare("Shoes")!=0){
 					player.drop(noun);
 				//Throw your shoe...
-				}else if(player.drop("Shoe")){
+				}else if(player.drop("Shoes")){
 					 cout<<"You threw your shoe"; 
 					if(location->hasItem("Alien")){
 						Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
@@ -234,17 +243,22 @@ int main() {
 				}else{
 					cout << "Nothing happened.\n"; 
 				}
+				break;
 
 			case open:
+				break;
 
 			case close:
+				break;
 
 			case push:
+				break;
 
 			case mine:
-				if(!player.use("Pickaxe")){
+				if(!player.use("Pick Axe")){
 					cout << "Looks like you can't mine right now.\n"; 
 				}
+				break;
 
 			case launch:
 				// IF spaceship is present launch to space
@@ -265,13 +279,10 @@ int main() {
 				break;
 
 			case eat:
-				if(player.eat(noun)){
-					cout << "You ate the " << noun << ".\n";
-					break;
-				}else {
+				if (noun.compare("Mushroom") != 0 || !player.use("Mushroom")) {
 					cout << "You can't eat that.\n";
-					break;
 				}
+				break;
 
 			case bow:
 				if(location->hasItem("Alien") && player.hasItem("Crysallith")){
@@ -283,6 +294,7 @@ int main() {
 				}else{
 					cout << "You bowed, but no one seemed to notice.\n"; 	
 				}
+				break;
 
 			case say:
 				if(noun=="Alien" && location->hasItem("Alien") ){
@@ -300,6 +312,7 @@ int main() {
 				} else {
 					cout << "You speak but no one seems to be around to hear you.\n"; 
 				}
+				break;
 
 			case use:
 				player.use(noun); 

@@ -39,7 +39,7 @@ void Area::printDescription(){
 		std::cout << shortDescription << "\n";
 	}
 	if (items.size() > 0) {
-		std::cout << "There are some items here: ";
+		std::cout << "There are some items here:\n";
 		for (int ii = 0; ii < items.size(); ii++) {
 			std::cout << items[ii]->getName() << "\n";
 		}
@@ -49,7 +49,7 @@ void Area::printLongDescription(){
 		std::cout << longDescription << "\n";
 		firstEntry = false;
 		if(items.size() > 0){
-			std::cout << "There are some items here: ";
+			std::cout << "There are some items here:\n";
 			for(int ii=0; ii < items.size(); ii++){
 				std::cout << items[ii]->getName() << "\n";
 			}

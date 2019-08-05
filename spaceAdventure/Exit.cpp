@@ -11,15 +11,18 @@ private:
 }; 
 */
 
+Exit::Exit(std::string nameIn, std::string ldIn, Area* toAreaIn) {
+	name = nameIn;
+	longDescription = ldIn;
+	toArea = toAreaIn;
+}
+
 Area* Exit::getArea(){
 	return toArea; 
 }
+
 std::string Exit::getName(){
 	return name; 
 } 
 
-Exit::Exit(std::string nameIn, std::string ldIn, Area* toAreaIn){
-	name = nameIn; 
-	longDescription = ldIn;
-	toArea = toAreaIn;
-}
+

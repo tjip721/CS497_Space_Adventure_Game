@@ -8,7 +8,7 @@ int Player::findItem(std::string targetName){
 			return ii; 	
 		}
 	}
-	return NULL; 
+	return -1; 
 }
 /*
 void Player::initializeInventory(std::vector<Item*> addItem) {
@@ -82,11 +82,14 @@ bool Player::use(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
 			inventory[ii]->use(location, this); 
-			if(targetName == "Doohickey" || targetName == "Power Crystal"){
-				inventory.erase(inventory.begin()+ii); 
-			}
 			return true; 	
 		}
+	}
+	if (!targetName.empty()) {
+		cout << "You don't have a " << targetName << " in your inventory.\n";
+	}
+	else {
+		cout << "I'm not sure what item you are trying to use. Please specify one that is in your inventory.\n";
 	}
 	return false; 
 
@@ -94,7 +97,7 @@ bool Player::use(std::string targetName){
 
 bool Player::eat(std::string targetName){
 	int itemIndex = findItem(targetName); 
-	if(itemIndex != NULL){
+	if(itemIndex != -1){
 		//Eat the item, add to asphyxiation timer?
 		inventory[itemIndex]->use(location, this); 
 		return true; 
@@ -119,6 +122,16 @@ bool Player::hasItem(std::string targetName){
 		}
 	}
 	return false; 
+}
+
+bool Player::eraseItem(std::string targetName) {
+	for (int ii = 0; ii < inventory.size(); ii++) {
+		if (inventory[ii]->getName().compare(targetName) == 0) {
+			inventory.erase(inventory.begin() + ii);
+			return true;
+		}
+	}
+	return false;
 }
 
 std::vector<Item*> Player::getPlayerInventory(){

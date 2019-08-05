@@ -26,3 +26,4 @@ screw_driver.txt
 transmitter.txt
 opportunity_rover.txt
 mushroom.txt
+spaceship.txt

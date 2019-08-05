@@ -1,6 +1,6 @@
 CC = g++ -std=c++11
 CFLAGS = -Wall
-OBJS = Item.o Area.o Player.o Exit.o Pickaxe.o parser.o Flashlight.o Mushroom.o Doohickey.o ScrewDriver.o PowerCrystal.o Spaceship.o data.o Alien.o Human.o
+OBJS = Item.o Area.o Player.o Exit.o Pickaxe.o parser.o Flashlight.o Mushroom.o Doohickey.o ScrewDriver.o PowerCrystal.o Spaceship.o data.o Alien.o Human.o Transmitter.o
 
 
 

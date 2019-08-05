@@ -11,9 +11,12 @@
 #include "Mushroom.h"
 #include "PowerCrystal.h"
 #include "Spaceship.h"
+#include "Doohickey.h"
+#include "Transmitter.h"
 #include "data.h"
 #include "Alien.h"
 #include "Human.h"
+#include "ScrewDriver.h"
 
 using std::string;
 class Player;
