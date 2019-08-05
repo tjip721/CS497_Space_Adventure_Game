@@ -9,6 +9,7 @@ using std::vector;
 
 class Item;
 class Exit;
+
 class Area
 {
 private:

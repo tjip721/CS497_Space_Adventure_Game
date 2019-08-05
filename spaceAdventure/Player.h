@@ -46,6 +46,8 @@ public:
 	bool hasItem(std::string name); 
 	bool eraseItem(std::string targetName);
 	void kill(){lifeRemaining = 0;}
+	bool wear(Item* item); 
+	bool takeOff(std::string targetName); 
 }; 
 
 #endif

@@ -66,6 +66,13 @@ void Player::listInventory(){
 	if(inventory.empty()){
 		std::cout << "... is empty\n"; 
 	}
+	std::cout << "You are wearing: \n"; 
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		std::cout << clothesWorn[ii]->getName() << "\n"; 
+	}
+	if(clothesWorn.empty()){
+		std::cout << "Nothing... you are naked.\n"; 
+	}
 }
 
 bool Player::lookAt(std::string targetName){
@@ -75,14 +82,28 @@ bool Player::lookAt(std::string targetName){
 			return true; 	
 		}
 	}
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		if(clothesWorn[ii]->getName().compare(targetName)==0){
+			clothesWorn[ii]->lookAt(); 
+			return true; 	
+		}
+	}
 	return false; 
 }
 
 bool Player::use(std::string targetName){
 	for(int ii=0; ii < inventory.size(); ii++){
 		if(inventory[ii]->getName().compare(targetName)==0){
-			inventory[ii]->use(location, this); 
-			return true; 	
+			Item* item = inventory[ii]; 
+			if(item->isWearable()){
+				wear(item); 
+				inventory.erase(inventory.begin()+ii);
+				cout << "You put on the " << targetName << ".\n"; 
+				return true; 
+			}else{
+				inventory[ii]->use(location, this); 
+				return true; 	
+			}
 		}
 	}
 	if (!targetName.empty()) {
@@ -93,6 +114,23 @@ bool Player::use(std::string targetName){
 	}
 	return false; 
 
+}
+
+bool Player::wear(Item* item){
+	clothesWorn.push_back(item); 
+	return true; 
+}
+
+bool Player::takeOff(std::string targetName){
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		if(clothesWorn[ii]->getName().compare(targetName)==0){
+			inventory.push_back(clothesWorn[ii]); 
+			clothesWorn.erase(clothesWorn.begin()+ii); 
+			cout << "You took off the " << targetName << " and put it in your inventory.\n"; 
+			return true; 
+		}
+	}
+	return false; 
 }
 
 bool Player::eat(std::string targetName){
