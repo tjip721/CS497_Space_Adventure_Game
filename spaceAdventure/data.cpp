@@ -51,7 +51,7 @@ int open_log(){
 }
 void remove_log(){}
 
-Player  createNewPlayer(Area* Uranus, Area* Mercury) {
+Player  createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, Item* flashlight) {
    Player player;
    double playerLife, playerGas;
    playerGas=rand() % 3 + 1;
@@ -66,6 +66,9 @@ Player  createNewPlayer(Area* Uranus, Area* Mercury) {
       player.setVars(playerGas, playerLife);
       player.setLocation(Mercury);
    }
+   player.addInventory(jacket);
+   player.addInventory(shoes);
+   player.addInventory(flashlight);
    return player;
 }
 vector<string> parseLoadFile() {

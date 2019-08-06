@@ -114,12 +114,14 @@ int main() {
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
 	transform(userChooses.begin(), userChooses.end(), userChooses.begin(), tolower);
+	//load the game 
 	if(userChooses == "loadgame" || userChooses =="load") {
 		cout << "Loading game..." << endl;
 		int fileReturn;
 		fileReturn = open_log();
 		if(fileReturn == 1 ) {
-			player=createNewPlayer(&Uranus, &Mercury);
+			//New player always get a Jacket, Shoe, and flashlight
+			player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight);
 		}
 		else {
 			vector<string> savedLines=parseLoadFile();
@@ -128,9 +130,10 @@ int main() {
 		}
 	}
 	else{
-		player= createNewPlayer(&Uranus, &Mercury);
+		player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight);
 	}
 
+//Welcome text displaying object of the game
 	getWelcome(&player);
 
 	int turnCounter = 0; 
