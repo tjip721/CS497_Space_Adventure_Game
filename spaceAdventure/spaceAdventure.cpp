@@ -142,7 +142,9 @@ int main() {
 		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
 			player.getLocation()->getName().compare("Uranus")==0 || 
 			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>2 ){
-					cout << "It is cold! You froze to DEATH. GAME OVER. \n";
+					//cout << "Quick, put on your jacket!" << endl;
+					read_uif_files("UIF_files/failure.txt");
+					cout << "You didn't put your jacket on. You froze to DEATH.\n";
 					gameOver = true;
 					break;
 		}
@@ -151,6 +153,7 @@ int main() {
 		if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
 			if(suffocationCounter < 0){
 				gameOver = true;
+				read_uif_files("UIF_files/failure.txt");
 				cout << "Oh no looks like you suffocated.\n";
 				break;
 			}
@@ -293,6 +296,7 @@ int main() {
 					if(pAlien != nullptr ){
 						pAlien->makePeace(); 
 					}
+					read_uif_files("crystal.txt");
 					cout <<"You bow to the Alien with Crysallith in your hands. It seems to accept your peace offering.\n"; 
 				}else{
 					cout << "You bowed, but no one seemed to notice.\n"; 	
@@ -301,6 +305,7 @@ int main() {
 
 			case say:
 				if(noun=="Alien" && location->hasItem("Alien") ){
+					read_uif_files("UIF_files/alien.txt");
 					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 					if(pAlien != nullptr ){
 						cout << "The alien replies: "; 
@@ -372,6 +377,18 @@ void moveFxn(string noun, Player player){
 	}
 }
 
+void read_uif_files(string fileName){
+	cout << string(20, '\n');
+	fstream r_file;
+	string file_read;
+	const string readFile=fileName;
+	r_file.open(readFile);
+	while(!r_file.eof()) {
+		getline(r_file, file_read);
+		cout << file_read << endl;
+	}
+	r_file.close();	
+}
 std::string get_file_data(std::string fileName){
 	fstream r_file;
 	string file_read;

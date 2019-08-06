@@ -26,6 +26,6 @@ string get_file_data(string text);
 void getWelcome(Player* player);
 void moveFxn(string noun, Player player); 
 bool itemExists(std::vector<Area*> planets, Player player, string item);
-
+void read_uif_files(std::string fileName);
 
 #endif
