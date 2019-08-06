@@ -37,9 +37,9 @@ int main() {
 	//Declaring the Area objects
 	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"),
    	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt"), Sun("Sun", "sun_short.txt", "sun_long.txt"),
-   	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt"), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"),
+   	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt",false, false), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"),
    	Uranus("Uranus", "uranus_short.txt", "uranus_long.txt"), Pluto("Pluto", "pluto_short.txt", "pluto_long.txt"), PlutoM("Pluto_Moon", "pluto_moon_short.txt", "pluto_moon_long.txt"),
-   	Neptune1("Neptune_1", "neptune_1_short.txt", "neptune_1_long.txt"), Neptune2("Neptune_2", "neptune_2_short.txt", "neptune_2_long.txt"), Venus2("Venus_2", "venus2_short.txt", "venus2_long.txt");
+   	Neptune1("Neptune_1", "neptune_1_short.txt", "neptune_1_long.txt", true), Neptune2("Neptune_2", "neptune_2_short.txt", "neptune_2_long.txt"), Venus2("Venus_2", "venus2_short.txt", "venus2_long.txt");
 
 	std::vector<Area*> planets;
 	planets.push_back(&Mercury);
@@ -93,12 +93,12 @@ int main() {
 
 	planets[0]->addItem(&Shoes);
 
-	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame };
+	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear };
 
 	// Map for converting string to enum
 	map<string, Verb> verbMap = {
-		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"lookAt",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"open",open},{"close",close},
-		{"push",push},{"mine",mine},{"launch",launch},{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame}
+		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"inspect",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"open",open},{"close",close},
+		{"push",push},{"mine",mine},{"launch",launch},{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear}
 	};
 
 	//Initialize parser
@@ -181,13 +181,13 @@ int main() {
 
 			//go somewhere, check exit is accessible and go there
 			case move:
-				if(player.isWearing("Shoes") || player.getLocation()->getName().compare("Shoes")==0 ){
+				if(player.isWearing("Shoes")){
 					moveFxn(noun, player);
 				}
 				break;
 
 			case help:
-				cout << "Try one of the following commands: \n Look \n Look at \n Move \n Take \n Fire \n Open \n Close \n Push \n Launch \n Land\n" ;
+				cout << "Try one of the following commands: \n Look \n Inspect \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n Open \n Close \n Push \n Launch \n Land \n Wear \n Mine \n Savegame \n";
 				break;
 
 			case inventory:
@@ -326,6 +326,16 @@ int main() {
 				saveGame(&player, planets);
 				break;
 
+			case wear:
+				if ((noun.compare("Shoes") == 0 || noun.compare("Jacket") == 0) &&
+					player.hasItem(noun))
+				{
+					player.use(noun);
+				}
+				else {
+					cout << "You can't wear that.\n";
+				}
+				break;
 		}
 		if(location->hasItem("Alien")){
 			Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 

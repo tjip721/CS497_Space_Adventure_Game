@@ -1,2 +1,2 @@
-lookAt
-lookat
+inspect
+inspect

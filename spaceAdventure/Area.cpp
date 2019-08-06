@@ -14,8 +14,10 @@ private:
 	bool firstEntry;
 */
 
-Area::Area(std::string name, std::string shortFileName, std::string longFileName){
+Area::Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark, bool hasOxygen){
 	areaName=name;
+	dark=isDark;
+	oxygen=hasOxygen;
 	//to do: update open file for reading in main
 	shortDescription=loadFile(shortFileName);
 	longDescription=loadFile(longFileName);

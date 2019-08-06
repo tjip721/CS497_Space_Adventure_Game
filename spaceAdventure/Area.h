@@ -22,12 +22,12 @@ private:
 	vector<Item*> items;
 	vector<Action> availableActions;
 	bool firstEntry = true;
-	bool dark = false;
-	bool oxygen = true;
+	bool dark;
+	bool oxygen;
 	string loadFile(string fileName);
 public:
 	//Adding constructor back
-	Area(std::string name, std::string shortFileName, std::string longFileName);
+	Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark=false, bool hasOxygen=true);
 	void printDescription();
 	void look();
 	Item* takeItem(std::string targetName);

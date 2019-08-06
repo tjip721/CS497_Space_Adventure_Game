@@ -16,4 +16,5 @@ eat.txt
 bow.txt
 say.txt
 use.txt
+wear.txt
 savegame.txt
