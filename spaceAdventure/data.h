@@ -19,7 +19,7 @@ void display_planet();
 void display_descriptions();
 //i.e. game over, start menue
 void display_gameInstances();
-Player createNewPlayer(Area* Mercury, Area* Uranus, Item* jacket, Item* shoes, Item* flashlight);
+Player createNewPlayer(Area* Mercury, Area* Uranus, Item* jacket, Item* shoes, Item* flashlight, Item* spaceship);
 void createNewPlanets(std::vector<Area*> planets);
 //save log file conditions, will be called in the "main" game
 void saveGame(Player* player1, std::vector<Area*> planets); 

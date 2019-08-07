@@ -14,10 +14,11 @@ private:
 	bool firstEntry;
 */
 
-Area::Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark, bool hasOxygen){
+Area::Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark, bool hasOxygen, bool isSpace){
 	areaName=name;
 	dark=isDark;
 	oxygen=hasOxygen;
+	space=isSpace;
 	//to do: update open file for reading in main
 	shortDescription=loadFile(shortFileName);
 	longDescription=loadFile(longFileName);
@@ -188,4 +189,14 @@ void Area::setEntry(int entry){
 		fEntry = false;
 	}
 	firstEntry = fEntry;
+}
+
+bool Area::eraseItem(std::string targetName) {
+	for (int ii = 0; ii < items.size(); ii++) {
+		if (items[ii]->getName().compare(targetName) == 0) {
+			items.erase(items.begin() + ii);
+			return true;
+		}
+	}
+	return false;
 }

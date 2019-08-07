@@ -27,3 +27,4 @@ transmitter.txt
 opportunity_rover.txt
 mushroom.txt
 spaceship.txt
+space.txt
