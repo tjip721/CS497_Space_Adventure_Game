@@ -51,7 +51,8 @@ int open_log(){
 }
 void remove_log(){}
 
-Player createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, Item* flashlight) {
+
+Player  createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, Item* flashlight, Item* spaceship) {
    Player player;
    double playerLife, playerGas;
    playerGas=rand() % 3 + 1;
@@ -66,6 +67,7 @@ Player createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, I
       player.setVars(playerGas, playerLife);
       player.setLocation(Mercury);
    }
+   player.getLocation()->addItem(spaceship);
    player.addInventory(jacket);
    player.addInventory(shoes);
    player.addInventory(flashlight);

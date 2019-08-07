@@ -22,20 +22,15 @@ using std::cin;
 using std::fstream;
 using std::transform;
 
-
 // Make sure that the word_files folder is in the same directory as the executable
 const string VERB_FILE_LIST = "./word_files/verb_files.txt";
 const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
-vector<string> loadingGame;
 
 int main() {
-
 	srand(time(NULL));
-	bool gameOver = false;
 
-	Player player;
 	//Declaring the Area objects
-	Area Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"),
+	Area Space("Space", "space_short.txt", "space_long.txt",false,true,true), Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"),
    	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt",false,false), Sun("Sun", "sun_short.txt", "sun_long.txt"),
    	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt",false, false), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"),
    	Uranus("Uranus", "uranus_short.txt", "uranus_long.txt"), Pluto("Pluto", "pluto_short.txt", "pluto_long.txt"), PlutoM("Pluto_Moon", "pluto_moon_short.txt", "pluto_moon_long.txt"),
@@ -57,6 +52,73 @@ int main() {
 	planets.push_back(&Neptune1);
 	planets.push_back(&Neptune2);
 	planets.push_back(&Venus2);
+
+	//Set Exits
+	Exit MercuryExit("Mercury", "place_holder.txt", "place_holder.txt", &Mercury, 1, 1),
+		Venus1Exit("Venus1", "place_holder.txt", "place_holder.txt", &Venus1, 1, 1),
+		EarthExit("Earth", "place_holder.txt", "place_holder.txt", &Earth, 1, 1), //Not sure if Earth should be a regular exit.
+		EarthMExit("Earth_Moon", "place_holder.txt", "place_holder.txt", &EarthM, 1, 1),
+		LostMExit("Lost_Moon", "place_holder.txt", "place_holder.txt", &LostM, 1, 1),
+		SunExit("Sun", "place_holder.txt", "place_holder.txt", &Sun, 1, 1),
+		MarsExit("Mars", "place_holder.txt", "place_holder.txt", &Mars, 1, 1),
+		JupiterExit("Jupiter", "place_holder.txt", "place_holder.txt", &Jupiter, 1, 1),
+		SaturnExit("Saturn", "place_holder.txt", "place_holder.txt", &Saturn, 1, 1),
+		UranusExit("Uranus", "place_holder.txt", "place_holder.txt", &Uranus, 1, 1),
+		PlutoExit("Pluto", "place_holder.txt", "place_holder.txt", &Pluto, 1, 1),
+		PlutoMExit("Pluto_Moon", "place_holder.txt", "place_holder.txt", &PlutoM, 1, 1),
+		Neptune1Exit("Neptune_1", "place_holder.txt", "place_holder.txt", &Neptune1, 1, 1),
+		Neptune2Exit("Neptune_2", "place_holder.txt", "place_holder.txt", &Neptune2, 1, 1),
+		Venus2Exit("Venus_2", "place_holder.txt", "place_holder.txt", &Venus2, 1, 1),
+		SpaceExit("Space", "place_holder.txt", "place_holder.txt", &Space, 0, 0);
+
+	// Set exits from space to planets.
+	Space.addExit(&MercuryExit);
+	Space.addExit(&Venus1Exit);
+	Space.addExit(&EarthExit);
+	Space.addExit(&EarthMExit);//Not sure if Earth should be a regular exit.
+	Space.addExit(&LostMExit);
+	Space.addExit(&SunExit);
+	Space.addExit(&MarsExit);
+	Space.addExit(&JupiterExit);
+	Space.addExit(&SaturnExit);
+	Space.addExit(&UranusExit);
+	Space.addExit(&PlutoExit);
+	Space.addExit(&PlutoMExit);
+	Space.addExit(&Neptune1Exit);
+
+	// Set exits from planets to space.
+	Mercury.addExit(&SpaceExit);
+	Venus1.addExit(&SpaceExit);
+	EarthM.addExit(&SpaceExit); // Should player be able to launch from earth?
+	LostM.addExit(&SpaceExit);
+	Sun.addExit(&SpaceExit);
+	Mars.addExit(&SpaceExit);
+	Jupiter.addExit(&SpaceExit);
+	Saturn.addExit(&SpaceExit);
+	Uranus.addExit(&SpaceExit);
+	Pluto.addExit(&SpaceExit);
+	PlutoM.addExit(&SpaceExit);
+	Neptune1.addExit(&SpaceExit);
+
+	// Set as launch exit also.
+	Mercury.setLaunchExit(&SpaceExit);
+	Venus1.setLaunchExit(&SpaceExit);
+	EarthM.setLaunchExit(&SpaceExit); // Should player be able to launch from earth?
+	LostM.setLaunchExit(&SpaceExit);
+	Sun.setLaunchExit(&SpaceExit);
+	Mars.setLaunchExit(&SpaceExit);
+	Jupiter.setLaunchExit(&SpaceExit);
+	Saturn.setLaunchExit(&SpaceExit);
+	Uranus.setLaunchExit(&SpaceExit);
+	Pluto.setLaunchExit(&SpaceExit);
+	PlutoM.setLaunchExit(&SpaceExit);
+	Neptune1.setLaunchExit(&SpaceExit);
+
+	// Set exits for planets that have second area.
+	Venus1.addExit(&Venus2Exit);
+	Venus2.addExit(&Venus1Exit);
+	Neptune1.addExit(&Neptune2Exit);
+	Neptune2.addExit(&Neptune2Exit);
 
 	// Declare Item Objects
 	Item Shoes("Shoes", "shoes.txt", 1),
@@ -91,10 +153,7 @@ int main() {
 	items.push_back(&mushroom);
 	items.push_back(&spaceship);
 
-
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear };
-
-	// Map for converting string to enum
 	map<string, Verb> verbMap = {
 		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"inspect",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"open",open},{"close",close},
 		{"push",push},{"mine",mine},{"launch",launch},{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear}
@@ -107,8 +166,9 @@ int main() {
 	if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
-
-	//Print out intro text
+	
+	// Welcome message
+	Player player;
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
@@ -119,8 +179,8 @@ int main() {
 		int fileReturn;
 		fileReturn = open_log();
 		if(fileReturn == 1 ) {
-			//New player always get a Jacket, Shoe, and flashlight
-			player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight);
+			//New player always get a Jacket, Shoe, and flashlight. Set spaceship at starting location.
+			player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight, &spaceship);
 			createNewPlanets(planets, items);
 		}
 		else {
@@ -130,16 +190,19 @@ int main() {
 		}
 	}
 	else{
-		player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight);
+
 		createNewPlanets(planets, items);
+		player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight, &spaceship);
 	}
 
-//Welcome text displaying object of the game
+	//Welcome text displaying object of the game
 	getWelcome(&player);
-
-	int turnCounter = 0; 
+	bool gameOver = false;
+	int turnCounter = 0;
+	int suffocationCounter = 1;
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 		turnCounter++; 
+		// Cold area check
 		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
 			player.getLocation()->getName().compare("Uranus")==0 || 
 			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>2 ){
@@ -150,7 +213,7 @@ int main() {
 					break;
 		}
 
-		int suffocationCounter = 1;
+		// No oxygen check
 		if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
 			if(suffocationCounter < 0){
 				gameOver = true;
@@ -162,6 +225,7 @@ int main() {
 			suffocationCounter--;
 		}
 
+		// Process user input
 		verb = invalid;
 		noun.clear();
 		command.clear();
@@ -172,6 +236,7 @@ int main() {
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
+
 		// Left this in for exiting game while testing
 		transform(command.begin(), command.end(), command.begin(), toupper);
 		if (command == "EXIT") {
@@ -180,7 +245,6 @@ int main() {
 		
 		Area* location = player.getLocation();
 		switch (verb){
-			//Do non item actions
 			//look around current location
 			case look:
 				player.getLocation()->look();
@@ -188,8 +252,8 @@ int main() {
 
 			//go somewhere, check exit is accessible and go there
 			case move:
-				if(player.isWearing("Shoes")){
-					moveFxn(noun, player);
+				if(player.isWearing("Shoes") && !location->isSpace()){
+					moveFxn(noun, player, spaceship);
 				}
 				break;
 
@@ -200,6 +264,7 @@ int main() {
 			case inventory:
 				player.listInventory();
 				break;
+
 			// If an item action is requested check if the item is available
 			//Check every inventory item for the item name
 			case lookAt:
@@ -216,6 +281,7 @@ int main() {
 					cout << "Sorry you can't look at that right now\n" ;
 					break;
 				}
+
 			case take:
 				if(player.take(noun)){
 					break;
@@ -223,6 +289,7 @@ int main() {
 					cout << "Sorry you don't seem to be able to take that right now.\n";
 					break;
 				}
+
 			case drop:
 				if(player.drop(noun)){
 					cout << "You dropped the " << noun << ".\n";
@@ -270,7 +337,7 @@ int main() {
 			case launch:
 				// IF spaceship is present launch to space
 				if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
-					moveFxn(noun, player);
+					moveFxn(noun, player, spaceship);
 				}else{
 					cout << "Sorry you don't appear to be able to launch from here.\n";
 				}
@@ -278,10 +345,10 @@ int main() {
 
 			case land:
 				//If in space land on specified planet
-				if(location->hasItem("Spaceship") && location->getLandExit() != NULL){
-					moveFxn(noun, player);
+				if(location->isSpace()){
+					moveFxn(noun, player, spaceship);
 				}else{
-					cout << "Sorry you don't appear to be able to land there from here.\n";
+					cout << "You will need to be flying in space before you can land your ship.\n";
 				}
 				break;
 
@@ -359,11 +426,14 @@ int main() {
 }
 
 
-void moveFxn(string noun, Player player){
+void moveFxn(string noun, Player &player, Item &spaceship){
 	Area* location = player.getLocation();
 	bool exitValid = location->hasExit(noun);
 	if(exitValid){
 		Exit* targetExit = location->getExit(noun);
+		if (targetExit->getName().compare("Space") == 0) {
+			player.getLocation()->eraseItem("Spaceship");
+		}
 		player.removeLife(targetExit->getLifeDistance());
 		player.removeGas(targetExit->getGasDistance());
 		if(player.getLife() < 0){
@@ -372,6 +442,9 @@ void moveFxn(string noun, Player player){
 			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n";
 		}
 		player.setLocation(location->getExit(noun)->getArea());
+		if (location->getName().compare("Space") == 0) {
+			player.getLocation()->addItem(&spaceship);
+		}
 		player.getLocation()->look();
 	} else {
 		std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n";

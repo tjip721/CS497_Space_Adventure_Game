@@ -18,16 +18,16 @@ private:
 	string shortDescription;
 	vector<Exit*> exits;
 	Exit* launchExit = NULL;
-	Exit* landExit = NULL;
 	vector<Item*> items;
 	vector<Action> availableActions;
 	bool firstEntry = true;
 	bool dark;
 	bool oxygen;
+	bool space;
 	string loadFile(string fileName);
 public:
 	//Adding constructor back
-	Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark=false, bool hasOxygen=true);
+	Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark=false, bool hasOxygen=true, bool isSpace=false);
 	void printDescription();
 	void look();
 	Item* takeItem(std::string targetName);
@@ -47,14 +47,14 @@ public:
 	void setShortDescription(std::string text);
 	bool hasItem(std::string targetName);
 	void setLaunchExit(Exit* exit){launchExit= exit;}
-	void setLandExit(Exit* exit){landExit= exit;}
-	Exit* getLandExit(){return landExit;}
 	Exit* getLaunchExit(){return launchExit;}
 	void setEntry(int entry);
 	//Prints all of the items in the Area + the Area name -- done for save log.
     std::vector<Item*> getItems();
     bool getAreaEntry();
 	std::string getName();
+	bool isSpace() { return space; }
+	bool eraseItem(std::string targetName);
 
 
 };

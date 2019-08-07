@@ -19,8 +19,8 @@ void display_planet();
 void display_descriptions();
 //i.e. game over, start menue
 void display_gameInstances();
-Player createNewPlayer(Area* Mercury, Area* Uranus, Item* jacket, Item* shoes, Item* flashlight);
 void createNewPlanets(std::vector<Area*> planets, std::vector<Item*> items);
+Player createNewPlayer(Area* Mercury, Area* Uranus, Item* jacket, Item* shoes, Item* flashlight, Item* spaceship);
 //save log file conditions, will be called in the "main" game
 void saveGame(Player* player1, std::vector<Area*> planets); 
 //Parse the save_log.txt and place in constructor for the areas + user

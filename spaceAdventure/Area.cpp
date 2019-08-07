@@ -14,10 +14,11 @@ private:
 	bool firstEntry;
 */
 
-Area::Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark, bool hasOxygen){
+Area::Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark, bool hasOxygen, bool isSpace){
 	areaName=name;
 	dark=isDark;
 	oxygen=hasOxygen;
+	space=isSpace;
 	//to do: update open file for reading in main
 	shortDescription=loadFile(shortFileName);
 	longDescription=loadFile(longFileName);
@@ -37,15 +38,30 @@ void Area::printDescription(){
 	if(firstEntry){
 		std::cout << longDescription << "\n";
 		firstEntry = false;
+		if (exits.size() > 0) {
+			std::cout << "There are some possible exits here:\n";
+			for (int ii = 0; ii < exits.size(); ii++) {
+				exits[ii]->printLongDescription();
+				std::cout << "\n";
+			}
+		}
 	} else {
 		std::cout << shortDescription << "\n";
+		if (exits.size() > 0) {
+			std::cout << "There are some possible exits here:\n";
+			for (int ii = 0; ii < exits.size(); ii++) {
+				exits[ii]->printShortDescription(); 
+				std::cout << "\n";
+			}
+		}
 	}
 	if (items.size() > 0) {
-		std::cout << "There are some items here:\n";
+		std::cout << "There are some things here:\n";
 		for (int ii = 0; ii < items.size(); ii++) {
 			std::cout << items[ii]->getName() << "\n";
 		}
 	}
+
 }
 void Area::printLongDescription(){
 		std::cout << longDescription << "\n";
@@ -173,4 +189,14 @@ void Area::setEntry(int entry){
 		fEntry = false;
 	}
 	firstEntry = fEntry;
+}
+
+bool Area::eraseItem(std::string targetName) {
+	for (int ii = 0; ii < items.size(); ii++) {
+		if (items[ii]->getName().compare(targetName) == 0) {
+			items.erase(items.begin() + ii);
+			return true;
+		}
+	}
+	return false;
 }
