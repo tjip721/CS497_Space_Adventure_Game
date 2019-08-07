@@ -51,7 +51,7 @@ int open_log(){
 }
 void remove_log(){}
 
-Player  createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, Item* flashlight) {
+Player createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, Item* flashlight) {
    Player player;
    double playerLife, playerGas;
    playerGas=rand() % 3 + 1;
@@ -135,6 +135,33 @@ void loadOldPlanets(std::vector<std::string> savedLines, std::vector<Area*> plan
       }
    }
 }
-void createNewPlanets(std::vector<Area*> planets){
-;
+void createNewPlanets(std::vector<Area*> planets, std::vector<Item*> items){
+   for(int i=0; i < planets.size(); i++) {
+      for(int j=0; j < items.size(); j++){
+         //if(((planets[i]->getName == "Earth_Moon") || (planets[i]->getName()== "Eath")) && (items[j]->getName()=="Human")) { planets[i]->addItem(items[j]); }
+         if(((planets[i]->getName() == "Mercury") || (planets[i]->getName() == "Venus2")) && (items[j]->getName() == "Gas")) { planets[i]->addItem(items[j]); }
+         if((planets[i]->getName() == "Neputune2") && (items[j]->getName() == "Screw Driver")) { planets[i]->addItem(items[j]); }
+         if(((planets[i]->getName() == "Lost Moon") || (planets[i]->getName() == "Pluto") || (planets[i]->getName() == "Venus2") || (planets[i]->getName() == "Venus1"))&&
+            (items[j]->getName() == "Alien")){ planets[i]->addItem(items[j]); }
+         if((planets[i]->getName() == "Pluto_Moon")&& (items[j]->getName() == "Pick Axe")) { planets[i]->addItem(items[j]); }
+         if(((planets[i]->getName() =="Lost_Moon") || (planets[i]->getName() == "Jupiter")) && (items[j]->getName() == "Mushroom")) { planets[i]->addItem(items[j]); }
+         if((planets[i]->getName() == "Pluto_Moon") && (items[j]->getName() == "Crysallith")) { planets[i]->addItem(items[j]); }
+         if(((planets[i]->getName() == "Uranus") || (planets[i]->getName() == "Pluto")) && (items[j]->getName()=="Doohickey")) { planets[i]->addItem(items[j]); }
+         if((planets[i]->getName() == "Saturn") && (items[j]->getName()=="Power Crystal")){ planets[i]->addItem(items[j]); }
+         if(((items[j]->getName() == "Opportunity Rover") || (items[j]->getName() == "Transmitter")) && (planets[i]->getName() == "Mars")){ planets[i]->addItem(items[j]); }
+         if(items[j]->getName() == "Rock") { planets[i]->addItem(items[j]); }
+      }
+   }
+
+   //Mercury = Gas
+   //Venus1=Alien
+   //Venus2=Gas, Aliens, Humans
+   //Earth= Humans
+   //Uranus=Doohickey
+   //Mars=Opportunity Rover, Transmitter
+   //Saturn= Power Crystal
+   //Neptune1=Rock
+   //Neputune2=ScrewDriver, Rock
+   //Pluto=Doohickey, Aliens
+   //Plutos moon=Crysallith, pickaxe
 }

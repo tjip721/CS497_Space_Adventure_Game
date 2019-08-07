@@ -91,7 +91,6 @@ int main() {
 	items.push_back(&mushroom);
 	items.push_back(&spaceship);
 
-	planets[0]->addItem(&Shoes);
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear };
 
@@ -122,6 +121,7 @@ int main() {
 		if(fileReturn == 1 ) {
 			//New player always get a Jacket, Shoe, and flashlight
 			player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight);
+			createNewPlanets(planets, items);
 		}
 		else {
 			vector<string> savedLines=parseLoadFile();
@@ -131,6 +131,7 @@ int main() {
 	}
 	else{
 		player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight);
+		createNewPlanets(planets, items);
 	}
 
 //Welcome text displaying object of the game
