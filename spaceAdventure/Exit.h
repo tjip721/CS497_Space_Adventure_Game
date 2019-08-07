@@ -2,6 +2,7 @@
 #define EXIT_H
 #include <string>
 #include <vector> 
+#include <iostream> 
 //#include "Area.h"
 
 class Area; 
@@ -20,6 +21,8 @@ public:
 	std::string getName(); 
 	double getGasDistance(){return gasDistance;}
 	double getLifeDistance(){return lifeDistance;}
+	void printLongDescription(); 
+	void printShortDescription(); 
 }; 
 
 #endif

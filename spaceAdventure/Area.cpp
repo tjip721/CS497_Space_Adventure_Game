@@ -37,15 +37,30 @@ void Area::printDescription(){
 	if(firstEntry){
 		std::cout << longDescription << "\n";
 		firstEntry = false;
+		if (exits.size() > 0) {
+			std::cout << "There are some possible exits here:\n";
+			for (int ii = 0; ii < exits.size(); ii++) {
+				exits[ii]->printLongDescription();
+				std::cout << "\n";
+			}
+		}
 	} else {
 		std::cout << shortDescription << "\n";
+		if (exits.size() > 0) {
+			std::cout << "There are some possible exits here:\n";
+			for (int ii = 0; ii < exits.size(); ii++) {
+				exits[ii]->printShortDescription(); 
+				std::cout << "\n";
+			}
+		}
 	}
 	if (items.size() > 0) {
-		std::cout << "There are some items here:\n";
+		std::cout << "There are some things here:\n";
 		for (int ii = 0; ii < items.size(); ii++) {
 			std::cout << items[ii]->getName() << "\n";
 		}
 	}
+
 }
 void Area::printLongDescription(){
 		std::cout << longDescription << "\n";

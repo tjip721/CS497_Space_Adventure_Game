@@ -25,4 +25,10 @@ std::string Exit::getName(){
 	return name; 
 } 
 
-
+void Exit::printLongDescription(){
+	std::cout << longDescription << "\n"; 
+}
+	
+void Exit::printShortDescription(){
+	std::cout << shortDescription << "\n"; 
+} 
