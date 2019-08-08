@@ -326,6 +326,15 @@ int main() {
 				break;
 
 			case push:
+				if(noun.compare("Alien")==0 && location->hasItem("Alien")){
+					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+					if(pAlien != nullptr){
+						pAlien->aggravate(); 
+						cout << "Looks like that aggravated the alien, it is now hostile towards you.\n"; 
+					}
+				}else{
+					cout << "You can't push that.\n"; 
+				}
 				break;
 
 			case mine:
