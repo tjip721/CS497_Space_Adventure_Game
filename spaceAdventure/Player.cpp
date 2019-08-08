@@ -35,7 +35,12 @@ bool Player::drop(std::string targetName){
 bool Player::take(std::string targetName){
 	Item* targetPtr = location->takeItem(targetName); 
 	if( targetPtr != NULL){
-		inventory.push_back(targetPtr); 
+		if (targetPtr->getName().compare("Gas") == 0) {
+			gasRemaining += 10;
+		}
+		else {
+			inventory.push_back(targetPtr);
+		}
 		std::cout << "You picked up the " << targetPtr->getName() <<"\n"; 
 		return true; 
 	}else{
