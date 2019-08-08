@@ -66,6 +66,7 @@ void Player::listInventory(){
 	if(inventory.empty()){
 		std::cout << "... is empty\n"; 
 	}
+	cout << "\n"; 
 	std::cout << "You are wearing: \n"; 
 	for(int ii=0; ii < clothesWorn.size(); ii++){
 		std::cout << clothesWorn[ii]->getName() << "\n"; 
@@ -73,6 +74,7 @@ void Player::listInventory(){
 	if(clothesWorn.empty()){
 		std::cout << "Nothing... you are naked.\n"; 
 	}
+	cout << "\n"; 
 }
 
 bool Player::lookAt(std::string targetName){

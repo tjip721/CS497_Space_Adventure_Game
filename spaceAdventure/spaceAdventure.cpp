@@ -127,7 +127,9 @@ int main() {
 		OpportunityR("Opportunity Rover", "opportunity_rover.txt", 0),
 		Rock("Rock", "rock.txt", 0),
 		Jacket("Jacket", "jacket.txt", 1);
-
+		Jacket.setWearable(true); 
+		Shoes.setWearable(true); 
+ 
 	Doohickey doohickey("Doohickey", "doohickey.txt", 1);
 	Flashlight flashlight("Flashlight", "flashlight.txt", 1);
 	Mushroom mushroom("Mushroom", "mushroom.txt", 1);

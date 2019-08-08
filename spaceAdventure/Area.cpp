@@ -45,6 +45,7 @@ void Area::printDescription(){
 				std::cout << "\n";
 			}
 		}
+		cout << "\n"; 
 	} else {
 		std::cout << shortDescription << "\n";
 		if (exits.size() > 0) {
@@ -54,6 +55,7 @@ void Area::printDescription(){
 				std::cout << "\n";
 			}
 		}
+		cout << "\n"; 
 	}
 	if (items.size() > 0) {
 		std::cout << "There are some things here:\n";
@@ -61,6 +63,7 @@ void Area::printDescription(){
 			std::cout << items[ii]->getName() << "\n";
 		}
 	}
+	cout << "\n"; 
 
 }
 void Area::printLongDescription(){
