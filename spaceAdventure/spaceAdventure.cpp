@@ -176,7 +176,7 @@ int main() {
 	getline(cin, userChooses);
 	transform(userChooses.begin(), userChooses.end(), userChooses.begin(), tolower);
 	//load the game 
-	if(userChooses == "loadgame" || userChooses =="load") {
+	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "load game") {
 		cout << "Loading game..." << endl;
 		int fileReturn;
 		fileReturn = open_log();
