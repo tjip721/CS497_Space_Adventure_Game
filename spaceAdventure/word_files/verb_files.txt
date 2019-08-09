@@ -18,3 +18,4 @@ say.txt
 use.txt
 wear.txt
 savegame.txt
+status.txt

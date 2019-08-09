@@ -155,10 +155,10 @@ int main() {
 	items.push_back(&mushroom);
 	items.push_back(&spaceship);
 
-	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, open, close, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear };
+	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status };
 	map<string, Verb> verbMap = {
-		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"inspect",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"open",open},{"close",close},
-		{"push",push},{"mine",mine},{"launch",launch},{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear}
+		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"inspect",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"push",push},{"mine",mine},{"launch",launch},
+		{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear},{"status",status}
 	};
 
 	//Initialize parser
@@ -260,7 +260,7 @@ int main() {
 				break;
 
 			case help:
-				cout << "Try one of the following commands: \n Look \n Inspect \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n Open \n Close \n Push \n Launch \n Land \n Wear \n Mine \n Savegame \n";
+				cout << "Try one of the following commands: \n Look \n Inspect \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n \n Push \n Launch \n Land \n Wear \n Mine \n Status \n Savegame \n";
 				break;
 
 			case inventory:
@@ -319,12 +319,6 @@ int main() {
 				}else{
 					cout << "Nothing happened.\n"; 
 				}
-				break;
-
-			case open:
-				break;
-
-			case close:
 				break;
 
 			case push:
@@ -430,6 +424,9 @@ int main() {
 				else {
 					cout << "You can't wear that.\n";
 				}
+				break;
+			case status:
+				cout << "You have " << player.getLife() << " years to live and " << player.getGas() << " gas left.\n";
 				break;
 		}
 		if(location->hasItem("Alien")){
