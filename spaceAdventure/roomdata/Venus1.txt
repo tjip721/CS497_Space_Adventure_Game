@@ -1,0 +1,6 @@
+Venus_1
+descriptorFiles/venus1_short.txt
+descriptorFiles/venus1_long.txt
+UIf_files/castle.txt
+Alien
+Rock

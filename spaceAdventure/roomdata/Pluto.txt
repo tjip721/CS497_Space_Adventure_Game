@@ -1,1 +1,7 @@
-Doohickey Alien
+Pluto
+descriptorFiles/pluto_short.txt
+descriptorFiles/pluto_long.txt
+UIf_files/snowy.txt
+Doohickey 
+Alien
+Rock

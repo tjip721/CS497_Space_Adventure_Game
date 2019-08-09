@@ -1,4 +1,5 @@
-0
-20
+Sun
+descriptorFiles/sun_short.txt
+descriptorFiles/sun_long.txt
+UIf_files/fire.txt
 x
-fire.txt

@@ -1,1 +1,6 @@
+Mercury
+descriptorFiles/mercury_short.txt
+descriptorFiles/mercury_long.txt
+UIf_files/Mountains.txt
 Gas
+Rock

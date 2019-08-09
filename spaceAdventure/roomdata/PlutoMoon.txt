@@ -1,1 +1,7 @@
-Crysallith Pick Axe
+Pluto Moon
+descriptorFiles/pluto_moon_short.txt
+descriptorFiles/pluto_moon_long.txt
+UIf_files/crystal.txt
+Crysallith 
+Pick Axe
+Rock

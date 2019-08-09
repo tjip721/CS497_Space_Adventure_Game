@@ -1,0 +1,6 @@
+Saturn
+descriptorFiles/saturn_short.txt
+descriptorFiles/saturn_long.txt
+UIf_files/cave.txt
+Power Crystal
+Rock
