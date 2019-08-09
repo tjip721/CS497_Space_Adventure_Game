@@ -250,6 +250,8 @@ int main() {
 			case move:
 				if(player.isWearing("Shoes") && !location->isSpace()){
 					moveFxn(noun, player, spaceship);
+				}else{
+					cout << "It's hard to walk anywhere on this surface in your bare feet...\n"; 
 				}
 				break;
 
