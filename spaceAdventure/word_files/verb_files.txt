@@ -19,3 +19,4 @@ use.txt
 wear.txt
 savegame.txt
 status.txt
+quit.txt

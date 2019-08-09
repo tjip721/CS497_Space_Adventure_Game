@@ -155,10 +155,10 @@ int main() {
 	items.push_back(&mushroom);
 	items.push_back(&spaceship);
 
-	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status };
+	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status, quit };
 	map<string, Verb> verbMap = {
 		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"inspect",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"push",push},{"mine",mine},{"launch",launch},
-		{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear},{"status",status}
+		{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear},{"status",status},{"quit",quit}
 	};
 
 	//Initialize parser
@@ -238,12 +238,6 @@ int main() {
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
-
-		// Left this in for exiting game while testing
-		transform(command.begin(), command.end(), command.begin(), toupper);
-		if (command == "EXIT") {
-			exit(0);
-		}
 		
 		Area* location = player.getLocation();
 		switch (verb){
@@ -260,7 +254,7 @@ int main() {
 				break;
 
 			case help:
-				cout << "Try one of the following commands: \n Look \n Inspect \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n \n Push \n Launch \n Land \n Wear \n Mine \n Status \n Savegame \n";
+				cout << "Try one of the following commands: \n Look \n Inspect \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n Push \n Launch \n Land \n Wear \n Mine \n Status \n Quit \n Savegame \n";
 				break;
 
 			case inventory:
@@ -427,6 +421,14 @@ int main() {
 				break;
 			case status:
 				cout << "You have " << player.getLife() << " years to live and " << player.getGas() << " gas left.\n";
+				break;
+			case quit:
+				cout << "Are you sure you want to quit and exit the game? Type yes or no: ";
+				getline(cin, command);
+				transform(command.begin(), command.end(), command.begin(), tolower);
+				if(command.compare("yes") == 0) {
+					return 0;
+				}
 				break;
 		}
 		if(location->hasItem("Alien")){
