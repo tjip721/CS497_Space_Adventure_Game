@@ -357,7 +357,15 @@ int main() {
 			case land:
 				//If in space land on specified planet
 				if(location->isSpace()){
-					moveFxn(noun, player, spaceship);
+					if(noun.compare("Earth")==0){
+						if(spaceship.isFixed()){
+							moveFxn(noun, player, spaceship);
+						} else {
+							cout << "Sorry your space ship isn't fixed yet. It won't survive entry into Earth's atmosphere.\n"; 
+						}
+					}else{
+						moveFxn(noun, player, spaceship);
+					}
 				}else{
 					cout << "You will need to be flying in space before you can land your ship.\n";
 				}
