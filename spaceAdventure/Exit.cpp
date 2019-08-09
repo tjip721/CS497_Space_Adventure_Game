@@ -12,10 +12,8 @@ private:
 }; 
 */
 
-Exit::Exit(std::string nameIn, std::string ldIn, std::string sdIn, Area* toAreaIn, double gasDist, double lifeDist) {
+Exit::Exit(std::string nameIn, Area* toAreaIn, double gasDist, double lifeDist) {
 	name = nameIn;
-	longDescription = loadFile(ldIn);
-	shortDescription = loadFile(sdIn);
 	toArea = toAreaIn;
 	gasDistance = gasDist;
 	lifeDistance = lifeDist;

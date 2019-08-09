@@ -54,22 +54,22 @@ int main() {
 	planets.push_back(&Venus2);
 
 	//Set Exits
-	Exit MercuryExit("Mercury", "place_holder.txt", "place_holder.txt", &Mercury, 1, 1),
-		Venus1Exit("Venus1", "place_holder.txt", "place_holder.txt", &Venus1, 1, 1),
-		EarthExit("Earth", "place_holder.txt", "place_holder.txt", &Earth, 1, 1), //Not sure if Earth should be a regular exit.
-		EarthMExit("Earth_Moon", "place_holder.txt", "place_holder.txt", &EarthM, 1, 1),
-		LostMExit("Lost_Moon", "place_holder.txt", "place_holder.txt", &LostM, 1, 1),
-		SunExit("Sun", "place_holder.txt", "place_holder.txt", &Sun, 1, 1),
-		MarsExit("Mars", "place_holder.txt", "place_holder.txt", &Mars, 1, 1),
-		JupiterExit("Jupiter", "place_holder.txt", "place_holder.txt", &Jupiter, 1, 1),
-		SaturnExit("Saturn", "place_holder.txt", "place_holder.txt", &Saturn, 1, 1),
-		UranusExit("Uranus", "place_holder.txt", "place_holder.txt", &Uranus, 1, 1),
-		PlutoExit("Pluto", "place_holder.txt", "place_holder.txt", &Pluto, 1, 1),
-		PlutoMExit("Pluto_Moon", "place_holder.txt", "place_holder.txt", &PlutoM, 1, 1),
-		Neptune1Exit("Neptune_1", "place_holder.txt", "place_holder.txt", &Neptune1, 1, 1),
-		Neptune2Exit("Neptune_2", "place_holder.txt", "place_holder.txt", &Neptune2, 1, 1),
-		Venus2Exit("Venus_2", "place_holder.txt", "place_holder.txt", &Venus2, 1, 1),
-		SpaceExit("Space", "place_holder.txt", "place_holder.txt", &Space, 0, 0);
+	Exit MercuryExit("Mercury", &Mercury, 1, 1),
+		Venus1Exit("Venus1", &Venus1, 1, 1),
+		EarthExit("Earth", &Earth, 1, 1), //Not sure if Earth should be a regular exit.
+		EarthMExit("Earth_Moon", &EarthM, 1, 1),
+		LostMExit("Lost_Moon", &LostM, 1, 1),
+		SunExit("Sun", &Sun, 1, 1),
+		MarsExit("Mars", &Mars, 1, 1),
+		JupiterExit("Jupiter", &Jupiter, 1, 1),
+		SaturnExit("Saturn", &Saturn, 1, 1),
+		UranusExit("Uranus", &Uranus, 1, 1),
+		PlutoExit("Pluto", &Pluto, 1, 1),
+		PlutoMExit("Pluto_Moon", &PlutoM, 1, 1),
+		Neptune1Exit("Neptune_1", &Neptune1, 1, 1),
+		Neptune2Exit("Neptune_2", &Neptune2, 1, 1),
+		Venus2Exit("Venus_2", &Venus2, 1, 1),
+		SpaceExit("Space", &Space, 0, 0);
 
 	// Set exits from space to planets.
 	Space.addExit(&MercuryExit);
