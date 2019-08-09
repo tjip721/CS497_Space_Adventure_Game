@@ -157,7 +157,7 @@ int main() {
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status, quit };
 	map<string, Verb> verbMap = {
-		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"inspect",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"push",push},{"mine",mine},{"launch",launch},
+		{"look",look},{"move",move},{"help",help},{"inventory",inventory},{"look at",lookAt},{"take",take},{"drop",drop},{"fire",fire},{"push",push},{"mine",mine},{"launch",launch},
 		{"land",land},{"eat",eat},{"bow",bow},{"say",say},{"use",use},{"",invalid},{"savegame",savegame},{"wear",wear},{"status",status},{"quit",quit}
 	};
 
@@ -254,7 +254,7 @@ int main() {
 				break;
 
 			case help:
-				cout << "Try one of the following commands: \n Look \n Inspect \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n Push \n Launch \n Land \n Wear \n Mine \n Status \n Quit \n Savegame \n";
+				cout << "Try one of the following commands: \n Look \n Look at \n Move \n Inventory \n Take \n Drop \n Fire \n Eat \n Bow \n Say \n Use \n Push \n Launch \n Land \n Wear \n Mine \n Status \n Quit \n Savegame \n";
 				break;
 
 			case inventory:

@@ -149,6 +149,10 @@ void Parser::matchVerb() {
 	// Loop through input word tokens.
     for (int i = 0; i < inputTokens.size(); i++) {
         currentTokenIndex++; // Track the current token index.
+		if (inputTokens[i].compare("look") == 0 && i + 1 < inputTokens.size() && inputTokens[i + 1].compare("at") == 0) {
+			verb = "look at";
+			return;
+		}
 		// Compare token to words from each verb list.
         for (std::vector<std::string> list : verbLists) {
 			// If a match is found, set first word in file as command verb and exit loops.

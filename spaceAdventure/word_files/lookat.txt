@@ -1,2 +1,3 @@
-inspect
+look at
+examine
 inspect
