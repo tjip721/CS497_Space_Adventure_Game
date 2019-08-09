@@ -36,14 +36,6 @@ std::string Exit::getName(){
 	return name; 
 } 
 
-void Exit::printLongDescription(){
-	// temporarily switched to name for testing.
-	//std::cout << longDescription << "\n";
+void Exit::printName(){
 	std::cout << name;
 }
-	
-void Exit::printShortDescription(){
-	// temporarily switched to name for testing.
-	//std::cout << shortDescription << "\n"; 
-	std::cout << name;
-} 

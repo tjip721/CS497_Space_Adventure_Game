@@ -20,8 +20,7 @@ public:
 	std::string getName(); 
 	double getGasDistance(){return gasDistance;}
 	double getLifeDistance(){return lifeDistance;}
-	void printLongDescription(); 
-	void printShortDescription(); 
+	void printName();
 }; 
 
 #endif

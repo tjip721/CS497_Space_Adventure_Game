@@ -41,7 +41,10 @@ void Area::printDescription(){
 		if (exits.size() > 0) {
 			std::cout << "There are some possible exits here:\n";
 			for (int ii = 0; ii < exits.size(); ii++) {
-				exits[ii]->printLongDescription();
+				exits[ii]->printName();
+				if (this->getName().compare("Space") == 0) {
+					cout << " - Gas needed: " << exits[ii]->getGasDistance() << ", Travel time: " << exits[ii]->getLifeDistance() << " years.";
+				}
 				std::cout << "\n";
 			}
 		}
@@ -51,7 +54,10 @@ void Area::printDescription(){
 		if (exits.size() > 0) {
 			std::cout << "There are some possible exits here:\n";
 			for (int ii = 0; ii < exits.size(); ii++) {
-				exits[ii]->printShortDescription(); 
+				exits[ii]->printName();
+				if (this->getName().compare("Space") == 0) {
+					cout << " - Gas needed: " << exits[ii]->getGasDistance() << ", Travel time: " << exits[ii]->getLifeDistance() << " years.";
+				}
 				std::cout << "\n";
 			}
 		}
