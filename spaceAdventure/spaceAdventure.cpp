@@ -338,7 +338,11 @@ int main() {
 			case launch:
 				// IF spaceship is present launch to space
 				if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
-					moveFxn(noun, player, spaceship);
+					if(player.isWearing("Shoes") && !location->isSpace()){
+						moveFxn(noun, player, spaceship);
+					}else{
+						cout << "You're having trouble walking to your space ship in your bare feet...\n"; 
+					}
 				}else{
 					cout << "Sorry you don't appear to be able to launch from here.\n";
 				}
