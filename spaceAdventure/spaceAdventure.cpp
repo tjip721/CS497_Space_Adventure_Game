@@ -209,13 +209,14 @@ int main() {
 			player.getLocation()->getName().compare("Uranus")==0 || 
 			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>2 ){
 					//cout << "Quick, put on your jacket!" << endl;
-					read_uif_files("UIF_files/failure.txt");
 					cout << "You didn't put your jacket on. You froze to DEATH.\n";
+					read_uif_files("UIF_files/failure.txt");
 					gameOver = true;
 					break;
 		}
 
 		// No oxygen check
+		
 		if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
 			if(suffocationCounter < 0){
 				gameOver = true;
@@ -252,6 +253,9 @@ int main() {
 					moveFxn(noun, player, spaceship);
 				}else{
 					cout << "It's hard to walk anywhere on this surface in your bare feet...\n"; 
+				}
+				if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) ){
+					suffocationCounter = 1; 
 				}
 				break;
 
@@ -345,6 +349,9 @@ int main() {
 					}
 				}else{
 					cout << "Sorry you don't appear to be able to launch from here.\n";
+				}
+				if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) ){
+					suffocationCounter = 1; 
 				}
 				break;
 
