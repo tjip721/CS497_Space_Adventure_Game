@@ -27,12 +27,13 @@ void saveGame(Player* player1, std::vector<Area> planets) {
    //Add area inventories & firstEntry to text file
    //Earth_Moon descriptorFiles/earthmoon_short.txt descriptorFiles/earthmoon_long.txt UIf_files/rocky.txt 0 1 0 Human Rock
    for (int j=0; j < planets.size(); j++) {
-            savegame << planets[j].getName() << ""<< planets[j].getShortFile()<< " " << planets[j].getLongFile()<< " " << planets[j].getUIFile() << " " 
-
-      <<  planets[j].isDark() << " " << planets[j].hasOxygen() << " "<< planets[j].isSpace() << " "<< planets[j].getAreaEntry() << " ";
+            savegame << planets[j].getName() << ' '<< planets[j].getShortFile()<< ' ';
+            savegame << planets[j].getLongFile() << ' ' << planets[j].getUIFile() << ' ';
+            savegame << planets[j].isDark() << ' ' << planets[j].hasOxygen() <<  ' '; 
+            savegame << planets[j].isSpace() << ' '<< planets[j].getAreaEntry() << ' ';
       vector<Item*> planetItems= planets[j].getItems();
       for (int p=0; p < planetItems.size(); p++) {
-         savegame << planetItems[p]->getName() << " ";
+         savegame << planetItems[p]->getName() << ' ';
       }
       savegame << endl;
    }
@@ -96,6 +97,7 @@ vector<string> parseLoadFile() {
       getline(loadFile, val);
       fileLine.push_back(val);
    }
+   loadFile.close();
    return fileLine;
 }
 

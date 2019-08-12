@@ -74,11 +74,12 @@ int main() {
 		planets=loadPlanets(items);
 		player=createNewPlayer(planets, items);
 	}
+
 	//Done for new game
 	exits=createExits(planets);
 	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
-	//getWelcome(&player);
+	getWelcome(&player);
 	saveGame(&player, planets);
 
 /******

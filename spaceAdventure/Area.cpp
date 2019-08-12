@@ -25,8 +25,8 @@ Area::Area(std::string name, std::string shortFileName, std::string longFileName
 	longDescription=loadFile(longFileName);
 	uIDisplay=loadFile(interFile);
 
-	longFileName=longFileName;
-	shortFileName=shortFileName;
+	longFileNames=longFileName;
+	shortFileNames=shortFileName;
 	uiFileName=interFile;
 }
 

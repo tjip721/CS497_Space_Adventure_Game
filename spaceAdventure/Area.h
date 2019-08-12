@@ -22,8 +22,8 @@ private:
 	Exit* launchExit = NULL;
 	vector<Item*> items;
 	vector<Action> availableActions;
-	string longFileName;
-	string shortFileName;
+	string longFileNames;
+	string shortFileNames;
 	string uiFileName;
 	bool firstEntry = true;
 	bool dark;
@@ -57,8 +57,8 @@ public:
 	void setEntry(int entry);
 	//Prints all of the items in the Area + the Area name -- done for save log.
     std::vector<Item*> getItems();
-    std::string getLongFile() { return longFileName; }
-    std::string getShortFile() {return shortFileName; }
+    std::string getLongFile() { return longFileNames; }
+    std::string getShortFile() {return shortFileNames; }
     std::string getUIFile() {return uiFileName; }
     bool isfirstEntry() { return firstEntry; }
     bool getAreaEntry();
