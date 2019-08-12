@@ -47,7 +47,7 @@ int main() {
 	// Welcome message
 	Player player;
 	vector<Area> planets;
-	std::vector<Exit> exits;
+	vector<Exit> exits;
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
@@ -59,30 +59,31 @@ int main() {
 		int fileReturn;
 		fileReturn = open_log();
 		if(fileReturn == 1 ) {
-			//New player always get a Jacket, Shoe, and flashlight. Set spaceship at starting location.
+			vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
+			planets=loadPlanets(savedLines, items);
 			player=createNewPlayer(planets, items);
-			planets=loadPlanets(items);
 		}
 		else {
-			vector<string> savedLines=parseLoadFile();
-			player=loadOldPlayer(planets, items);
-			planets=loadPlanets(items);
+			vector<string> savedLines=openLoadFile("saveLog.txt");
+			planets=loadPlanets(savedLines, items);
+			player=loadOldPlayer(savedLines, planets, items);
 			//loadOldPlanets(savedLines, planets, items);
 		}
 	}
 	else{
-		planets=loadPlanets(items);
+		vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
+		planets=loadPlanets(savedLines, items);
 		player=createNewPlayer(planets, items);
 	}
 
-	//Done for new game
+	//Create exit objects + setting exits for each planet
 	exits=createExits(planets);
 	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
 	getWelcome(&player);
 	saveGame(&player, planets);
 
-/******
+
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 1;
@@ -337,7 +338,7 @@ int main() {
 		cout << "\n";
 
 		}
-*******/
+	
 	return 0;
 }
 
