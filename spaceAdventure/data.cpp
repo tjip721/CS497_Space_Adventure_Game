@@ -38,7 +38,7 @@ void saveGame(Player* player1, std::vector<Area> planets) {
       savegame << endl;
    }
    savegame.close();
-   cout << "Successfully saved game! << endl;
+   cout << "Successfully saved game!" << endl;
 }
 
 int open_log(){
