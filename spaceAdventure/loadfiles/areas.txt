@@ -1,4 +1,4 @@
-Space descriptorFiles/space_short.txt descriptorFiles/space_long.txt UIf_files/rocky.txt 0 1 1 0 x 
+User Jacket Shoes Flashlight
 Earth_Moon descriptorFiles/earthmoon_short.txt descriptorFiles/earthmoon_long.txt UIf_files/rocky.txt 0 1 0 0 Human Rock
 Jupiter descriptorFiles/jupiter_short.txt descriptorFiles/jupiter_long.txt UIf_files/tornado.txt 0 0 0 0 Mushroom Rock
 Lost_Moon descriptorFiles/lostMoon_short.txt descriptorFiles/lostMoon_long.txt UIf_files/greenhouse.txt 0 1 0 0 Mushroom Alien Rock
