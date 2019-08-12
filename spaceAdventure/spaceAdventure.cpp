@@ -28,132 +28,7 @@ const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 
 int main() {
 	srand(time(NULL));
-
-	//Declaring the Area objects
-	Area Space("Space", "space_short.txt", "space_long.txt",false,true,true), Mercury("Mercury", "mercury_short.txt", "mercury_long.txt"), Venus1("Venus_1", "venus1_short.txt","venus1_long.txt"), Earth("Earth", "earth_short.txt", "earth_long.txt"),
-   	EarthM("Earth_Moon", "earthmoon_short.txt", "earthmoon_long.txt"), LostM("Lost_Moon", "lostMoon_short.txt", "lostMoon_long.txt",false,false), Sun("Sun", "sun_short.txt", "sun_long.txt"),
-   	Mars("Mars", "mars_short.txt", "mars_long.txt"), Jupiter("Jupiter", "jupiter_short.txt", "jupiter_long.txt",false, false), Saturn("Saturn", "saturn_short.txt", "saturn_long.txt"),
-   	Uranus("Uranus", "uranus_short.txt", "uranus_long.txt"), Pluto("Pluto", "pluto_short.txt", "pluto_long.txt"), PlutoM("Pluto_Moon", "pluto_moon_short.txt", "pluto_moon_long.txt"),
-   	Neptune1("Neptune_1", "neptune_1_short.txt", "neptune_1_long.txt", true), Neptune2("Neptune_2", "neptune_2_short.txt", "neptune_2_long.txt"), Venus2("Venus_2", "venus2_short.txt", "venus2_long.txt");
-
-	std::vector<Area*> planets;
-	planets.push_back(&Mercury);
-	planets.push_back(&Venus1);
-	planets.push_back(&Earth);
-	planets.push_back(&EarthM);
-	planets.push_back(&LostM);
-	planets.push_back(&Sun);
-	planets.push_back(&Mars);
-	planets.push_back(&Jupiter);
-	planets.push_back(&Saturn);
-	planets.push_back(&Uranus);
-	planets.push_back(&Pluto);
-	planets.push_back(&PlutoM);
-	planets.push_back(&Neptune1);
-	planets.push_back(&Neptune2);
-	planets.push_back(&Venus2);
-
-	//Set Exits
-	Exit MercuryExit("Mercury", &Mercury, 1, 1),
-		Venus1Exit("Venus1", &Venus1, 1, 1),
-		EarthExit("Earth", &Earth, 1, 1), //Not sure if Earth should be a regular exit.
-		EarthMExit("Earth_Moon", &EarthM, 1, 1),
-		LostMExit("Lost_Moon", &LostM, 1, 1),
-		SunExit("Sun", &Sun, 1, 1),
-		MarsExit("Mars", &Mars, 1, 1),
-		JupiterExit("Jupiter", &Jupiter, 1, 1),
-		SaturnExit("Saturn", &Saturn, 1, 1),
-		UranusExit("Uranus", &Uranus, 1, 1),
-		PlutoExit("Pluto", &Pluto, 1, 1),
-		PlutoMExit("Pluto_Moon", &PlutoM, 1, 1),
-		Neptune1Exit("Neptune_1", &Neptune1, 1, 1),
-		Neptune2Exit("Neptune_2", &Neptune2, 1, 1),
-		Venus2Exit("Venus_2", &Venus2, 1, 1),
-		SpaceExit("Space", &Space, 0, 0);
-
-	// Set exits from space to planets.
-	Space.addExit(&MercuryExit);
-	Space.addExit(&Venus1Exit);
-	Space.addExit(&EarthExit);
-	Space.addExit(&EarthMExit);//Not sure if Earth should be a regular exit.
-	Space.addExit(&LostMExit);
-	Space.addExit(&SunExit);
-	Space.addExit(&MarsExit);
-	Space.addExit(&JupiterExit);
-	Space.addExit(&SaturnExit);
-	Space.addExit(&UranusExit);
-	Space.addExit(&PlutoExit);
-	Space.addExit(&PlutoMExit);
-	Space.addExit(&Neptune1Exit);
-
-	// Set exits from planets to space.
-	Mercury.addExit(&SpaceExit);
-	Venus1.addExit(&SpaceExit);
-	EarthM.addExit(&SpaceExit); // Should player be able to launch from earth?
-	LostM.addExit(&SpaceExit);
-	Sun.addExit(&SpaceExit);
-	Mars.addExit(&SpaceExit);
-	Jupiter.addExit(&SpaceExit);
-	Saturn.addExit(&SpaceExit);
-	Uranus.addExit(&SpaceExit);
-	Pluto.addExit(&SpaceExit);
-	PlutoM.addExit(&SpaceExit);
-	Neptune1.addExit(&SpaceExit);
-
-	// Set as launch exit also.
-	Mercury.setLaunchExit(&SpaceExit);
-	Venus1.setLaunchExit(&SpaceExit);
-	EarthM.setLaunchExit(&SpaceExit); // Should player be able to launch from earth?
-	LostM.setLaunchExit(&SpaceExit);
-	Sun.setLaunchExit(&SpaceExit);
-	Mars.setLaunchExit(&SpaceExit);
-	Jupiter.setLaunchExit(&SpaceExit);
-	Saturn.setLaunchExit(&SpaceExit);
-	Uranus.setLaunchExit(&SpaceExit);
-	Pluto.setLaunchExit(&SpaceExit);
-	PlutoM.setLaunchExit(&SpaceExit);
-	Neptune1.setLaunchExit(&SpaceExit);
-
-	// Set exits for planets that have second area.
-	Venus1.addExit(&Venus2Exit);
-	Venus2.addExit(&Venus1Exit);
-	Neptune1.addExit(&Neptune2Exit);
-	Neptune2.addExit(&Neptune2Exit);
-
-	// Declare Item Objects
-	Item Shoes("Shoes", "shoes.txt", 1),
-		Gas("Gas", "gas.txt", 1),
-		Crysallith("Crysallith", "crysallith.txt", 0),
-		OpportunityR("Opportunity Rover", "opportunity_rover.txt", 0),
-		Rock("Rock", "rock.txt", 0),
-		Jacket("Jacket", "jacket.txt", 1);
-		Jacket.setWearable(true); 
-		Shoes.setWearable(true); 
- 
-	Doohickey doohickey("Doohickey", "doohickey.txt", 1);
-	Flashlight flashlight("Flashlight", "flashlight.txt", 1);
-	Mushroom mushroom("Mushroom", "mushroom.txt", 1);
-	Pickaxe PickA("Pick Axe", "pickaxe.txt", 1);
-	PowerCrystal PowerC("Power Crystal", "powercrystal.txt", 0);
-	ScrewDriver ScrewD("Screw Driver", "screwdriver.txt", 1);
-	Spaceship spaceship("Spaceship", "spaceship.txt", 0);
-	Transmitter transmitter("Transmitter", "transmitter.txt", 1);
-
-	std::vector<Item*> items;
-	items.push_back(&Shoes);
-	items.push_back(&Gas);
-	items.push_back(&PowerC);
-	items.push_back(&Crysallith);
-	items.push_back(&OpportunityR);
-	items.push_back(&transmitter);
-	items.push_back(&ScrewD);
-	items.push_back(&doohickey);
-	items.push_back(&PickA);
-	items.push_back(&Rock);
-	items.push_back(&Jacket);
-	items.push_back(&flashlight);
-	items.push_back(&mushroom);
-	items.push_back(&spaceship);
+	vector<Item> items=loadItems();
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status, quit };
 	map<string, Verb> verbMap = {
@@ -168,37 +43,45 @@ int main() {
 	if (parser.loadFiles(VERB_FILE_LIST, NOUN_FILE_LIST) == EXIT_FAILURE) {
 		return EXIT_FAILURE;
 	}
-	
+
 	// Welcome message
 	Player player;
+	vector<Area> planets;
+	std::vector<Exit> exits;
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
 	transform(userChooses.begin(), userChooses.end(), userChooses.begin(), tolower);
-	//load the game 
+	//load the game
+	//createNewPlanets(planets, items); 
 	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "load game") {
 		cout << "Loading game..." << endl;
 		int fileReturn;
 		fileReturn = open_log();
 		if(fileReturn == 1 ) {
 			//New player always get a Jacket, Shoe, and flashlight. Set spaceship at starting location.
-			player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight, &spaceship);
-			createNewPlanets(planets, items);
+			player=createNewPlayer(planets, items);
+			planets=loadPlanets(items);
 		}
 		else {
 			vector<string> savedLines=parseLoadFile();
-			player=loadOldPlayer(savedLines, planets, items);
-			loadOldPlanets(savedLines, planets, items);
+			player=loadOldPlayer(planets, items);
+			planets=loadPlanets(items);
+			//loadOldPlanets(savedLines, planets, items);
 		}
 	}
 	else{
-
-		createNewPlanets(planets, items);
-		player=createNewPlayer(&Uranus, &Mercury, &Jacket, &Shoes, &flashlight, &spaceship);
+		planets=loadPlanets(items);
+		player=createNewPlayer(planets, items);
 	}
-
+	//Done for new game
+	exits=createExits(planets);
+	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
-	getWelcome(&player);
+	//getWelcome(&player);
+	saveGame(&player, planets);
+
+/******
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 1;
@@ -238,7 +121,7 @@ int main() {
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
-		
+	
 		Area* location = player.getLocation();
 		switch (verb){
 			//look around current location
@@ -442,6 +325,7 @@ int main() {
 		cout << "\n";
 
 		}
+*******/
 	return 0;
 }
 
@@ -508,7 +392,7 @@ void getWelcome(Player* player){
 		get_file_data("welcome_0.txt");
 		cout << "As of now you have: " << player->getLife() << " years left and " << player->getGas() << " million miles left in the tank\n\n" << endl;
 	}
-	player->getLocation()->printDescription();
+	//player->getLocation()->printDescription();
 }
 
 bool itemExists(std::vector<Area*> planets, Player player, std::string item) {
@@ -521,4 +405,5 @@ bool itemExists(std::vector<Area*> planets, Player player, std::string item) {
 		}
 	}
 	return false;
+
 }

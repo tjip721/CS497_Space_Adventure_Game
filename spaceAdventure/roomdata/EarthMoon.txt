@@ -1,5 +1,0 @@
-Earth Moon
-descriptorFiles/earthmoon_short.txt
-descriptorFiles/earthmoon_long.txt
-UIf_files/rocky.txt
-Human

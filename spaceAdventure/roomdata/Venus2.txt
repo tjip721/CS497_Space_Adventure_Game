@@ -1,7 +1,0 @@
-Venus_2
-descriptorFiles/venus2_short.txt
-descriptorFiles/venus2_long.txt
-UIf_files/cave.txt
-Gas 
-Alien 
-Rock

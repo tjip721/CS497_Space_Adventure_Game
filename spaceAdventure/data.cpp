@@ -9,10 +9,10 @@ using std::cout;
 using std::string;
 using std::vector;
 using std::stringstream;
-
+using std::istringstream;
 string saveLog="saveLog.txt";
 
-void saveGame(Player* player1, std::vector<Area*> planets) {
+void saveGame(Player* player1, std::vector<Area> planets) {
    fstream savegame;
    savegame.open(saveLog, fstream::out | fstream::trunc);
    savegame << "User " << player1->getLife() << " " << player1->getGas() << " " << player1->getLocation()->getName() << " ";
@@ -25,10 +25,12 @@ void saveGame(Player* player1, std::vector<Area*> planets) {
    savegame << endl;
 
    //Add area inventories & firstEntry to text file
+   //Earth_Moon descriptorFiles/earthmoon_short.txt descriptorFiles/earthmoon_long.txt UIf_files/rocky.txt 0 1 0 Human Rock
    for (int j=0; j < planets.size(); j++) {
-      savegame << planets[j]->getName() << " " << planets[j]->getAreaEntry() << " ";
-      vector<Item*> planetItems= planets[j]->getItems();
+            savegame << planets[j].getName() << ""<< planets[j].getShortFile()<< " " << planets[j].getLongFile()<< " " << planets[j].getUIFile() << " " 
 
+      <<  planets[j].isDark() << " " << planets[j].hasOxygen() << " "<< planets[j].isSpace() << " "<< planets[j].getAreaEntry() << " ";
+      vector<Item*> planetItems= planets[j].getItems();
       for (int p=0; p < planetItems.size(); p++) {
          savegame << planetItems[p]->getName() << " ";
       }
@@ -52,32 +54,43 @@ int open_log(){
 void remove_log(){}
 
 
-Player  createNewPlayer(Area* Uranus, Area* Mercury, Item* jacket, Item* shoes, Item* flashlight, Item* spaceship) {
+Player createNewPlayer(std::vector<Area> planets, std::vector<Item> items) {
    Player player;
    double playerLife, playerGas;
    playerGas=rand() % 3 + 1;
    playerLife= rand()% 40 + 30;
    int location=rand()% 2 + 1;
-   std::cout <<location << std::endl;
+   player.setVars(playerGas, playerLife);
    if (location == 1){
-      player.setVars(playerGas, playerLife);
-      player.setLocation(Uranus);
+      for(int i=0; i < planets.size(); i++){
+         if(planets[i].getName() == "Uranus"){
+            player.setLocation(&planets[i]);
+         }
+      }
    }
    else {
-      player.setVars(playerGas, playerLife);
-      player.setLocation(Mercury);
+      for(int i=0; i < planets.size(); i++){
+         if(planets[i].getName() == "Mercury"){
+            player.setLocation(&planets[i]);
+         }
+      }
    }
-   player.getLocation()->addItem(spaceship);
-   player.addInventory(jacket);
-   player.addInventory(shoes);
-   player.addInventory(flashlight);
+
+   for(int i=0; i < items.size(); i++){
+      if(items[i].getName() == "Spaceship") {
+         player.getLocation()->addItem(&items[i]);
+      }
+      if((items[i].getName() == "Jacket") || (items[i].getName() == "Shoes") || (items[i].getName() == "Flashlight")){
+         player.addInventory(&items[i]);
+      }
+   }
    return player;
 }
+
 vector<string> parseLoadFile() {
    string val;
    std::vector<string> fileLine;
    fstream loadFile;
-   stringstream loadVector;
    loadFile.open(saveLog);
    while(!loadFile.eof()){
       getline(loadFile, val);
@@ -86,7 +99,23 @@ vector<string> parseLoadFile() {
    return fileLine;
 }
 
-Player loadOldPlayer(vector<string> savedLines, vector<Area*> area, vector<Item*> items){
+vector<string> openLoadFile(string fileName) {
+   string val;
+   std::vector<string> fileLine;
+   fstream loadFile;
+   stringstream loadVector;
+   loadFile.open(fileName);
+   while(!loadFile.eof()){
+      getline(loadFile, val);
+      fileLine.push_back(val);
+   }
+   loadFile.close();
+   return fileLine;
+}
+
+Player loadOldPlayer( vector<Area> area, vector<Item> items){
+   vector<string> savedLines;
+   savedLines=parseLoadFile();
    Player player;
    string val, inventory, dummy, location;
    double health, gas;
@@ -98,15 +127,15 @@ Player loadOldPlayer(vector<string> savedLines, vector<Area*> area, vector<Item*
    parseString >> gas;
    parseString >> location;
    for(int i=0; i < area.size(); i++) {
-      if(area[i]->getName() == location) {
-         player.setLocation(area[i]);
+      if(area[i].getName() == location) {
+         player.setLocation(&area[i]);
       }
    }
    player.setVars(gas, health);
    while(getline(parseString, inventory, ' ')){
       for(int i=0; i < items.size(); i++) {
-         if(items[i]->getName() == inventory) {
-            player.addInventory(items[i]);
+         if(items[i].getName() == inventory) {
+            player.addInventory(&items[i]);
          }  
       }
    }
@@ -137,33 +166,131 @@ void loadOldPlanets(std::vector<std::string> savedLines, std::vector<Area*> plan
       }
    }
 }
-void createNewPlanets(std::vector<Area*> planets, std::vector<Item*> items){
-   for(int i=0; i < planets.size(); i++) {
+void createNewPlanets(std::vector<Area*> planets, std::vector<Item> items){
       for(int j=0; j < items.size(); j++){
-         //if(((planets[i]->getName == "Earth_Moon") || (planets[i]->getName()== "Eath")) && (items[j]->getName()=="Human")) { planets[i]->addItem(items[j]); }
-         if(((planets[i]->getName() == "Mercury") || (planets[i]->getName() == "Venus2")) && (items[j]->getName() == "Gas")) { planets[i]->addItem(items[j]); }
-         if((planets[i]->getName() == "Neputune2") && (items[j]->getName() == "Screw Driver")) { planets[i]->addItem(items[j]); }
-         if(((planets[i]->getName() == "Lost Moon") || (planets[i]->getName() == "Pluto") || (planets[i]->getName() == "Venus2") || (planets[i]->getName() == "Venus1"))&&
-            (items[j]->getName() == "Alien")){ planets[i]->addItem(items[j]); }
-         if((planets[i]->getName() == "Pluto_Moon")&& (items[j]->getName() == "Pick Axe")) { planets[i]->addItem(items[j]); }
-         if(((planets[i]->getName() =="Lost_Moon") || (planets[i]->getName() == "Jupiter")) && (items[j]->getName() == "Mushroom")) { planets[i]->addItem(items[j]); }
-         if((planets[i]->getName() == "Pluto_Moon") && (items[j]->getName() == "Crysallith")) { planets[i]->addItem(items[j]); }
-         if(((planets[i]->getName() == "Uranus") || (planets[i]->getName() == "Pluto")) && (items[j]->getName()=="Doohickey")) { planets[i]->addItem(items[j]); }
-         if((planets[i]->getName() == "Saturn") && (items[j]->getName()=="Power Crystal")){ planets[i]->addItem(items[j]); }
-         if(((items[j]->getName() == "Opportunity Rover") || (items[j]->getName() == "Transmitter")) && (planets[i]->getName() == "Mars")){ planets[i]->addItem(items[j]); }
-         if(items[j]->getName() == "Rock") { planets[i]->addItem(items[j]); }
+         cout << items[j].getName() << endl;
+      }
+}
+std::vector<Item> loadItems(){
+   vector<Item> returnItems;
+   std::ifstream loadFile("loadfiles/items.txt");
+   string itemName, itemTextFile, fullLine;
+   int takeable, wearable;
+   while(std::getline(loadFile, fullLine)) {
+      std::istringstream parseLine(fullLine);
+      parseLine >> itemName >> itemTextFile >> takeable >> wearable;
+      returnItems.push_back(Item(itemName, itemTextFile, takeable));
+      if(wearable == 1){
+         returnItems.back().setWearable(wearable);
       }
    }
+   loadFile.close();
+      //Loads the special items (their own children Objects)
+      std::ifstream loadSFile("loadfiles/specialItems.txt");
+      while(std::getline(loadSFile, fullLine)) {
+         std::istringstream parseLine(fullLine);
+         parseLine >> itemName >> itemTextFile >> takeable >> wearable;
+         if(itemName == "Doohickey") {
+            returnItems.push_back(Doohickey(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "Flashlight") {
+            returnItems.push_back(Flashlight(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "Mushroom") {
+            returnItems.push_back(Mushroom(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "PickAxe") {
+            returnItems.push_back(Pickaxe(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "PowerCrystal") {
+            returnItems.push_back(PowerCrystal(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "ScrewDriver") {
+            returnItems.push_back(ScrewDriver(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "Transmitter") {
+            returnItems.push_back(Transmitter(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "Spaceship") {
+            returnItems.push_back(Spaceship(itemName, itemTextFile, takeable));
+         }
+         if(wearable == 1){
+            returnItems.back().setWearable(wearable);
+         }
+      }
+   return returnItems;
 
-   //Mercury = Gas
-   //Venus1=Alien
-   //Venus2=Gas, Aliens, Humans
-   //Earth= Humans
-   //Uranus=Doohickey
-   //Mars=Opportunity Rover, Transmitter
-   //Saturn= Power Crystal
-   //Neptune1=Rock
-   //Neputune2=ScrewDriver, Rock
-   //Pluto=Doohickey, Aliens
-   //Plutos moon=Crysallith, pickaxe
+}
+std::vector<Area> loadPlanets(std::vector<Item> items){
+   vector<Area> returnPlanet;
+   vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
+   string planetName, shortFile, longFile, interFile, inventory;
+   bool dark, oxy, space, visited;
+   for(int j=1; j < savedLines.size(); j++){
+      string fileString = savedLines[j];
+      std::istringstream parseString(fileString);
+      parseString >> planetName >> shortFile >> longFile >> interFile >> dark >> oxy >> space >> visited;
+      returnPlanet.push_back(Area(planetName, shortFile, longFile, interFile, dark, oxy, space));
+      while(getline(parseString, inventory, ' ')) {
+         for(int i=0; i < items.size(); i++) {
+            if(items[i].getName() == inventory) {
+               returnPlanet.back().addItem(&items[i]);
+            }  
+         }
+      }
+   }
+   return returnPlanet;
+}
+
+std::vector<Exit> createExits(std::vector<Area> areas){
+   vector<Exit> returnExit;
+   vector<string> savedLines=openLoadFile("loadfiles/exit.txt");
+   string planetName;
+   double life, gas;
+   for(int j=1; j < savedLines.size(); j++){
+      string fileString = savedLines[j];
+      std::istringstream parseString(fileString);
+      parseString >> planetName >> life >> gas;
+      for(int i=0; i < areas.size(); i++) {
+         if(areas[i].getName() == planetName){
+            returnExit.push_back(Exit(planetName, &areas[i], gas, life));
+         }
+      }
+   }
+   return returnExit;
+}
+void setPlanetExits(std::vector<Area> planets, std::vector<Exit> exits) {
+   for(int i=0; i < planets.size(); i++) {
+      for(int j=0; j < exits.size(); j++) {
+         if(planets[i].getName() == "Space"){
+            if(exits[j].getName() != "Space") {
+               planets[i].addExit(&exits[j]);
+            }
+         }
+         else{
+            if(exits[j].getName() == "Space") {
+               planets[i].addExit(&exits[j]);
+               planets[i].setLaunchExit(&exits[j]);
+            }
+         }
+      }
+      // Set exits from space to planets.
+   }
+   vector<string> savedLines=openLoadFile("loadfiles/addExit.txt");
+   string planetName, exitName;
+   for(int j=1; j < savedLines.size(); j++){
+      string fileString = savedLines[j];
+      std::istringstream parseString(fileString);
+      parseString >> planetName >> exitName;
+
+      for(int i=0; i < planets.size(); i++) {
+         if(planets[i].getName() == planetName){
+            for(int k=0; k < exits.size(); k++) {
+               if(exits[k].getName() == exitName) {
+                  planets[i].addExit(&exits[j]);
+               }
+            }
+         }
+      }
+   }
 }

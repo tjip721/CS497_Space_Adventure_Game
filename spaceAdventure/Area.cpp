@@ -14,18 +14,24 @@ private:
 	bool firstEntry;
 */
 
-Area::Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark, bool hasOxygen, bool isSpace){
+Area::Area(std::string name, std::string shortFileName, std::string longFileName, std::string interFile, bool isDark, bool hasOxygen, bool isSpace){
 	areaName=name;
 	dark=isDark;
 	oxygen=hasOxygen;
 	space=isSpace;
+	uIDisplay=interFile;
 	//to do: update open file for reading in main
 	shortDescription=loadFile(shortFileName);
 	longDescription=loadFile(longFileName);
+	uIDisplay=loadFile(interFile);
+
+	longFileName=longFileName;
+	shortFileName=shortFileName;
+	uiFileName=interFile;
 }
 
 std::string Area::loadFile(std::string fileName) {
-	fileName = "./descriptorFiles/" + fileName;
+	//fileName = "./descriptorFiles/" + fileName;
 	std::ifstream file(fileName.c_str());
 	std::string str;
 	getline(file, str);

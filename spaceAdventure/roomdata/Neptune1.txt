@@ -1,5 +1,0 @@
-Neptune_1
-descriptorFiles/neptune_1_short.txt
-descriptorFiles/neptune_1_long.txt
-UIf_files/windy.txt
-Rock

@@ -1,7 +1,0 @@
-Mars
-descriptorFiles/mars_short.txt
-descriptorFiles/mars_long.txt
-UIf_files/volcano.txt
-Opportunity Rover 
-Transmitter
-Rock

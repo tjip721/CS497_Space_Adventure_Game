@@ -5,6 +5,7 @@
 #include <vector>
 #include "Action.h"
 
+using std::string;
 using std::vector;
 
 class Item;
@@ -16,10 +17,14 @@ private:
 	string areaName;
 	string longDescription;
 	string shortDescription;
+	string uIDisplay;
 	vector<Exit*> exits;
 	Exit* launchExit = NULL;
 	vector<Item*> items;
 	vector<Action> availableActions;
+	string longFileName;
+	string shortFileName;
+	string uiFileName;
 	bool firstEntry = true;
 	bool dark;
 	bool oxygen;
@@ -27,7 +32,7 @@ private:
 	string loadFile(string fileName);
 public:
 	//Adding constructor back
-	Area(std::string name, std::string shortFileName, std::string longFileName, bool isDark=false, bool hasOxygen=true, bool isSpace=false);
+	Area(std::string name, std::string shortFileName, std::string longFileName, std::string interFile, bool isDark=false, bool hasOxygen=true, bool isSpace=false);
 	void printDescription();
 	void look();
 	Item* takeItem(std::string targetName);
@@ -36,6 +41,7 @@ public:
 	bool hasExit(std::string target);
 	Exit* getExit(std::string targetName);
 	bool lookAt(std::string targetName);
+
 	bool isDark(){return dark;}
 	void setDark(bool tf){dark = tf;}
 	bool hasOxygen(){return oxygen; }
@@ -51,6 +57,10 @@ public:
 	void setEntry(int entry);
 	//Prints all of the items in the Area + the Area name -- done for save log.
     std::vector<Item*> getItems();
+    std::string getLongFile() { return longFileName; }
+    std::string getShortFile() {return shortFileName; }
+    std::string getUIFile() {return uiFileName; }
+    bool isfirstEntry() { return firstEntry; }
     bool getAreaEntry();
 	std::string getName();
 	bool isSpace() { return space; }

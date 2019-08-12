@@ -1,7 +1,0 @@
-Lost Moon
-descriptorFiles/lostMoon_short.txt
-descriptorFiles/lostMoon_long.txt
-UIf_files/greenhouse.txt
-Mushroom
-Alien
-Rock
