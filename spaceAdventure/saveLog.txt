@@ -1,16 +1,16 @@
-User 52 1 Mercury 
-Mercury 0 Shoe 
-Venus_1 1 
-Earth 1 
-Earth_Moon 1 
-Lost_Moon 1 
-Sun 1 
-Mars 1 
-Jupiter 1 
-Saturn 1 
-Uranus 1 
-Pluto 1 
-Pluto_Moon 1 
-Neptune_1 1 
-Neptune_2 1 
-Venus_2 1 
+User 32 10 Lost_Moon Flashlight 
+Mercury 0 Rock 
+Venus_1 1 Rock 
+Earth 1 Rock 
+Earth_Moon 0 Rock 
+Lost_Moon 0 Rock Spaceship 
+Sun 1 Rock 
+Mars 1 Opportunity Rover Transmitter Rock 
+Jupiter 1 Rock Mushroom 
+Saturn 1 Power Crystal Rock 
+Uranus 1 Doohickey Rock 
+Pluto 1 Doohickey Rock 
+Pluto_Moon 1 Crysallith Pick Axe Rock 
+Neptune_1 1 Rock 
+Neptune_2 1 Rock 
+Venus_2 1 Rock 
