@@ -59,11 +59,11 @@ void remove_log(){}
 Player createNewPlayer(std::vector<Area> planets, std::vector<Item> items) {
    Player player;
    double playerLife, playerGas;
-   playerGas=rand() % 3 + 1;
    playerLife= rand()% 40 + 30;
    int location=rand()% 2 + 1;
    player.setVars(playerGas, playerLife);
    if (location == 1){
+      playerGas=rand() % 5000 + 2000;
       for(int i=0; i < planets.size(); i++){
          if(planets[i].getName() == "Uranus"){
             player.setLocation(&planets[i]);
@@ -72,6 +72,7 @@ Player createNewPlayer(std::vector<Area> planets, std::vector<Item> items) {
    }
    else {
       for(int i=0; i < planets.size(); i++){
+         playerGas=rand() % 3 + 1;
          if(planets[i].getName() == "Mercury"){
             player.setLocation(&planets[i]);
          }
