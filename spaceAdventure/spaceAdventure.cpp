@@ -47,6 +47,7 @@ int main() {
 	// Welcome message
 	Player player;
 	Spaceship spaceship; 
+	Transmitter transmitter("transmitter", "A transmitter the rover used.", true);
 	vector<Area> planets;
 	vector<Exit> exits;
 	string userChooses;
