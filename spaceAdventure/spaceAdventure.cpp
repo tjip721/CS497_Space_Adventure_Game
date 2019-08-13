@@ -46,6 +46,7 @@ int main() {
 
 	// Welcome message
 	Player player;
+	Spaceship spaceship; 
 	vector<Area> planets;
 	vector<Exit> exits;
 	string userChooses;
@@ -81,7 +82,21 @@ int main() {
 	//getWelcome(&player);
 	saveGame(&player, planets);
 
-/*
+	std::vector<Area*> pPlanets;
+	for(int ii=0; ii < planets.size(); ii++){
+		pPlanets.push_back(&planets[ii]); 
+	}std::vector<Item*> pItems;
+	for(int ii=0; ii < items.size(); ii++){
+		pItems.push_back(&items[ii]); 
+	}
+	for(int ii=0; ii < items.size(); ii++){
+		Spaceship* spaceship = dynamic_cast<Spaceship*>(&items[ii]); 
+		if(spaceship != nullptr){
+			break; 
+		}
+	}	
+
+
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 1;
@@ -157,7 +172,7 @@ int main() {
 					break;
 				}else if(player.getLocation()->lookAt(noun)){
 					// If player looks at rover for the first time, add transmitter to area's items
-					if (noun.compare("Opportunity Rover") == 0 && !itemExists(planets, player, "Transmitter")) {
+					if (noun.compare("Opportunity Rover") == 0 && !itemExists(pPlanets, player, "Transmitter")) {
 						player.getLocation()->addItem(&transmitter);
 						cout << "A transmitter is attached to Opportunity Rover.\n";
 					}
@@ -336,7 +351,7 @@ int main() {
 		cout << "\n";
 
 		}
-	*/
+	
 	return 0;
 }
 
