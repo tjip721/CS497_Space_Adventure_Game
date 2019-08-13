@@ -31,10 +31,8 @@ Item* getItemPtr(string itemName, vector<Item> *itemList) {
 		if (((*itemList)[i].getName()).compare(itemName) == 0) {
 			return &(*itemList)[i];
 		}
-		else {
-			return NULL;
-		}
 	}
+	return NULL;
 }
 
 int main() {
@@ -95,13 +93,14 @@ int main() {
 
 	bool gameOver = false;
 	int turnCounter = 0;
-	int suffocationCounter = 1;
+	int suffocationCounter = 15;
+	player.getLocation()->addItem(getItemPtr("Spaceship", &items));
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 		turnCounter++; 
 		// Cold area check
 		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
 			player.getLocation()->getName().compare("Uranus")==0 || 
-			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>2 ){
+			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>15 ){
 					//cout << "Quick, put on your jacket!" << endl;
 					cout << "You didn't put your jacket on. You froze to DEATH.\n";
 					read_uif_files("UIF_files/failure.txt");

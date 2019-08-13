@@ -106,7 +106,7 @@ vector<string> openLoadFile(string fileName) {
    return fileLine;
 }
 
-Player loadOldPlayer(std::vector<std::string> savedLines, vector<Area> area, vector<Item> items){
+Player loadOldPlayer(std::vector<std::string> savedLines, vector<Area> &area, vector<Item> &items){
    Player player;
    string val, inventory, dummy, location;
    double health, gas;
@@ -203,7 +203,7 @@ std::vector<Area> loadPlanets(vector<string> savedLines, std::vector<Item> &item
    return returnPlanet;
 }
 
-std::vector<Exit> createExits(std::vector<Area> areas){
+std::vector<Exit> createExits(std::vector<Area> &areas){
    vector<Exit> returnExit;
    vector<string> savedLines=openLoadFile("loadfiles/exit.txt");
    string planetName;
@@ -220,7 +220,7 @@ std::vector<Exit> createExits(std::vector<Area> areas){
    }
    return returnExit;
 }
-void setPlanetExits(std::vector<Area> planets, std::vector<Exit> exits) {
+void setPlanetExits(std::vector<Area> &planets, std::vector<Exit> &exits) {
    for(int i=0; i < planets.size(); i++) {
       for(int j=0; j < exits.size(); j++) {
          if(planets[i].getName() == "Space"){
