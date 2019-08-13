@@ -12,7 +12,7 @@ using std::stringstream;
 using std::istringstream;
 
 
-void saveGame(Player* player1, std::vector<Area> planets) {
+void saveGame(Player* player1, std::vector<Area> &planets) {
    fstream savegame;
    savegame.open("saveLog.txt", fstream::out | fstream::trunc);
    savegame << "User " << player1->getLife() << " " << player1->getGas() << " " << player1->getLocation()->getName() << " ";
@@ -57,7 +57,7 @@ int open_log(){
 void remove_log(){}
 
 
-Player createNewPlayer(vector<string> savedLines, std::vector<Area> planets, std::vector<Item> items) {
+Player createNewPlayer(vector<string> savedLines, std::vector<Area> &planets, std::vector<Item> &items) {
    Player player;
    double playerLife, playerGas;
    playerLife= rand()% 40 + 30;
@@ -183,7 +183,7 @@ std::vector<Item> loadItems(){
    return returnItems;
 
 }
-std::vector<Area> loadPlanets(vector<string> savedLines, std::vector<Item> items){
+std::vector<Area> loadPlanets(vector<string> savedLines, std::vector<Item> &items){
    vector<Area> returnPlanet;
    string planetName, shortFile, longFile, interFile, inventory;
    bool dark, oxy, space, visited;
