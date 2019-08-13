@@ -379,17 +379,16 @@ void read_uif_files(string fileName){
 	r_file.close();	
 }
 std::string get_file_data(std::string fileName){
+	//done to clear screen
+	cout << string(20, '\n');
 	fstream r_file;
 	string file_read;
-	const string readFile= "descriptorFiles/"+fileName;
+	const string readFile= fileName;
 	r_file.open(readFile);
 	while(!r_file.eof()) {
 		getline(r_file, file_read);
-		//cout << file_read << endl;
+		cout << file_read << endl;
 	}
-	//done to clear screen
-	cout << string(20, '\n');
-	cout << file_read << endl;
 	r_file.close();
 	return file_read;
 }
