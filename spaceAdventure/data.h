@@ -32,7 +32,7 @@ void display_descriptions();
 //i.e. game over, start menue
 void display_gameInstances();
 //void createNewPlanets(std::vector<Area*> planets, std::vector<Item> items);
-Player createNewPlayer(std::vector<Area> planets, std::vector<Item> items);
+Player createNewPlayer(std::vector<string> savedLines, std::vector<Area> planets, std::vector<Item> items);
 //save log file conditions, will be called in the "main" game
 void saveGame(Player* player1, std::vector<Area> planets); 
 //Parse the save_log.txt and place in constructor for the areas + user
@@ -40,7 +40,7 @@ int open_log();
 Player loadOldPlayer(std::vector<std::string> savedLines, std::vector<Area> planets, std::vector<Item> items);
 //void loadOldPlanets(std::vector<std::string> savedLines, std::vector<Area> planets, std::vector<Item> items);
 std::vector<std::string> openLoadFile(std::string fileName);
-std::vector<Area> loadPlanets(std::vector<Item> items);
+std::vector<Area> loadPlanets(std::vector<string> savedLines, std::vector<Item> items);
 std::vector<Exit> createExits(std::vector<Area> areas);
 std::vector<Item> loadItems();
 void setPlanetExits(std::vector<Area> planets, std::vector<Exit> exits);

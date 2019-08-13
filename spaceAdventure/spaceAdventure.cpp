@@ -61,29 +61,27 @@ int main() {
 		if(fileReturn == 1 ) {
 			vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
 			planets=loadPlanets(savedLines, items);
-			player=createNewPlayer(planets, items);
+			player=createNewPlayer(savedLines, planets, items);
 		}
 		else {
 			vector<string> savedLines=openLoadFile("saveLog.txt");
 			planets=loadPlanets(savedLines, items);
 			player=loadOldPlayer(savedLines, planets, items);
-			//loadOldPlanets(savedLines, planets, items);
 		}
 	}
 	else{
 		vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
 		planets=loadPlanets(savedLines, items);
-		player=createNewPlayer(planets, items);
+		player=createNewPlayer(savedLines, planets, items);
 	}
-
 	//Create exit objects + setting exits for each planet
 	exits=createExits(planets);
 	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
-	getWelcome(&player);
+	//getWelcome(&player);
 	saveGame(&player, planets);
 
-
+/*
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 1;
@@ -338,7 +336,7 @@ int main() {
 		cout << "\n";
 
 		}
-	
+	*/
 	return 0;
 }
 

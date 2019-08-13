@@ -14,7 +14,7 @@ using std::istringstream;
 
 void saveGame(Player* player1, std::vector<Area> planets) {
    fstream savegame;
-   savegame.open(saveLog, fstream::out | fstream::trunc);
+   savegame.open("saveLog.txt", fstream::out | fstream::trunc);
    savegame << "User " << player1->getLife() << " " << player1->getGas() << " " << player1->getLocation()->getName() << " ";
 
    //add the player inventory
@@ -36,6 +36,7 @@ void saveGame(Player* player1, std::vector<Area> planets) {
          savegame << planetItems[p]->getName() << ' ';
       }
       savegame << endl;
+
    }
    savegame.close();
    cout << "Successfully saved game!" << endl;
@@ -43,7 +44,7 @@ void saveGame(Player* player1, std::vector<Area> planets) {
 
 int open_log(){
    fstream loadgame;
-   loadgame.open(saveLog, fstream::in);
+   loadgame.open("saveLog.txt", fstream::in);
    if(loadgame.is_open()){
       loadgame.close();
       return 0;
@@ -56,7 +57,7 @@ int open_log(){
 void remove_log(){}
 
 
-Player createNewPlayer(std::vector<Area> planets, std::vector<Item> items) {
+Player createNewPlayer(vector<string> savedLines, std::vector<Area> planets, std::vector<Item> items) {
    Player player;
    double playerLife, playerGas;
    playerLife= rand()% 40 + 30;
@@ -77,13 +78,15 @@ Player createNewPlayer(std::vector<Area> planets, std::vector<Item> items) {
          }
       }
    }
-
+   stringstream parseString;
+   string fileString = savedLines[0];
+   string inventory;
+   parseString.str(fileString);
    for(int i=0; i < items.size(); i++){
-      if(items[i].getName() == "Spaceship") {
-         player.getLocation()->addItem(&items[i]);
-      }
-      if((items[i].getName() == "Jacket") || (items[i].getName() == "Shoes") || (items[i].getName() == "Flashlight")){
-         player.addInventory(&items[i]);
+      while(getline(parseString, inventory, ' ')) {
+         if((items[i].getName() == inventory)){
+            player.addInventory(&items[i]);
+         }
       }
    }
    player.setVars(playerGas, playerLife);
@@ -129,38 +132,7 @@ Player loadOldPlayer(std::vector<std::string> savedLines, vector<Area> area, vec
    }
    return player;
 }
-/****
-vector<Area> loadOldPlanets(std::vector<std::string> savedLines, std::vector<Area*> planets, std::vector<Item*> items){
-   vector<Area> returnPlanet;
-   string planetName, shortFile, longFile, interFile, inventory;
-   bool dark, oxy, space, visited;
-   stringstream parseString;
-   for(int j=1; j < savedLines.size(); j++){
-      string fileString = savedLines[j];
-      parseString.str(fileString);
-      parseString >> ;
-      parseString >> hasVisited;
-      for(int i=0; i < planets.size(); i++){
-         if(planets[i]->getName() == dummy) {
-            planets[i]->setEntry(hasVisited);
-            while(getline(parseString, inventory, ' ')) {
-               for(int i=0; i < items.size(); i++) {
-                  if(items[i]->getName() == inventory) {
-                     planets[i]->addItem(items[i]);
-                  }  
-               }
-            }
-         }
-      }
-   }
-}
 
-void createNewPlanets(std::vector<Area*> planets, std::vector<Item> items){
-      for(int j=0; j < items.size(); j++){
-         cout << items[j].getName() << endl;
-      }
-}
-****/
 std::vector<Item> loadItems(){
    vector<Item> returnItems;
    std::ifstream loadFile("loadfiles/items.txt");
@@ -215,7 +187,7 @@ std::vector<Area> loadPlanets(vector<string> savedLines, std::vector<Item> items
    vector<Area> returnPlanet;
    string planetName, shortFile, longFile, interFile, inventory;
    bool dark, oxy, space, visited;
-   for(int j=1; j < savedLines.size(); j++){
+   for(int j=1; j < savedLines.size()-1; j++){
       string fileString = savedLines[j];
       std::istringstream parseString(fileString);
       parseString >> planetName >> shortFile >> longFile >> interFile >> dark >> oxy >> space >> visited;
