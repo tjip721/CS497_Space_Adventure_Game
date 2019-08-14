@@ -181,6 +181,12 @@ std::vector<Item*> loadItems(){
          if(itemName == "Spaceship") {
             returnItems.push_back(new Spaceship(itemName, itemTextFile, takeable));
          }
+         if(itemName == "Human") {
+            returnItems.push_back(new Human(itemName, itemTextFile, takeable));
+         }
+         if(itemName == "Alien") {
+            returnItems.push_back(new Alien(itemName, itemTextFile, takeable));
+         }
          if(wearable == 1){
             returnItems.back()->setWearable(wearable);
          }
