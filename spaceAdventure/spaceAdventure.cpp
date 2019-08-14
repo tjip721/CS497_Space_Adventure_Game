@@ -26,10 +26,10 @@ using std::transform;
 const string VERB_FILE_LIST = "./word_files/verb_files.txt";
 const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 
-Item* getItemPtr(string itemName, vector<Item> *itemList) {
-	for(int i=0; i<(*itemList).size();i++){
-		if (((*itemList)[i].getName()).compare(itemName) == 0) {
-			return &(*itemList)[i];
+Item* getItemPtr(string itemName, vector<Item*> &itemList) {
+	for(int i=0; i < itemList.size(); i++){
+		if (itemList[i]->getName().compare(itemName) == 0) {
+			return itemList[i];
 		}
 	}
 	return NULL;
@@ -37,7 +37,8 @@ Item* getItemPtr(string itemName, vector<Item> *itemList) {
 
 int main() {
 	srand(time(NULL));
-	vector<Item> items=loadItems();
+	vector<Item*> items;
+	loadItems(items);
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status, quit };
 	map<string, Verb> verbMap = {
@@ -71,7 +72,7 @@ int main() {
 			vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
 			planets=loadPlanets(savedLines, items);
 			player=createNewPlayer(savedLines, planets, items);
-			player.getLocation()->addItem(getItemPtr("Spaceship", &items));
+			player.getLocation()->addItem(getItemPtr("Spaceship", items));
 		}
 		else {
 			vector<string> savedLines=openLoadFile("saveLog.txt");
@@ -83,7 +84,7 @@ int main() {
 		vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
 		planets=loadPlanets(savedLines, items);
 		player=createNewPlayer(savedLines, planets, items);
-		player.getLocation()->addItem(getItemPtr("Spaceship", &items));
+		player.getLocation()->addItem(getItemPtr("Spaceship", items));
 	}
 	//Create exit objects + setting exits for each planet
 	exits=createExits(planets);
@@ -134,7 +135,6 @@ int main() {
 		if (parser.getNouns().size() > 0) {
 			noun = parser.getNouns()[0];
 		}
-	
 		Area* location = player.getLocation();
 		switch (verb){
 			//look around current location
@@ -145,7 +145,7 @@ int main() {
 			//go somewhere, check exit is accessible and go there
 			case move:
 				if(player.isWearing("Shoes") && !location->isSpace()){
-					moveFxn(noun, player, getItemPtr("Spaceship",&items));
+					moveFxn(noun, player, getItemPtr("Spaceship",items));
 				}else{
 					cout << "It's hard to walk anywhere on this surface in your bare feet...\n"; 
 				}
@@ -170,7 +170,7 @@ int main() {
 				}else if(player.getLocation()->lookAt(noun)){
 					// If player looks at rover for the first time, add transmitter to area's items
 					if (noun.compare("Opportunity Rover") == 0 && !itemExists(&planets, player, "Transmitter")) {
-						player.getLocation()->addItem(getItemPtr("Transmitter",&items));
+						player.getLocation()->addItem(getItemPtr("Transmitter",items));
 						cout << "A transmitter is attached to Opportunity Rover.\n";
 					}
 					break;
@@ -238,7 +238,7 @@ int main() {
 				// IF spaceship is present launch to space
 				if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
 					if(player.isWearing("Shoes") && !location->isSpace()){
-						moveFxn(noun, player, getItemPtr("Spaceship",&items));
+						moveFxn(noun, player, getItemPtr("Spaceship",items));
 					}else{
 						cout << "You're having trouble walking to your space ship in your bare feet...\n"; 
 					}
@@ -254,13 +254,13 @@ int main() {
 				//If in space land on specified planet
 				if(location->isSpace()){
 					if(noun.compare("Earth")==0){
-						if(((Spaceship*)getItemPtr("Spaceship",&items))->isFixed()){
-							moveFxn(noun, player, getItemPtr("Spaceship",&items));
+						if(((Spaceship*)getItemPtr("Spaceship",items))->isFixed()){
+							moveFxn(noun, player, getItemPtr("Spaceship",items));
 						} else {
 							cout << "Sorry your space ship isn't fixed yet. It won't survive entry into Earth's atmosphere.\n"; 
 						}
 					}else{
-						moveFxn(noun, player, getItemPtr("Spaceship", &items));
+						moveFxn(noun, player, getItemPtr("Spaceship", items));
 					}
 				}else{
 					cout << "You will need to be flying in space before you can land your ship.\n";
@@ -348,6 +348,9 @@ int main() {
 		cout << "\n";
 
 		}
+	for (Item* item : items) {
+		delete item;
+	}
 	return 0;
 }
 
