@@ -87,8 +87,7 @@ int main() {
 	exits=createExits(planets);
 	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
-	//getWelcome(&player);
-	saveGame(&player, planets);
+	getWelcome(&player);
 
 
 	bool gameOver = false;
@@ -103,7 +102,7 @@ int main() {
 			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>15 ){
 					//cout << "Quick, put on your jacket!" << endl;
 					cout << "You didn't put your jacket on. You froze to DEATH.\n";
-					read_uif_files("UIF_files/failure.txt");
+					read_uif_files(UI_FAILURE);
 					gameOver = true;
 					break;
 		}
@@ -113,7 +112,7 @@ int main() {
 		if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
 			if(suffocationCounter < 0){
 				gameOver = true;
-				read_uif_files("UIF_files/failure.txt");
+				read_uif_files(UI_FAILURE);
 				cout << "Oh no looks like you suffocated.\n";
 				break;
 			}
@@ -277,7 +276,7 @@ int main() {
 					if(pAlien != nullptr ){
 						pAlien->makePeace(); 
 					}
-					read_uif_files("crystal.txt");
+					read_uif_files("UIf_files/crystal.txt");
 					cout <<"You bow to the Alien with Crysallith in your hands. It seems to accept your peace offering.\n"; 
 				}else{
 					cout << "You bowed, but no one seemed to notice.\n"; 	
@@ -286,7 +285,7 @@ int main() {
 
 			case say:
 				if(noun=="Alien" && location->hasItem("Alien") ){
-					read_uif_files("UIF_files/alien.txt");
+					read_uif_files(UI_ALIEN);
 					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 					if(pAlien != nullptr ){
 						cout << "The alien replies: "; 
@@ -370,22 +369,27 @@ void moveFxn(string noun, Player &player, Item *spaceship){
 			player.getLocation()->addItem(spaceship);
 		}
 		player.getLocation()->look();
+		read_uif_files(player.getLocation()->getUIFile());
 	} else {
 		std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n";
 	}
 }
 
 void read_uif_files(string fileName){
-	cout << string(20, '\n');
 	fstream r_file;
 	string file_read;
 	const string readFile=fileName;
 	r_file.open(readFile);
-	while(!r_file.eof()) {
-		getline(r_file, file_read);
-		cout << file_read << endl;
+	if(r_file.is_open()){ 
+		while(!r_file.eof()) {
+			getline(r_file, file_read);
+			cout << file_read << endl;
+		}
+		r_file.close();
 	}
-	r_file.close();	
+	else{
+		cout << "File load error" << endl;
+	}	
 }
 std::string get_file_data(std::string fileName){
 	fstream r_file;
@@ -396,8 +400,6 @@ std::string get_file_data(std::string fileName){
 		getline(r_file, file_read);
 		//cout << file_read << endl;
 	}
-	//done to clear screen
-	cout << string(20, '\n');
 	cout << file_read << endl;
 	r_file.close();
 	return file_read;
@@ -412,7 +414,8 @@ void getWelcome(Player* player){
 		get_file_data("welcome_0.txt");
 		cout << "As of now you have: " << player->getLife() << " years left and " << player->getGas() << " million miles left in the tank\n\n" << endl;
 	}
-	//player->getLocation()->printDescription();
+	read_uif_files(player->getLocation()->getUIFile());
+	player->getLocation()->printDescription();
 }
 
 bool itemExists(vector<Area> *planets, Player player, string item) {

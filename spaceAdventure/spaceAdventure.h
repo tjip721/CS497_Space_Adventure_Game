@@ -18,6 +18,8 @@
 #include "Human.h"
 #include "ScrewDriver.h"
 
+#define UI_FAILURE "UIf_files/failure.txt"
+#define UI_ALIEN "UIf_files/alien.txt"
 using std::string;
 class Player;
 //open description file to save to an object variable
