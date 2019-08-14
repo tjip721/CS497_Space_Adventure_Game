@@ -96,6 +96,7 @@ int main() {
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 15;
+	player.getLocation()->look();
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 		turnCounter++; 
 		// Cold area check
