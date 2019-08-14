@@ -1,6 +1,8 @@
 #include "Human.h"
 #include <time.h>
 
+Human::Human(std::string nameIn, std::string descriptionIn, bool takeableIn)
+	: Item(nameIn, descriptionIn, takeableIn) {}
 
 void Human::attack(Player* player){
 	srand(time(NULL)); 

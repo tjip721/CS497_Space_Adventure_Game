@@ -29,6 +29,7 @@ public:
 	void setWearable(bool wear){wearable = wear;}
 	Item(std::string name, std::string description, bool takeable); 
 */
+	Alien(std::string nameIn, std::string descriptionIn, bool takeableIn);
 	void aggravate(){hostile = true;}
 	void makePeace(){hostile = false;}
 	bool isHostile(){return hostile;}

@@ -185,7 +185,7 @@ std::vector<Item*> loadItems(){
             returnItems.push_back(new Human(itemName, itemTextFile, takeable));
          }
          if(itemName == "Alien") {
-            returnItems.push_back(new Alien(itemName, itemTextFile, takeable));
+           returnItems.push_back(new Alien(itemName, itemTextFile, takeable));
          }
          if(wearable == 1){
             returnItems.back()->setWearable(wearable);
