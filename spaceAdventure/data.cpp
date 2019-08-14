@@ -100,7 +100,12 @@ vector<string> openLoadFile(string fileName) {
    loadFile.open(fileName);
    while(!loadFile.eof()){
       getline(loadFile, val);
-      fileLine.push_back(val);
+      if(val==""){
+        continue;
+      }
+      else{
+         fileLine.push_back(val);
+      }
    }
    loadFile.close();
    return fileLine;
@@ -187,7 +192,7 @@ std::vector<Area> loadPlanets(vector<string> savedLines, std::vector<Item> &item
    vector<Area> returnPlanet;
    string planetName, shortFile, longFile, interFile, inventory;
    bool dark, oxy, space, visited;
-   for(int j=1; j < savedLines.size()-1; j++){
+   for(int j=1; j < savedLines.size(); j++){
       string fileString = savedLines[j];
       std::istringstream parseString(fileString);
       parseString >> planetName >> shortFile >> longFile >> interFile >> dark >> oxy >> space >> visited;
