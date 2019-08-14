@@ -71,6 +71,7 @@ int main() {
 			vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
 			planets=loadPlanets(savedLines, items);
 			player=createNewPlayer(savedLines, planets, items);
+			player.getLocation()->addItem(getItemPtr("Spaceship", &items));
 		}
 		else {
 			vector<string> savedLines=openLoadFile("saveLog.txt");
@@ -82,19 +83,19 @@ int main() {
 		vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
 		planets=loadPlanets(savedLines, items);
 		player=createNewPlayer(savedLines, planets, items);
+		player.getLocation()->addItem(getItemPtr("Spaceship", &items));
 	}
 	//Create exit objects + setting exits for each planet
 	exits=createExits(planets);
 	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
 	//getWelcome(&player);
-	saveGame(&player, planets);
+	//saveGame(&player, planets);
 
 
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 15;
-	player.getLocation()->addItem(getItemPtr("Spaceship", &items));
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 		turnCounter++; 
 		// Cold area check
