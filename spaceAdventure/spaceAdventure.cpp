@@ -103,7 +103,7 @@ int main() {
 			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>15 ){
 					//cout << "Quick, put on your jacket!" << endl;
 					cout << "You didn't put your jacket on. You froze to DEATH.\n";
-					read_uif_files("UIF_files/failure.txt");
+					read_uif_files("UIf_files/failure.txt");
 					gameOver = true;
 					break;
 		}
@@ -113,7 +113,7 @@ int main() {
 		if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
 			if(suffocationCounter < 0){
 				gameOver = true;
-				read_uif_files("UIF_files/failure.txt");
+				read_uif_files("UIf_files/failure.txt");
 				cout << "Oh no looks like you suffocated.\n";
 				break;
 			}
