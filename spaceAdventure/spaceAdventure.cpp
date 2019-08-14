@@ -22,14 +22,22 @@ using std::cin;
 using std::fstream;
 using std::transform;
 
+#define RESET   "\033[0m"
+#define BLACK   "\033[30m"      
+#define RED     "\033[31m"      
+#define GREEN   "\033[32m"      
+#define YELLOW  "\033[33m"      
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+
 // Make sure that the word_files folder is in the same directory as the executable
 const string VERB_FILE_LIST = "./word_files/verb_files.txt";
 const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 
-Item* getItemPtr(string itemName, vector<Item> *itemList) {
-	for(int i=0; i<(*itemList).size();i++){
-		if (((*itemList)[i].getName()).compare(itemName) == 0) {
-			return &(*itemList)[i];
+Item* getItemPtr(string itemName, vector<Item*> itemList) {
+	for(int i=0; i< itemList.size();i++){
+		if ((itemList[i]->getName()).compare(itemName) == 0) {
+			return itemList[i];
 		}
 	}
 	return NULL;
@@ -37,7 +45,7 @@ Item* getItemPtr(string itemName, vector<Item> *itemList) {
 
 int main() {
 	srand(time(NULL));
-	vector<Item> items=loadItems();
+	vector<Item*> items=loadItems();
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status, quit };
 	map<string, Verb> verbMap = {
@@ -55,8 +63,8 @@ int main() {
 
 	// Welcome message
 	Player player;
-	vector<Area> planets;
-	vector<Exit> exits;
+	vector<Area*> planets;
+	vector<Exit*> exits;
 	string userChooses;
 	cout << "Welcome to the space adventure\n What do you want to do? \n Load Game\n New Game\n";
 	getline(cin, userChooses);
@@ -93,7 +101,7 @@ int main() {
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 15;
-	player.getLocation()->addItem(getItemPtr("Spaceship", &items));
+	player.getLocation()->addItem(getItemPtr("Spaceship", items));
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
 		turnCounter++; 
 		// Cold area check
@@ -142,7 +150,7 @@ int main() {
 			//go somewhere, check exit is accessible and go there
 			case move:
 				if(player.isWearing("Shoes") && !location->isSpace()){
-					moveFxn(noun, player, getItemPtr("Spaceship",&items));
+					moveFxn(noun, player, getItemPtr("Spaceship", items));
 				}else{
 					cout << "It's hard to walk anywhere on this surface in your bare feet...\n"; 
 				}
@@ -166,8 +174,8 @@ int main() {
 					break;
 				}else if(player.getLocation()->lookAt(noun)){
 					// If player looks at rover for the first time, add transmitter to area's items
-					if (noun.compare("Opportunity Rover") == 0 && !itemExists(&planets, player, "Transmitter")) {
-						player.getLocation()->addItem(getItemPtr("Transmitter",&items));
+					if (noun.compare("Opportunity Rover") == 0 && !itemExists(planets, player, "Transmitter")) {
+						player.getLocation()->addItem(getItemPtr("Transmitter", items));
 						cout << "A transmitter is attached to Opportunity Rover.\n";
 					}
 					break;
@@ -235,7 +243,7 @@ int main() {
 				// IF spaceship is present launch to space
 				if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
 					if(player.isWearing("Shoes") && !location->isSpace()){
-						moveFxn(noun, player, getItemPtr("Spaceship",&items));
+						moveFxn(noun, player, getItemPtr("Spaceship", items));
 					}else{
 						cout << "You're having trouble walking to your space ship in your bare feet...\n"; 
 					}
@@ -251,13 +259,13 @@ int main() {
 				//If in space land on specified planet
 				if(location->isSpace()){
 					if(noun.compare("Earth")==0){
-						if(((Spaceship*)getItemPtr("Spaceship",&items))->isFixed()){
-							moveFxn(noun, player, getItemPtr("Spaceship",&items));
+						if(((Spaceship*)getItemPtr("Spaceship", items))->isFixed()){
+							moveFxn(noun, player, getItemPtr("Spaceship", items));
 						} else {
 							cout << "Sorry your space ship isn't fixed yet. It won't survive entry into Earth's atmosphere.\n"; 
 						}
 					}else{
-						moveFxn(noun, player, getItemPtr("Spaceship", &items));
+						moveFxn(noun, player, getItemPtr("Spaceship", items));
 					}
 				}else{
 					cout << "You will need to be flying in space before you can land your ship.\n";
@@ -376,6 +384,8 @@ void moveFxn(string noun, Player &player, Item *spaceship){
 }
 
 void read_uif_files(string fileName){
+	int num= rand()% 4 + 0;
+
 	fstream r_file;
 	string file_read;
 	const string readFile=fileName;
@@ -383,7 +393,11 @@ void read_uif_files(string fileName){
 	if(r_file.is_open()){ 
 		while(!r_file.eof()) {
 			getline(r_file, file_read);
-			cout << file_read << endl;
+			if(num == 0) { cout << RED << file_read << RESET << endl; }
+			if(num ==1) { cout << BLACK << file_read << RESET << endl; }
+			if(num ==2) { cout << GREEN << file_read << RESET << endl; }
+			if(num ==3) { cout << MAGENTA << file_read << RESET << endl; }
+			if(num ==4) { cout << BLUE << file_read << RESET << endl; }
 		}
 		r_file.close();
 	}
@@ -418,12 +432,12 @@ void getWelcome(Player* player){
 	player->getLocation()->printDescription();
 }
 
-bool itemExists(vector<Area> *planets, Player player, string item) {
+bool itemExists(vector<Area*> planets, Player player, string item) {
 	if (player.hasItem(item)) {
 		return true;
 	}
-	for (int i = 0; i < planets->size();i++) {
-		if ((*planets)[i].hasItem(item)) {
+	for (int i = 0; i < planets.size();i++) {
+		if (planets[i]->hasItem(item)) {
 			return true;
 		}
 	}

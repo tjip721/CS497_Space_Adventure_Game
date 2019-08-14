@@ -20,6 +20,8 @@
 
 #define UI_FAILURE "UIf_files/failure.txt"
 #define UI_ALIEN "UIf_files/alien.txt"
+     
+
 using std::string;
 class Player;
 //open description file to save to an object variable
@@ -27,7 +29,7 @@ string get_file_data(string text);
 
 void getWelcome(Player* player);
 void moveFxn(string noun, Player& player, Item* spaceship);
-bool itemExists(std::vector<Area> *planets, Player player, string item);
+bool itemExists(std::vector<Area*> planets, Player player, string item);
 void read_uif_files(std::string fileName);
 
 #endif
