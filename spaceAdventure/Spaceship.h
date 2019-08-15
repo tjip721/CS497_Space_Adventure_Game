@@ -29,7 +29,7 @@ public:
 */
 	Spaceship(std::string nameIn, std::string descriptionIn, bool takeableIn);
 	void use(Area* location, Player* player);
-	void fix(){ fixesNeeded--;}
+	void fix() { cout << "You have made repairs to your ship.\n"; fixesNeeded--; }
 	bool isFixed();
 	
 }; 

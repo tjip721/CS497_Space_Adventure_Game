@@ -1,4 +1,5 @@
 #include "Doohickey.h"
+#include "Spaceship.h"
 
 
 Doohickey::Doohickey(std::string nameIn, std::string descriptionIn, bool takeableIn)
@@ -10,7 +11,7 @@ void Doohickey::use(Area* location, Player* player) {
 		Item* ship = location->getItem("Spaceship"); 
 		if(ship !=NULL){
 			cout << "Not sure what this doohickey does but you found a spot it fits right into on the spaceship.\n";
-			ship->fix();
+			((Spaceship*)ship)->fix();
 			player->eraseItem("Doohickey");
 		}
 	}else{

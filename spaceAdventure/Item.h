@@ -33,7 +33,7 @@ public:
 	bool isWearable(){return wearable;}
 	void setWearable(bool wear){wearable = wear;}
 	virtual void use(Area* location, Player* player); 
-	void fix(){cout<<"You have made repairs to your ship.\n";}
+	//void fix(){cout<<"You have made repairs to your ship.\n";}
 }; 
 
 #endif
