@@ -10,6 +10,12 @@ int Player::findItem(std::string targetName){
 	}
 	return -1; 
 }
+
+void Player::kill(){
+	lifeRemaining = 0;
+}
+
+
 /*
 void Player::initializeInventory(std::vector<Item*> addItem) {
 	for(int i=0; i < addItem.size(); i++) {
