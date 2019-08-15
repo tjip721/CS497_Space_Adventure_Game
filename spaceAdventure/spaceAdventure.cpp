@@ -228,7 +228,7 @@ int main() {
 						cout << "Looks like that aggravated the alien, it is now hostile towards you.\n"; 
 					}
 				}else{
-					cout << "You can't push that.\n"; 
+					cout << "You push it but it didn't seem to care.\n"; 
 				}
 				break;
 
