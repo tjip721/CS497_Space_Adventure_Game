@@ -45,7 +45,7 @@ public:
 	bool isWearing(std::string name); 
 	bool hasItem(std::string name); 
 	bool eraseItem(std::string targetName);
-	void kill(){lifeRemaining = 0;}
+	void kill();
 	bool wear(Item* item); 
 	bool takeOff(std::string targetName); 
 	std::vector<Item*> getPlayerWearing() { return clothesWorn; }

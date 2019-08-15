@@ -10,6 +10,12 @@ int Player::findItem(std::string targetName){
 	}
 	return -1; 
 }
+
+void Player::kill(){
+	lifeRemaining = 0;
+}
+
+
 /*
 void Player::initializeInventory(std::vector<Item*> addItem) {
 	for(int i=0; i < addItem.size(); i++) {
@@ -26,6 +32,13 @@ bool Player::drop(std::string targetName){
 		if(inventory[ii]->getName().compare(targetName)==0){
 			location->dropItem(inventory[ii]); 
 			inventory.erase(inventory.begin()+ii); 
+			return true; 	
+		}
+	}
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		if(clothesWorn[ii]->getName().compare(targetName)==0){
+			location->dropItem(clothesWorn[ii]); 
+			clothesWorn.erase(clothesWorn.begin()+ii); 
 			return true; 	
 		}
 	}

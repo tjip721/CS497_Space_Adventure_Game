@@ -207,7 +207,7 @@ int main() {
 					player.drop(noun);
 				//Throw your shoe...
 				}else if(player.drop("Shoes")){
-					 cout<<"You threw your shoe"; 
+					 cout<<"You threw your shoe.\n"; 
 					if(location->hasItem("Alien")){
 						Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 						if(pAlien != nullptr){
@@ -348,6 +348,10 @@ int main() {
 			Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 			if(pAlien != nullptr && pAlien->isHostile()){
 				pAlien->attack(&player); 
+				if(player.getLife() <= 0){
+					cout << "The alien pulls out a gun looking device and fires a beam at you.... Anddddd you are now a pile of ashes.\n"; 
+					read_uif_files(UI_FAILURE);
+				}
 			}
 		}
 		cout << "\n";
