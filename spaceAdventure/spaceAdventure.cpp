@@ -250,7 +250,7 @@ int main() {
 				}else{
 					cout << "Sorry you don't appear to be able to launch from here.\n";
 				}
-				if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) ){
+				if( (player.getLocation()->getName().compare("Lost Moon") == 0 || player.getLocation()->getName().compare("Jupiter") == 0) ){
 					suffocationCounter = 1; 
 				}
 				break;
