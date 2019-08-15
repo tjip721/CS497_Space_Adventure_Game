@@ -82,12 +82,12 @@ Player createNewPlayer(vector<string> savedLines, std::vector<Area*> planets, st
    string fileString = savedLines[0];
    string inventory;
    parseString.str(fileString);
-   for(int i=0; i < items.size(); i++){
-      while(getline(parseString, inventory, ' ')) {
-         if((items[i]->getName() == inventory)){
-            player.addInventory(items[i]);
-         }
-      }
+   while (getline(parseString, inventory, ' ')) {
+	   for (int i = 0; i < items.size(); i++) {
+			if ((items[i]->getName() == inventory)) {
+				player.addInventory(items[i]);
+			}
+	   }
    }
    player.setVars(playerGas, playerLife);
    return player;
