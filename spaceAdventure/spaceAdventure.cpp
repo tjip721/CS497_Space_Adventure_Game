@@ -371,13 +371,14 @@ void moveFxn(string noun, Player &player, Item *spaceship){
 			cout << "Oh no! It appears you died of old age before reaching Earth. \n GAME OVER. \n";
 		}else if (player.getGas() <= 0){
 			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n";
+		}else{
+			player.setLocation(location->getExit(noun)->getArea());
+			if (location->getName().compare("Space") == 0) {
+				player.getLocation()->addItem(spaceship);
+			}
+			player.getLocation()->look();
+			read_uif_files(player.getLocation()->getUIFile());
 		}
-		player.setLocation(location->getExit(noun)->getArea());
-		if (location->getName().compare("Space") == 0) {
-			player.getLocation()->addItem(spaceship);
-		}
-		player.getLocation()->look();
-		read_uif_files(player.getLocation()->getUIFile());
 	} else {
 		std::cout << "Sorry that doesn't appear to be a place you can get to from here. \n";
 	}
