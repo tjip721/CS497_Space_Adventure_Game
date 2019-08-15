@@ -265,7 +265,7 @@ void setPlanetExits(std::vector<Area*> planets, std::vector<Exit*> exits) {
    }
    vector<string> savedLines=openLoadFile("loadfiles/addExit.txt");
    string planetName, exitName;
-   for(int j=1; j < savedLines.size(); j++){
+   for(int j=0; j < savedLines.size(); j++){
       string fileString = savedLines[j];
       std::istringstream parseString(fileString);
       parseString >> planetName >> exitName;
@@ -274,7 +274,7 @@ void setPlanetExits(std::vector<Area*> planets, std::vector<Exit*> exits) {
          if(planets[i]->getName() == planetName){
             for(int k=0; k < exits.size(); k++) {
                if(exits[k]->getName() == exitName) {
-                  planets[i]->addExit(exits[j]);
+                  planets[i]->addExit(exits[k]);
                }
             }
          }
