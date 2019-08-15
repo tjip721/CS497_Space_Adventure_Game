@@ -29,6 +29,13 @@ bool Player::drop(std::string targetName){
 			return true; 	
 		}
 	}
+	for(int ii=0; ii < clothesWorn.size(); ii++){
+		if(clothesWorn[ii]->getName().compare(targetName)==0){
+			location->dropItem(clothesWorn[ii]); 
+			clothesWorn.erase(clothesWorn.begin()+ii); 
+			return true; 	
+		}
+	}
 	return false; 
 } 
 
