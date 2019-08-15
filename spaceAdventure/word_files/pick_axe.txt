@@ -1,4 +1,4 @@
-Pick Axe
+PickAxe
 axe
 pick
 pickaxe
