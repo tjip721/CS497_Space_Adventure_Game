@@ -28,3 +28,5 @@ opportunity_rover.txt
 mushroom.txt
 spaceship.txt
 space.txt
+alien.txt
+human.txt

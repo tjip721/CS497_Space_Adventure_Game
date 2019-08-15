@@ -151,13 +151,16 @@ int main() {
 
 			//go somewhere, check exit is accessible and go there
 			case move:
-				if(player.isWearing("Shoes") && !location->isSpace()){
-					moveFxn(noun, player, getItemPtr("Spaceship", items));
-				}else{
-					cout << "It's hard to walk anywhere on this surface in your bare feet...\n"; 
+				if(!location->isSpace() && noun.compare("Space")!=0) {
+					if(player.isWearing("Shoes")) {
+						moveFxn(noun, player, getItemPtr("Spaceship", items));
+					}
+					else {
+						cout << "It's hard to walk anywhere on this surface in your bare feet...\n";
+					}
 				}
-				if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) ){
-					suffocationCounter = 1; 
+				else{
+					cout << "You must use the Launch or Land commands for travel to and from space.\n";
 				}
 				break;
 
