@@ -117,7 +117,7 @@ int main() {
 
 		// No oxygen check
 		
-		if( (player.getLocation()->getName().compare("Lost Moon") || player.getLocation()->getName().compare("Jupiter")) && !player.getLocation()->hasOxygen() ){
+		if( (player.getLocation()->getName().compare("Lost Moon") == 0 || player.getLocation()->getName().compare("Jupiter") == 0) && !player.getLocation()->hasOxygen() ){
 			if(suffocationCounter < 0){
 				gameOver = true;
 				read_uif_files(UI_FAILURE);
@@ -251,7 +251,7 @@ int main() {
 					cout << "Sorry you don't appear to be able to launch from here.\n";
 				}
 				if( (player.getLocation()->getName().compare("Lost Moon") == 0 || player.getLocation()->getName().compare("Jupiter") == 0) ){
-					suffocationCounter = 1; 
+					suffocationCounter = 15; 
 				}
 				break;
 
