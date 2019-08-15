@@ -34,18 +34,8 @@ using std::transform;
 const string VERB_FILE_LIST = "./word_files/verb_files.txt";
 const string NOUN_FILE_LIST = "./word_files/noun_files.txt";
 
-Item* getItemPtr(string itemName, vector<Item*> itemList) {
-	for(int i=0; i< itemList.size();i++){
-		if ((itemList[i]->getName()).compare(itemName) == 0) {
-			return itemList[i];
-		}
-	}
-	return NULL;
-}
-
 int main() {
 	srand(time(NULL));
-	vector<Item*> items=loadItems();
 
 	enum Verb { look, move, help, inventory, lookAt, take, drop, fire, push, mine, launch, land, eat, bow, say, use, invalid, savegame, wear, status, quit };
 	map<string, Verb> verbMap = {
@@ -62,6 +52,7 @@ int main() {
 	}
 
 	// Welcome message
+	vector<Item*> items = loadItems();
 	Player player;
 	vector<Area*> planets;
 	vector<Exit*> exits;
@@ -70,7 +61,6 @@ int main() {
 	getline(cin, userChooses);
 	transform(userChooses.begin(), userChooses.end(), userChooses.begin(), tolower);
 	//load the game
-	//createNewPlanets(planets, items); 
 	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "load game") {
 		cout << "Loading game..." << endl;
 		int fileReturn;
@@ -102,24 +92,23 @@ int main() {
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 15;
-	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
+	while (!gameOver && player.getLife() > 0 && player.getGas() >= 0 ){
 		// Cold area check
-		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
-			player.getLocation()->getName().compare("Uranus")==0 || 
-			player.getLocation()->getName().compare("Neptune")==0) && turnCounter>15 ){
-					//cout << "Quick, put on your jacket!" << endl;
-					cout << "You didn't put your jacket on. You froze to DEATH.\n";
-					read_uif_files(UI_FAILURE);
-					gameOver = true;
-					break;
-		}
-		else {
+		if (!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto") == 0 ||
+			player.getLocation()->getName().compare("Uranus") == 0 ||
+			player.getLocation()->getName().compare("Neptune") == 0)) {
+			if (turnCounter > 15) {
+				cout << "You didn't put your jacket on. You froze to DEATH.\n";
+				read_uif_files(UI_FAILURE);
+				gameOver = true;
+				break;
+			}
+			cout << "It is extremely cold here. Better put on a jacket.\n";
 			turnCounter++;
 		}
 
 		// No oxygen check
-		
-		if( (player.getLocation()->getName().compare("Lost Moon") == 0 || player.getLocation()->getName().compare("Jupiter") == 0) && !player.getLocation()->hasOxygen() ){
+		if( (player.getLocation()->getName().compare("Lost Moon") == 0 || player.getLocation()->getName().compare("Jupiter") == 0) && !player.getLocation()->hasOxygen()){
 			if(suffocationCounter < 0){
 				gameOver = true;
 				read_uif_files(UI_FAILURE);
@@ -363,7 +352,8 @@ int main() {
 		}
 		cout << "\n";
 
-		}
+	}
+	read_uif_files(UI_FAILURE);
 	return 0;
 }
 
@@ -378,9 +368,9 @@ void moveFxn(string noun, Player &player, Item *spaceship){
 		}
 		player.removeLife(targetExit->getLifeDistance());
 		player.removeGas(targetExit->getGasDistance());
-		if(player.getLife() <= 0){
+		if(player.getLife() < 1){
 			cout << "Oh no! It appears you died of old age before reaching Earth. \n GAME OVER. \n";
-		}else if (player.getGas() <= 0){
+		}else if (player.getGas() < 0){
 			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n";
 		}else{
 			player.setLocation(location->getExit(noun)->getArea());
@@ -454,5 +444,13 @@ bool itemExists(vector<Area*> planets, Player player, string item) {
 		}
 	}
 	return false;
+}
 
+Item* getItemPtr(string itemName, vector<Item*> itemList) {
+	for (int i = 0; i < itemList.size(); i++) {
+		if ((itemList[i]->getName()).compare(itemName) == 0) {
+			return itemList[i];
+		}
+	}
+	return NULL;
 }
