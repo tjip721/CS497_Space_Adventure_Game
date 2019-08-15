@@ -12,12 +12,12 @@ void Pickaxe::use(Area* location, Player* player) {
 			cout << "It appears you successfully mined the Crysallith.\n";
 			player->take("Crysallith");
 		}
-	}else if(location->hasItem("Power Crystal")){
-		Item* item = location->getItem("Power Crystal"); 
+	}else if(location->hasItem("PowerCrystal")){
+		Item* item = location->getItem("PowerCrystal"); 
 		if(item !=NULL){
 			item->setTakeable(true); 
 			cout << "It appears you uncovered a power crystal.\n";
-			player->take("Power Crystal");
+			player->take("PowerCrystal");
 		}
 	}else{
 		cout << "Looks like that didn't do anything.\n"; 

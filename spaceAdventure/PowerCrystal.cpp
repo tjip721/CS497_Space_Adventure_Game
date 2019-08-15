@@ -10,7 +10,7 @@ void PowerCrystal::use(Area* location, Player* player) {
 		if(item !=NULL){
 			cout << "You have inserted the power crystal into the spaceship energy drive.\n";
 			item->fix();
-			player->eraseItem("Power Crystal");
+			player->eraseItem("PowerCrystal");
 		}
 	}else{
 		cout << "Looks like that didn't do anything.\n"; 
