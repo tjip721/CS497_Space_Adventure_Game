@@ -103,7 +103,6 @@ int main() {
 	int turnCounter = 0;
 	int suffocationCounter = 15;
 	while (!gameOver && player.getLife() > 0 && player.getGas() > 0 ){
-		turnCounter++; 
 		// Cold area check
 		if(!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto")==0 ||
 			player.getLocation()->getName().compare("Uranus")==0 || 
@@ -113,6 +112,9 @@ int main() {
 					read_uif_files(UI_FAILURE);
 					gameOver = true;
 					break;
+		}
+		else {
+			turnCounter++;
 		}
 
 		// No oxygen check
@@ -174,7 +176,7 @@ int main() {
 					break;
 				}else if(player.getLocation()->lookAt(noun)){
 					// If player looks at rover for the first time, add transmitter to area's items
-					if (noun.compare("Opportunity Rover") == 0 && !itemExists(planets, player, "Transmitter")) {
+					if (noun.compare("OpportunityRover") == 0 && !itemExists(planets, player, "Transmitter")) {
 						player.getLocation()->addItem(getItemPtr("Transmitter", items));
 						cout << "A transmitter is attached to Opportunity Rover.\n";
 					}
@@ -234,7 +236,7 @@ int main() {
 				break;
 
 			case mine:
-				if(!player.use("Pick Axe")){
+				if(!player.use("PickAxe")){
 					cout << "Looks like you can't mine right now.\n"; 
 				}
 				break;
@@ -244,14 +246,13 @@ int main() {
 				if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
 					if(player.isWearing("Shoes") && !location->isSpace()){
 						moveFxn(noun, player, getItemPtr("Spaceship", items));
+						turnCounter = 0;
+						suffocationCounter = 15;
 					}else{
 						cout << "You're having trouble walking to your space ship in your bare feet...\n"; 
 					}
 				}else{
 					cout << "Sorry you don't appear to be able to launch from here.\n";
-				}
-				if( (player.getLocation()->getName().compare("Lost Moon") == 0 || player.getLocation()->getName().compare("Jupiter") == 0) ){
-					suffocationCounter = 15; 
 				}
 				break;
 
