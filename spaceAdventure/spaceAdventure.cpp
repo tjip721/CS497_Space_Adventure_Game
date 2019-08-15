@@ -206,7 +206,12 @@ int main() {
 			case fire:
 				//Throw something
 				if(noun.compare("Shoes")!=0){
-					player.drop(noun);
+					if(player.drop(noun)){
+						cout << "You threw the " << noun << ".\n";
+						break;
+					} else {
+						cout << "Sorry you don't seem to have that in your inventory... soooo you can't throw it.\n";
+					}
 				//Throw your shoe...
 				}else if(player.drop("Shoes")){
 					 cout<<"You threw your shoe.\n"; 
@@ -218,8 +223,6 @@ int main() {
 							cout << "Looks like that aggravated the alien, it is now hostile towards you.\n"; 
 						}
 					}
-				}else{
-					cout << "Nothing happened.\n"; 
 				}
 				break;
 
