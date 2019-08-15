@@ -48,6 +48,7 @@ public:
 	void kill(){lifeRemaining = 0;}
 	bool wear(Item* item); 
 	bool takeOff(std::string targetName); 
+	std::vector<Item*> getPlayerWearing() { return clothesWorn; }
 }; 
 
 #endif

@@ -23,6 +23,12 @@ void saveGame(Player* player1, std::vector<Area*> planets) {
        savegame << playerItems[i]->getName() << " ";
    }
    savegame << endl;
+   //add player clothing
+   vector<Item*> playerWears= player1->getPlayerWearing();
+   for(int i=0; i < playerWears.size(); i++) {
+       savegame << playerWears[i]->getName() << " ";
+   }
+   savegame << endl;
 
    //Add area inventories & firstEntry to text file
    //Earth_Moon descriptorFiles/earthmoon_short.txt descriptorFiles/earthmoon_long.txt UIf_files/rocky.txt 0 1 0 Human Rock
@@ -113,9 +119,9 @@ vector<string> openLoadFile(string fileName) {
 
 Player loadOldPlayer(std::vector<std::string> savedLines, vector<Area*> area, std::vector<Item*> items){
    Player player;
-   string val, inventory, dummy, location;
+   string val, inventory, dummy, location, wearing;
    double health, gas;
-   stringstream parseString;
+   stringstream parseString, parseWear;
    string fileString = savedLines[0];
    parseString.str(fileString);
    parseString >> dummy;
@@ -132,6 +138,15 @@ Player loadOldPlayer(std::vector<std::string> savedLines, vector<Area*> area, st
       for(int i=0; i < items.size(); i++) {
          if(items[i]->getName() == inventory) {
             player.addInventory(items[i]);
+         }  
+      }
+   }
+   fileString = savedLines[1];
+   parseWear.str(fileString);
+   while(getline(parseWear, wearing, ' ')){
+      for(int i=0; i < items.size(); i++) {
+         if(items[i]->getName() == wearing) {
+            player.wear(items[i]);
          }  
       }
    }
@@ -194,11 +209,11 @@ std::vector<Item*> loadItems(){
    return returnItems;
 
 }
-std::vector<Area*> loadPlanets(vector<string> savedLines, std::vector<Item*> items){
+std::vector<Area*> loadPlanets(vector<string> savedLines, std::vector<Item*> items, int start){
    vector<Area*> returnPlanet;
    string planetName, shortFile, longFile, interFile, inventory;
    bool dark, oxy, space, visited;
-   for(int j=1; j < savedLines.size(); j++){
+   for(int j=start; j < savedLines.size(); j++){
       string fileString = savedLines[j];
       std::istringstream parseString(fileString);
       parseString >> planetName >> shortFile >> longFile >> interFile >> dark >> oxy >> space >> visited;

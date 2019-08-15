@@ -40,7 +40,7 @@ int open_log();
 Player loadOldPlayer(std::vector<std::string> savedLines, std::vector<Area*> planets, std::vector<Item*> items);
 //void loadOldPlanets(std::vector<std::string> savedLines, std::vector<Area> planets, std::vector<Item> items);
 std::vector<std::string> openLoadFile(std::string fileName);
-std::vector<Area*> loadPlanets(std::vector<string> savedLines, std::vector<Item*> items);
+std::vector<Area*> loadPlanets(std::vector<string> savedLines, std::vector<Item*> items, int start);
 std::vector<Exit*> createExits(std::vector<Area*> areas);
 std::vector<Item*> loadItems();
 void setPlanetExits(std::vector<Area*> planets, std::vector<Exit*> exits);

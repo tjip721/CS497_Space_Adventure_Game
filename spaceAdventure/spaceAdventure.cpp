@@ -77,18 +77,18 @@ int main() {
 		fileReturn = open_log();
 		if(fileReturn == 1 ) {
 			vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
-			planets=loadPlanets(savedLines, items);
+			planets=loadPlanets(savedLines, items, 1);
 			player=createNewPlayer(savedLines, planets, items);
 		}
 		else {
 			vector<string> savedLines=openLoadFile("saveLog.txt");
-			planets=loadPlanets(savedLines, items);
+			planets=loadPlanets(savedLines, items, 2);
 			player=loadOldPlayer(savedLines, planets, items);
 		}
 	}
 	else{
 		vector<string> savedLines=openLoadFile("loadfiles/areas.txt");
-		planets=loadPlanets(savedLines, items);
+		planets=loadPlanets(savedLines, items, 1);
 		player=createNewPlayer(savedLines, planets, items);
 	}
 	//Create exit objects + setting exits for each planet
@@ -96,7 +96,6 @@ int main() {
 	setPlanetExits(planets, exits);
 	//Welcome text displaying object of the game
 	getWelcome(&player);
-
 
 	bool gameOver = false;
 	int turnCounter = 0;
