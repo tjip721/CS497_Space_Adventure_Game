@@ -78,7 +78,7 @@ Player createNewPlayer(vector<string> savedLines, std::vector<Area*> planets, st
    }
    else {
       for(int i=0; i < planets.size(); i++){
-         playerGas=rand() % 3 + 1;
+         playerGas=rand() % 3 + 15;
          if(planets[i]->getName() == "Mercury"){
             player.setLocation(planets[i]);
          }
