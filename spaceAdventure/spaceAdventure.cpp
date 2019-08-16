@@ -95,13 +95,13 @@ int main() {
 
 	bool gameOver = false;
 	int turnCounter = 0;
-	int suffocationCounter = 15;
+	int suffocationCounter = 4;
 	while (!gameOver && player.getLife() > 0 && player.getGas() >= 0 ){
 		// Cold area check
 		if (!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto") == 0 ||
 			player.getLocation()->getName().compare("Uranus") == 0 ||
 			player.getLocation()->getName().compare("Neptune") == 0)) {
-			if (turnCounter > 15) {
+			if (turnCounter > 4) {
 				cout << "You didn't put your jacket on. You froze to DEATH.\n";
 				read_uif_files(UI_FAILURE);
 				gameOver = true;
@@ -246,7 +246,7 @@ int main() {
 					if(player.isWearing("Shoes") && !location->isSpace()){
 						moveFxn(noun, player, getItemPtr("Spaceship", items));
 						turnCounter = 0;
-						suffocationCounter = 15;
+						suffocationCounter = 4;
 					}else{
 						cout << "You're having trouble walking to your space ship in your bare feet...\n"; 
 					}
@@ -279,13 +279,19 @@ int main() {
 				break;
 
 			case bow:
-				if(location->hasItem("Alien") && player.hasItem("Crysallith")){
+				if(location->hasItem("Alien")&& player.hasItem("Crysallith")){
 					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 					if(pAlien != nullptr ){
 						pAlien->makePeace(); 
 					}
 					read_uif_files("UIf_files/crystal.txt");
 					cout <<"You bow to the Alien with Crysallith in your hands. It seems to accept your peace offering.\n"; 
+				}else if(location->hasItem("Alien")){
+					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+					if(pAlien != nullptr ){
+						pAlien->makePeace(); 
+					}
+					cout <<"You bow to the Alien, he seems to accept your deference despite your lack of an offering.\n";  
 				}else{
 					cout << "You bowed, but no one seemed to notice.\n"; 	
 				}

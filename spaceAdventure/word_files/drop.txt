@@ -1,2 +1,4 @@
 drop
+abandon
+discard
 drop

@@ -1,2 +1,5 @@
 take
+get
+grab
+pickup
 take
