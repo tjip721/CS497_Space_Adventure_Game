@@ -364,7 +364,6 @@ int main() {
 		cout << "\n";
 
 	}
-	read_uif_files(UI_FAILURE);
 	cleanObjects(items, planets, exits);
 	return 0;
 }
@@ -381,8 +380,10 @@ void moveFxn(string noun, Player &player, Item *spaceship){
 		player.removeLife(targetExit->getLifeDistance());
 		player.removeGas(targetExit->getGasDistance());
 		if(player.getLife() < 1){
+			read_uif_files(UI_FAILURE);
 			cout << "Oh no! It appears you died of old age before reaching Earth. \n GAME OVER. \n";
 		}else if (player.getGas() < 0){
+			read_uif_files(UI_FAILURE);
 			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n";
 		}else{
 			player.setLocation(location->getExit(noun)->getArea());
