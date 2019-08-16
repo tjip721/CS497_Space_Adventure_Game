@@ -346,7 +346,6 @@ int main() {
 				pAlien->attack(&player); 
 				if(player.getLife() <= 0){
 					cout << "The alien pulls out a gun looking device and fires a beam at you.... Anddddd you are now a pile of ashes.\n"; 
-					read_uif_files(UI_FAILURE);
 				}
 			}
 		}
