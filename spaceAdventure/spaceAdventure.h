@@ -28,7 +28,7 @@ class Player;
 string get_file_data(string text);
 
 void getWelcome(Player* player);
-void moveFxn(string noun, Player& player, Item* spaceship);
+void moveFxn(string noun, Player &player, Item *spaceship, bool spaceMove); 
 bool itemExists(std::vector<Area*> planets, Player player, string item);
 void read_uif_files(std::string fileName);
 Item* getItemPtr(string itemName, vector<Item*> itemList);
