@@ -32,6 +32,7 @@ public:
 	void fix() { cout << "You have made repairs to your ship.\n"; fixesNeeded--; }
 	void setFixes(int fixesIn){ fixesNeeded = fixesIn; }
 	bool isFixed();
+	int getFixes() { return fixesNeeded; }
 	
 }; 
 

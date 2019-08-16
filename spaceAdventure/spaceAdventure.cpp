@@ -79,12 +79,14 @@ int main() {
 			planets=loadPlanets(savedLines, items, 1);
 			player=createNewPlayer(savedLines, planets, items);
 			player.getLocation()->addItem(getItemPtr("Spaceship", items));
+			if(player.getLocation()->getName() == "Mercury") {
+				((Spaceship*)(getItemPtr("Spaceship", items)))->setFixes(0);
+			}
 		}
 		else {
 			vector<string> savedLines=openLoadFile("saveLog.txt");
-			planets=loadPlanets(savedLines, items, 2);
+			planets=loadPlanets(savedLines, items, 3);
 			player=loadOldPlayer(savedLines, planets, items);
-			((Spaceship*)getItemPtr("Spaceship", items))->setFixes(0);
 		}
 	}
 	else{
@@ -92,6 +94,9 @@ int main() {
 		planets=loadPlanets(savedLines, items, 1);
 		player=createNewPlayer(savedLines, planets, items);
 		player.getLocation()->addItem(getItemPtr("Spaceship", items));
+		if(player.getLocation()->getName() == "Mercury") {
+			((Spaceship*)(getItemPtr("Spaceship", items)))->setFixes(0);
+		}
 	}
 	//Create exit objects + setting exits for each planet
 	exits=createExits(planets);
@@ -336,7 +341,8 @@ int main() {
 				break;
 
 			case savegame:
-				saveGame(&player, planets);
+
+				saveGame(&player, planets, ((Spaceship *)getItemPtr("Spaceship", items)));
 				break;
 
 			case wear:

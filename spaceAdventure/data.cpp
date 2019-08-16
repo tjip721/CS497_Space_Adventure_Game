@@ -12,7 +12,7 @@ using std::stringstream;
 using std::istringstream;
 
 
-void saveGame(Player* player1, std::vector<Area*> planets) {
+void saveGame(Player* player1, std::vector<Area*> planets, Spaceship* space) {
    fstream savegame;
    savegame.open("saveLog.txt", fstream::out | fstream::trunc);
    savegame << "User " << player1->getLife() << " " << player1->getGas() << " " << player1->getLocation()->getName() << " ";
@@ -29,6 +29,7 @@ void saveGame(Player* player1, std::vector<Area*> planets) {
        savegame << playerWears[i]->getName() << " ";
    }
    savegame << endl;
+   savegame << space->getFixes() << endl;
 
    //Add area inventories & firstEntry to text file
    //Earth_Moon descriptorFiles/earthmoon_short.txt descriptorFiles/earthmoon_long.txt UIf_files/rocky.txt 0 1 0 Human Rock
@@ -148,6 +149,15 @@ Player loadOldPlayer(std::vector<std::string> savedLines, vector<Area*> area, st
          if(items[i]->getName() == wearing) {
             player.wear(items[i]);
          }  
+      }
+   }
+   fileString=savedLines[2];
+   int fixed;
+   stringstream fixedString(fileString);
+   fixedString >> fixed;
+   for(int j=0; j < items.size(); j++){
+      if(items[j]->getName() == "Spaceship"){
+         ((Spaceship *)items[j])->setFixes(fixed);
       }
    }
    return player;

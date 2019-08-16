@@ -34,7 +34,7 @@ void display_gameInstances();
 //void createNewPlanets(std::vector<Area*> planets, std::vector<Item> items);
 Player createNewPlayer(std::vector<string> savedLines, std::vector<Area*> planets, std::vector<Item*> items);
 //save log file conditions, will be called in the "main" game
-void saveGame(Player* player1, std::vector<Area*> planets); 
+void saveGame(Player* player1, std::vector<Area*> planets, Spaceship* space); 
 //Parse the save_log.txt and place in constructor for the areas + user
 int open_log();
 Player loadOldPlayer(std::vector<std::string> savedLines, std::vector<Area*> planets, std::vector<Item*> items);
