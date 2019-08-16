@@ -11,9 +11,28 @@ void Human::attack(Player* player){
 		player->kill(); 
 	}
 }
+void Human::setSayings(){
+	std::vector<string> fileLine;
+	string say;
+   	std::fstream loadFile;
+   	loadFile.open("loadfiles/says.txt");
+   	while(!loadFile.eof()){
+      getline(loadFile, say);
+      if(say==""){
+        continue;
+      }
+      else{
+         fileLine.push_back(say);
+      }
+   }
+   loadFile.close();	
+   speech=fileLine;
+}
 
 void Human::talk(){
-	std::cout<< speech << "\n"; 
+	int s=rand() % 10+0;
+	std::cout<< speech[s] << "\n"; 
 }
+
 
 

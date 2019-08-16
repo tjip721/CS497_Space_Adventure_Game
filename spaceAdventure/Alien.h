@@ -2,7 +2,7 @@
 #define ALIEN_H
 #include "Item.h"
 #include "Player.h"
-
+#include <fstream>
 class Alien : public Item
 {
 private: 
@@ -16,7 +16,7 @@ private:
 	bool wearable; 
 */
 	bool hostile; 
-	std::string speech; 
+	std::vector<std::string> speech; 
 	
 public: 
 /* Inherited methods for reference
@@ -33,6 +33,7 @@ public:
 	void aggravate(){hostile = true;}
 	void makePeace(){hostile = false;}
 	bool isHostile(){return hostile;}
+	void setSayings(); 
 	void attack(Player* player); 
 	void talk(); 
 	

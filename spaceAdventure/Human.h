@@ -2,7 +2,7 @@
 #define HUMAN_H
 #include "Item.h"
 #include "Player.h"
-
+#include <fstream>
 class Human : public Item
 {
 private: 
@@ -16,7 +16,7 @@ private:
 	bool wearable; 
 */
 	bool hostile; 
-	std::string speech; 
+	std::vector<std::string> speech; 
 	
 public: 
 /* Inherited methods for reference
@@ -30,7 +30,8 @@ public:
 	Item(std::string name, std::string description, bool takeable); 
 */
 	Human(std::string nameIn, std::string descriptionIn, bool takeableIn);
-	void talk(); 
+	void talk();
+	void setSayings(); 
 	void aggravate(){hostile = true;}
 	void makePeace(){hostile = false;}
 	bool isHostile(){return hostile;}

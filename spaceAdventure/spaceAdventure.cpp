@@ -86,6 +86,10 @@ int main() {
 	//Create exit objects + setting exits for each planet
 	exits=createExits(planets);
 	setPlanetExits(planets, exits);
+	Alien* pAlien=dynamic_cast<Alien*>(getItemPtr("Alien", items));
+	pAlien->setSayings();
+	Human* pHuman=dynamic_cast<Human*>(getItemPtr("Human", items));
+	pHuman->setSayings();
 	//Welcome text displaying object of the game
 	getWelcome(&player);
 
@@ -290,13 +294,13 @@ int main() {
 			case say:
 				if(noun=="Alien" && location->hasItem("Alien") ){
 					read_uif_files(UI_ALIEN);
-					Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+					//Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 					if(pAlien != nullptr ){
 						cout << "The alien replies: "; 
 						pAlien->talk(); 
 					}
 				} else if (noun == "Human"){
-					Human* pHuman= dynamic_cast<Human*>(location->getItem("Human")); 
+					//Human* pHuman= dynamic_cast<Human*>(location->getItem("Human")); 
 					if(pHuman!= nullptr ){
 						cout << "The human replies: "; 
 						pHuman->talk(); 
@@ -341,7 +345,7 @@ int main() {
 				break;
 		}
 		if(location->hasItem("Alien")){
-			Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
+			//Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
 			if(pAlien != nullptr && pAlien->isHostile()){
 				pAlien->attack(&player); 
 				if(player.getLife() <= 0){
