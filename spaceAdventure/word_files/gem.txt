@@ -1,4 +1,0 @@
-gem
-gem
-jewel
-stone

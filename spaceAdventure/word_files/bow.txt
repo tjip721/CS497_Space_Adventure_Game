@@ -1,2 +1,4 @@
 bow
 bow
+curtsy
+salute
