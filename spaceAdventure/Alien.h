@@ -15,7 +15,7 @@ private:
 	bool edible; 
 	bool wearable; 
 */
-	bool hostile; 
+	bool hostile = true; 
 	std::string speech; 
 	
 public: 
