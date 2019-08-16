@@ -106,6 +106,7 @@ int main() {
 	bool gameOver = false;
 	int turnCounter = 0;
 	int suffocationCounter = 4;
+	int attackCounter = 3; 
 	while (!gameOver && player.getLife() > 0 && player.getGas() >= 0 ){
 		// Cold area check
 		if (!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto") == 0 ||
@@ -155,6 +156,7 @@ int main() {
 				if(!location->isSpace() && noun.compare("Space")!=0) {
 					if(player.isWearing("Shoes")) {
 						moveFxn(noun, player, getItemPtr("Spaceship", items), false);
+						attackCounter = 2; 
 					}
 					else {
 						cout << "It's hard to walk anywhere on this surface in your bare feet...\n";
@@ -269,6 +271,7 @@ int main() {
 					if(noun.compare("Earth")==0){
 						if(((Spaceship*)getItemPtr("Spaceship", items))->isFixed()){
 							moveFxn(noun, player, getItemPtr("Spaceship", items), true);
+							attackCounter = 2; 
 						} else {
 							cout << "Sorry your space ship isn't fixed yet. It won't survive entry into Earth's atmosphere.\n"; 
 						}
@@ -359,12 +362,15 @@ int main() {
 				}
 				break;
 		}
-		if(location->hasItem("Alien")){
+		if(player.getLocation()->hasItem("Alien")){
+			attackCounter--;
 			//Alien* pAlien = dynamic_cast<Alien*>(location->getItem("Alien")); 
-			if(pAlien != nullptr && pAlien->isHostile()){
+			if(pAlien != nullptr && pAlien->isHostile() && attackCounter < 0){
 				pAlien->attack(&player); 
 				if(player.getLife() <= 0){
 					cout << "The alien pulls out a gun looking device and fires a beam at you.... Anddddd you are now a pile of ashes.\n"; 
+				}else{
+					cout << "The alien shot a laser beam at you and barely missed. Looks like you've worn out your welcome.\n";
 				}
 			}
 		}
