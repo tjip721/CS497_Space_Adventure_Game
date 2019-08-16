@@ -6,8 +6,6 @@ lookat.txt
 take.txt
 drop.txt
 fire.txt
-open.txt
-close.txt
 push.txt
 mine.txt
 launch.txt
