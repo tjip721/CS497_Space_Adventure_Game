@@ -390,9 +390,9 @@ void moveFxn(string noun, Player &player, Item *spaceship, bool spaceMove){
 			player.removeGas(targetExit->getGasDistance());
 		}
 		if(player.getLife() < 1){
-			cout << "Oh no! It appears you died of old age before reaching Earth. \n GAME OVER. \n";
+			cout << "Oh no! It appears you died of old age before reaching Earth.\n";
 		}else if (player.getGas() < 0){
-			cout << "Oh no! It appears you ran out of gas and are stranded in space. \n GAME OVER. \n";
+			cout << "Oh no! It appears you ran out of gas and are stranded in space.\n";
 		}else{
 			player.setLocation(location->getExit(noun)->getArea());
 			if (location->getName().compare("Space") == 0) {
