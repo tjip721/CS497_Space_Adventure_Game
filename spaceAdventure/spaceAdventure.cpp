@@ -61,8 +61,17 @@ int main() {
 	getline(cin, userChooses);
 	transform(userChooses.begin(), userChooses.end(), userChooses.begin(), tolower);
 	//load the game
+	string choice;
+	int val=0;
 	if(userChooses == "loadgame" || userChooses =="load" || userChooses == "load game") {
-		cout << "Loading game..." << endl;
+		cout << "Are you sure?" << endl;
+		getline(cin, choice);
+		if((choice == "yes") || (choice=="Yes") || (choice=="y") || (choice=="y")) {
+			cout << "Loading game..." << endl;
+			val=1; 
+		}
+	}
+	if(val==1) {
 		int fileReturn;
 		fileReturn = open_log();
 		if(fileReturn == 1 ) {
