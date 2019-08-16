@@ -97,7 +97,7 @@ int main() {
 		if (!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto") == 0 ||
 			player.getLocation()->getName().compare("Uranus") == 0 ||
 			player.getLocation()->getName().compare("Neptune") == 0)) {
-			if (turnCounter > 15) {
+			if (turnCounter > 4) {
 				cout << "You didn't put your jacket on. You froze to DEATH.\n";
 				read_uif_files(UI_FAILURE);
 				gameOver = true;
@@ -242,7 +242,7 @@ int main() {
 					if(player.isWearing("Shoes") && !location->isSpace()){
 						moveFxn(noun, player, getItemPtr("Spaceship", items));
 						turnCounter = 0;
-						suffocationCounter = 15;
+						suffocationCounter = 4;
 					}else{
 						cout << "You're having trouble walking to your space ship in your bare feet...\n"; 
 					}
