@@ -244,7 +244,7 @@ std::vector<Exit*> createExits(std::vector<Area*> areas){
    vector<string> savedLines=openLoadFile("loadfiles/exit.txt");
    string planetName;
    double life, gas;
-   for(int j=1; j < savedLines.size(); j++){
+   for(int j=0; j < savedLines.size(); j++){
       string fileString = savedLines[j];
       std::istringstream parseString(fileString);
       parseString >> planetName >> life >> gas;
