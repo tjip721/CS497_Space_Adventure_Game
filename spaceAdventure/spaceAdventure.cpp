@@ -75,6 +75,7 @@ int main() {
 			vector<string> savedLines=openLoadFile("saveLog.txt");
 			planets=loadPlanets(savedLines, items, 2);
 			player=loadOldPlayer(savedLines, planets, items);
+			((Spaceship*)getItemPtr("Spaceship", items))->setFixes(0);
 		}
 	}
 	else{
