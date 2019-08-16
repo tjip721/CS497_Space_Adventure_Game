@@ -91,7 +91,7 @@ int main() {
 
 	bool gameOver = false;
 	int turnCounter = 0;
-	int suffocationCounter = 15;
+	int suffocationCounter = 4;
 	while (!gameOver && player.getLife() > 0 && player.getGas() >= 0 ){
 		// Cold area check
 		if (!player.isWearing("Jacket") && (player.getLocation()->getName().compare("Pluto") == 0 ||
