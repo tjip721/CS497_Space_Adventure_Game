@@ -147,7 +147,7 @@ int main() {
 			case move:
 				if(!location->isSpace() && noun.compare("Space")!=0) {
 					if(player.isWearing("Shoes")) {
-						moveFxn(noun, player, getItemPtr("Spaceship", items));
+						moveFxn(noun, player, getItemPtr("Spaceship", items), false);
 					}
 					else {
 						cout << "It's hard to walk anywhere on this surface in your bare feet...\n";
@@ -245,7 +245,7 @@ int main() {
 				// IF spaceship is present launch to space
 				if(location->hasItem("Spaceship") && location->getLaunchExit() != NULL){
 					if(player.isWearing("Shoes") && !location->isSpace()){
-						moveFxn(noun, player, getItemPtr("Spaceship", items));
+						moveFxn(noun, player, getItemPtr("Spaceship", items), true);
 						turnCounter = 0;
 						suffocationCounter = 4;
 					}else{
@@ -261,12 +261,12 @@ int main() {
 				if(location->isSpace()){
 					if(noun.compare("Earth")==0){
 						if(((Spaceship*)getItemPtr("Spaceship", items))->isFixed()){
-							moveFxn(noun, player, getItemPtr("Spaceship", items));
+							moveFxn(noun, player, getItemPtr("Spaceship", items), true);
 						} else {
 							cout << "Sorry your space ship isn't fixed yet. It won't survive entry into Earth's atmosphere.\n"; 
 						}
 					}else{
-						moveFxn(noun, player, getItemPtr("Spaceship", items));
+						moveFxn(noun, player, getItemPtr("Spaceship", items), true);
 					}
 				}else{
 					cout << "You will need to be flying in space before you can land your ship.\n";
@@ -369,7 +369,7 @@ int main() {
 }
 
 
-void moveFxn(string noun, Player &player, Item *spaceship){
+void moveFxn(string noun, Player &player, Item *spaceship, bool spaceMove){
 	Area* location = player.getLocation();
 	bool exitValid = location->hasExit(noun);
 	if(exitValid){
@@ -377,8 +377,10 @@ void moveFxn(string noun, Player &player, Item *spaceship){
 		if (targetExit->getName().compare("Space") == 0) {
 			player.getLocation()->eraseItem("Spaceship");
 		}
-		player.removeLife(targetExit->getLifeDistance());
-		player.removeGas(targetExit->getGasDistance());
+		if(spaceMove){
+			player.removeLife(targetExit->getLifeDistance());
+			player.removeGas(targetExit->getGasDistance());
+		}
 		if(player.getLife() < 1){
 			read_uif_files(UI_FAILURE);
 			cout << "Oh no! It appears you died of old age before reaching Earth. \n GAME OVER. \n";
