@@ -346,6 +346,7 @@ int main() {
 				getline(cin, command);
 				transform(command.begin(), command.end(), command.begin(), tolower);
 				if(command.compare("yes") == 0) {
+					cleanObjects(items, planets, exits);
 					return 0;
 				}
 				break;
@@ -363,6 +364,7 @@ int main() {
 
 	}
 	read_uif_files(UI_FAILURE);
+	cleanObjects(items, planets, exits);
 	return 0;
 }
 

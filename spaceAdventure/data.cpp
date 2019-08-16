@@ -281,3 +281,9 @@ void setPlanetExits(std::vector<Area*> planets, std::vector<Exit*> exits) {
       }
    }
 }
+void cleanObjects(std::vector<Item*> items, std::vector<Area*> areas, std::vector<Exit*> exits) {
+   for(int i=0; i < items.size(); i++){ delete items[i]; }
+   for(int i=0; i < areas.size(); i++){ delete areas[i]; }
+   for(int i=0; i < exits.size(); i++){ delete exits[i]; }
+
+}

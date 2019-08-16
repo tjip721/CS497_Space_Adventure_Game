@@ -44,4 +44,5 @@ std::vector<Area*> loadPlanets(std::vector<string> savedLines, std::vector<Item*
 std::vector<Exit*> createExits(std::vector<Area*> areas);
 std::vector<Item*> loadItems();
 void setPlanetExits(std::vector<Area*> planets, std::vector<Exit*> exits);
+void cleanObjects(std::vector<Item*> items, std::vector<Area*> areas, std::vector<Exit*> exits);
 #endif // DATA_H
